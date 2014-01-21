@@ -1,0 +1,11 @@
+.reveal p {
+    margin-bottom: 16px;
+}
+
+.reveal a:not(.image) {
+    color: #93eefa;
+}
+
+.reveal a:not(.image):hover {
+    color: #b3f2f7;
+}

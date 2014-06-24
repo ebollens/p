@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>MWF & WebBlocks Technologies</title>
+
+		<meta name="description" content="The web platform of today is an exciting, albeit complex environment of semantics, presentation and interactivity. But how did we get here? And where are we going? During this talk, Eric Bollens, a web architect at UCLA’s Office of Information Technology, will discuss the history, landscape and future of the World Wide Web.">
+		<meta name="author" content="Eric R. Bollens">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        
+        <style>
+            .reveal section img { border: 0; }
+            .good { color: #7c7; }
+            .bad { color: #f99; }
+        </style>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+                
+				<section>
+                    
+                    <section>
+                        <h1>MWF</h1>
+                        <h2>Mobile Web Framework</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Native or Web?</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>The Native App</h2>
+                        <ul>
+                            <li class="fragment good">Rich set of features</li>
+                            <li class="fragment good">Centralized distribution platforms</li>
+                            <li class="fragment bad">Development specific to OS and device</li>
+                            <li class="fragment bad">Varied paradigms and architectures</li>
+                            <li class="fragment bad">Rise and fall of native platforms</li>
+                            <li class="fragment bad">Manual updates</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>The Mobile Web App</h2>
+                        <ul>
+                            <li class="fragment good">Single established platform</li>
+                            <li class="fragment good">Existing paradigms and arcitecture</li>
+                            <li class="fragment good">Automatic updates</li>
+                            <li class="fragment bad">Mixed support between devices</li>
+                            <li class="fragment bad">New and evolving API</li>
+                            <li class="fragment bad">No central distribution platform</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h2>Solving Challenges of the Mobile Web</h2>
+                        <div class="fragment">
+                            <p><strong>Mixed support between devices</strong></p>
+                            <p class="fragment">
+                                <em>Fully compatible markup standard</em><br>
+                                <em class="fragment">Framework enhances and degrades experience</em><br>
+                                <em class="fragment">No device-by-device planning</em>
+                            </p>
+                            <p><strong>New and evolving API</strong></p>
+                            <p class="fragment">
+                                <em>Devices that can use it, should use it</em><br>
+                                <em class="fragment">Create support where possible but not native</em>
+                            </p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h2>The MWF Strategy</h2>
+                        <p class="fragment"><strong>Semantic markup standard</strong></p>
+                        <p class="fragment">
+                            <em>Leverage framework features through classes and ids</em>
+                        </p>
+                        <p class="fragment"><strong>Dynamic CSS and Javascript</strong></p>
+                        <p>
+                            <em class="fragment">Enhance and degrade based on device capabilities</em><br>
+                            <em class="fragment">Included through script and link tags</em>
+                        </p>
+                        <p class="fragment"><strong>Platform independence</strong> and <strong>federation</strong></p>
+                        <p class="fragment">
+                            <em>Intrinsic to the technology stack</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Getting Started</h2>
+                        <p class="fragment">Create a page with script and link tag:</p>
+                        <pre class='fragment prettyprint'><code>&lt;link rel="stylesheet" type="text/css" 
+    href="http://[DOMAIN]/assets/css.php"&gt;
+&lt;script type="text/javascript"
+    src="http://[DOMAIN]/assets/js.php"&gt;&lt;/script&gt;</code></pre>
+                        <p class="fragment">Start using the MWF!</p>
+                        <p>
+                            <em class="fragment">All HTML classes/ids and JS core always available</em>
+                            <br>
+                            <em class="fragment">Additional libraries available on demand</em>
+                            <br>
+                            <em class="fragment">Special assets like compressors</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>How does this work?</h2>
+                        <p class="fragment">An app has a page with MWF handlers</p>
+                        <p class="fragment">When a user visits the page,</p>
+                        <p>
+                            <em class="fragment">the user's browser requests css.php and js.php</em><br>
+                            <em class="fragment">the MWF gathers telemetry on the device</em><br>
+                            <em class="fragment">the MWF classifies device and generates CSS/JS</em><br>
+                            <em class="fragment">the page is rendered from generated CSS/JS</em>
+                        </p>
+                        <p class="fragment">Process is transparent to the app (semantic markup)</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Features</h2>
+                        <p>
+                            <em class="fragment"><strong>Page-level UI</strong>: header, footer</em>
+                            <br>
+                            <em class="fragment"><strong>Content-level UI</strong>: content, menu, button, form, message</em>
+                            <br>
+                            <em class="fragment"><strong>Telemetry</strong>: capability exposure</em>
+                            <br>
+                            <em class="fragment"><strong>Interaction</strong>: transitions, touch transitions, geolocation</em>
+                            <br>
+                            <em class="fragment"><strong>Compression</strong>: CSS, JS, images</em>
+                            <br>
+                            <em class="fragment"><strong>Utilities</strong>: normalization, redirection</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Example: Message</h2>
+                        <pre class="fragment"><code lang="html">&lt;div class="message alert"&gt;Alert message&lt;/div&gt;
+&lt;div class="message confirm"&gt;Confirm message&lt;/div&gt;
+&lt;div class="message error"&gt;Error message&lt;/div&gt;
+&lt;div class="message info"&gt;Info message&lt;/div&gt;</code></pre>
+                        <img src="img/messages-example.png" class="fragment">
+                    </section>
+                    
+                    <section>
+                        <h2>Example: Form</h2>
+                        <pre class="fragment"><code lang="html">&lt;form action="#"&gt;
+    &lt;h2&gt;Example Form&lt;/h2&gt;
+    &lt;label&gt;Label for Input&lt;/label&gt;
+    &lt;input name="t-1" type="text"&gt;
+    &lt;label&gt;Label for Checkbox Group&lt;/label&gt;
+    &lt;div class="option"&gt;
+        &lt;label&gt;&lt;input name="c-1" value="1" type="checkbox"&gt;One&lt;/label&gt;
+        &lt;label&gt;&lt;input name="c-2" value="2" type="checkbox"&gt;Two&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;input value="Submit" class="primary" type="submit"&gt;
+&lt;/form&gt;</code></pre>
+                        <img src="img/form-example.png" class="fragment">
+                    </section>
+                    
+                    <section>
+                        <h2>Learn More</h2>
+                        <p>
+                            <strong>Repository</strong>
+                            <br>
+                            <a href="https://github.com/ucla/mwf" class="_blank">https://github.com/ucla/mwf</a>
+                        </p>
+                        <p>
+                            <strong>Documentation</strong>
+                            <br>
+                            <a href="http://mwf.ucla.edu/framework13/doc/" class="_blank">http://mwf.ucla.edu/framework13/doc/</a>
+                        </p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h1>WebBlocks</h1>
+                        <h2>Responsive Toolkit</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Evolving Web</h2>
+                        <p class="fragment">Fully-capable mobile devices are becoming pervasive</p>
+                        <p class="fragment">Changing perceptions of how mobile is used</p>
+                        <p class="fragment">Rise of tablets, wearables and more</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Responsive Web Design</h2>
+                        <p class="fragment">
+							Website transforms to fit the user's<br><strong>needs</strong>
+							and <strong>capabilities</strong>
+						</p>
+						<p class="fragment" style='font-style:italic'>Viewport
+                            <br><span class="fragment">Context</span>
+                            <br><span class="fragment">Bandwidth</span>
+                            <br><span class="fragment">Pixel Density</span>
+                            <br><span class="fragment">Battery Life</span></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Key Components</h2>
+                        <p class="fragment">Flexible Grid</p>
+                        <p class="fragment">Responsive Media</p>
+                        <p class="fragment">Media Queries</p>
+                    </section>
+                    
+                    <section>
+                        <table>
+                            <tr>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-1.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-2.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-3.png'></td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <section>
+                        <h2>A Tale of Two Frameworks</h2>
+                        <p class="fragment">Technologies and target audience are different</p>
+                        <p class="fragment">but many shared concepts between MWF and WebBlocks:</p>
+                        <p>
+                            <em class="fragment">Device agnosticism</em><br>
+                            <em class="fragment">Platform independence</em><br>
+                            <em class="fragment">Federation</em>
+                        </p>
+                        <p class="fragment">Use cases drive what works for you:</p>
+                        <p>
+                            <em class="fragment">Who's your intended demographic?</em><br>
+                            <em class="fragment">Do you have an existing website? Are you rewriting it?</em><br>
+                            <em class="fragment">What frameworks are you currently using?</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Staying Flexible with a Toolkit</h2>
+                        <p class="fragment">A lot of good tools already exist</p>
+                        <p>
+                            <em class="fragment">Extend and integrate, don't recreate</em>
+                        </p>
+                        <p class="fragment">Not every use case is the same</p>
+                        <p>
+                            <em class="fragment">Federated or individual deployments?</em><br>
+                            <em class="fragment">Which tools do you need?</em><br>
+                            <em class="fragment">What if you're already using a framework?</em>
+                        </p>
+                        <p class="fragment">Architecture of packages, adapters and extensions</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Features</h2>
+                        <p class="fragment">Powerful fluid layout system</p>
+                        <p class="fragment">Rich UI element and interactivity libraries</p>
+                        <p class="fragment">Responsive images and video</p>
+                        <p class="fragment">Polyfills for older devices</p>
+                        <p class="fragment">Customized builds exactly for needs</p>
+                        <p class="fragment">Adapters to bind to other frameworks</p>
+                        <p class="fragment">Extensions for campus and unit specific needs</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Learn More</h2>
+                        <p>
+                            <strong>Repository</strong>
+                            <br>
+                            <a href="https://github.com/ucla/WebBlocks" class="_blank">https://github.com/ucla/WebBlocks</a>
+                        </p>
+                        <p>
+                            <strong>Documentation</strong>
+                            <br>
+                            <a href="http://ucla.github.io/WebBlocks/doc" class="_blank">http://ucla.github.io/WebBlocks/doc</a>
+                        </p>
+                    </section>
+                    
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

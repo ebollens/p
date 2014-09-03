@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Responsive Beyond Layouts</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Eric R. Bollens">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+                
+				<section>
+					<h1>Responsive</h1>
+					<h2>Beyond Layouts</h2>
+                    <h3 style="padding-top:72px">by Eric Bollens</h3>
+                    <div style="font-size:0.8em">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/responsive-beyond-layouts">ebollens.github.io/p/responsive-beyond-layouts</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+				</section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Responsive Layouts</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Responsive Sampling</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Media Queries</h2>
+                        <p class="fragment"><strong>Most commonly...</strong></p>
+                        <pre class="fragment"><code class="css">@media (max-width: 480px) { /* ... */ }</code></pre>
+                        <p class="fragment"><strong>But often more effective...</strong></p>
+                        <pre class="fragment"><code class="css">@media (min-width: 481px) { /* ... */ }</code></pre>
+                        <p class="fragment"><strong>For high resolution displays...</strong></p>
+                        <pre class="fragment"><code class="css">@media (min-resolution: 300dpi) { /* ... */ }</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>And more Media Queries</h2>
+                        <pre class="code fragment">media_feature: width | min-width | max-width
+  | resolution | min-resolution | max-resolution
+  <span class="fragment">| height | min-height | max-height</span>
+  <span class="fragment">| device-width | min-device-width | max-device-width
+  | device-height | min-device-height | max-device-height</span>
+  <span class="fragment">| aspect-ratio | min-aspect-ratio | max-aspect-ratio
+  | device-aspect-ratio | min-device-aspect-ratio | max-device-aspect-ratio</span>
+  <span class="fragment">| color | min-color | max-color
+  | color-index | min-color-index | max-color-index</span>
+  <span class="fragment">| monochrome | min-monochrome | max-monochrome
+  | scan | grid</span></pre>
+                        <pre class="code fragment">expression: ( &lt;media_feature&gt; [: &lt;value&gt;]? )
+<span class="fragment">media_query: <span class="fragment">[[only | not]?</span> &lt;expression&gt; <span class="fragment">[ and &lt;expression&gt; ]*</span></span>
+  <span class="fragment">| &lt;media_type&gt; [ and &lt;expression&gt; ]*]</span></pre>
+                        <pre class="code fragment">media_type: all | print | screen <span class="fragment">| aural | braille | handheld 
+  | projection | tty | tv | embossed</span></pre>
+                        <pre class="code fragment">media_query_list: &lt;media_query&gt;<span class="fragment"> [, &lt;media_query&gt; ]*</span>
+</pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Using ems/rems for Breakpoints</h2>
+                        <p>TODO</p>
+                    </section>
+                    
+                    <section>
+                        <h2>@supports</h2>
+                        <p class="fragment"><strong>CSS Conditional Rules Module Level 3</strong></p>
+                        <pre class="fragment"><code class="css">@supports (display: flex) {
+  div { display: flex; }
+}</code></pre>
+                        <pre class="fragment"><code class="css">@supports (-webkit-box-shadow: 0 0 2px #000) or 
+          (   -moz-box-shadow: 0 0 2px #000) or 
+          (        box-shadow: 0 0 2px #000) { 
+   div { /* .. */ } 
+}</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("display", "flex");</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("(transform-origin: 5% 5%)");</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("(transform-origin: 5% 5%) and (display:flex)");</code></pre>
+                        <p class="fragment"><em>Available in Chrome 28, Firefox 17 and Opera 12.1<br>and polyfill <a href="https://github.com/kjarmicki/fq-polyfill">github.com/kjarmicki/fq-polyfill</a></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Viewport</h2>
+                        <pre class="fragment"><code class="html">&lt;meta name="viewport" content="width=device-width"&gt;</code></pre>
+                        <p class="fragment">
+                            <em>The viewport meta tag is non-normative</em>
+                            <br>
+                            <em class="fragment">De facto standard introduced by iOS</em>
+                            <br>
+                            <em class="fragment">Today, in Safari Mobile, Firefox for Mobile &amp; Opera Mobile</em>
+                        </p>
+                        <p class="fragment"><strong>HTML is the wrong place for this</strong></p>
+                        <p class="fragment"><em>&quot;By separating the presentation style of documents from the content of documents, CSS 2.1 simplifies Web authoring and site maintenance.&quot;</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>@viewport</h2>
+                        <p class="fragment"><strong>CSS Device Adaptation</strong></p>
+                        <pre class="fragment"><code class="css">@viewport { width: device-width; }</code></pre>
+                        <pre class="fragment"><code class="css">@media screen and (max-width:400px) {
+    @viewport { width: device-width; }
+}</code></pre>
+                        <p class="fragment">Currently only supported in IE and Opera with vendor prefixing</p>
+                        <pre class="fragment"><code class="css">@media screen and (max-width:400px) { 
+    @-ms-viewport{ width:320px; } 
+    @-o-viewport { width: device-width; }
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Grid Stylesheets</h2>
+                        <p>TODO</p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>User Interaction</h2>
+                    </section>
+                    
+                    <section>
+                        <p>TODO</p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Considering the Environment</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Ambient Light</h2>
+                        <p class="fragment">Adapt to the luminosity of the environment</p>
+                        <pre class="fragment prettyprint"><code class="css">@media (light-level: normal){ body { background-color: #ddd; color: #333; } }
+@media (light-level: dim)   { body { background-color: #000; color: #ddd; } }</code></pre>
+                        <p class="fragment">Change simulation or game conditions based on environment</p>
+                        <pre class="fragment prettyprint"><code class="javascript">window.addEventListener('devicelight', function(e) {
+  /** change environment based on e.value from [0,100] **/
+});
+</code></pre>
+                        <p class="fragment"><strong>CSS Media Queries Level 4 &amp; Ambient Light API</strong></p>
+                        <p>
+                            <em class="fragment">Last call working draft for CSS Media Queries Level 4</em>
+                            <br>
+                            <em class="fragment">devicelight only supported by Firefox 22+ for OSX</em>
+                            <br>
+                            <em class="fragment">Limited polyfill opportunities</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Battery Life</h2>
+                        <p class="fragment"><strong>Battery Status API</strong></p>
+                        <pre class="prettyprint fragment"><code class="javascript">navigator.battery || navigator.webkitBattery || navigator.mozBattery</code></pre>
+                        <p>
+                            <em class="fragment">Properties for charging, current level and discharge time</em>
+                            <br>
+                            <em class="fragment">Events when properties change</em>
+                        </p>
+                        <p class="fragment">Why do we care?</p>
+                        <p>
+                            <em class="fragment">Minimize the frequency of radio wakes</em>
+                            <br>
+                            <em class="fragment">Adjust colors to minimize battery drain</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Network Information API (that wasn't)</h2>
+                        <p class='fragment'>Proposal for an API with bandwidth and metered properties</p>
+                        <pre class='fragment'><code class="javascript">var i = document.getElementById('ex'), connection = document.connection;
+if (connection.bandwidth > 2 && !connection.metered) {
+  i.src = "/ex_hd.png";
+} else {
+  i.src = "/ex_ld.png";
+}</code></pre>
+                        <p class='fragment'>But this didn't come to pass...</p>
+                        <p class='fragment'><em>While working on this specification... encountered issues related to estimating network bandwidth... discontinue[d] work until better understanding of the use cases, requirements and approach...</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Network Sampling</h2>
+                        <p class='fragment'><strong>Navigation Timing API</strong>&nbsp; ( <strong>performanceTiming</strong> interface )</p>
+                        <p class='fragment'><img src='navigation-timing-api.png' style='height:400px;'></p>
+                        <p class='fragment'><em>Supported in IE 9, Firefox 7, Chrome 6, Safari 8 and Opera 23</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>More Performance Sampling</h2>
+                        <p class='fragment'><strong>Resource Timing API</strong>&nbsp; ( <strong>performanceTiming</strong> interface )</p>
+                        <pre class='fragment'><code class="javascript">window.performance.getEntriesByType("resource")[5]</code></pre>
+                        <p class='fragment' style='margin-top:24px;'><strong>User Timing API</strong></p>
+                        <pre class='fragment'><code>performance.now</code></pre>
+                        <pre class='fragment'><code class="javascript"><span class="fragment">performance.mark("startTask1");</span>
+someTaskToMeasure();
+<span class='fragment'>performance.mark("endTask1");</span>
+<span class='fragment'>var perfEntries = performance.getEntriesByType("mark");</code></pre>
+                        <p class='fragment' style='margin-top:24px;'><em>Supported in IE 10, Chrome 27, Opera 23 &amp; Android Browser 4.4</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Storage Availability</h2>
+                        <p class='fragment'>HTML 5 adds a range of storage mechanisms</p>
+                        <p>
+                            <em class='fragment'>Web Storage</em><em class='fragment'>, Application Cache</em><em class='fragment'>, FileSystem API</em><em class='fragment'> &amp; Indexed Database</em></em>
+                        </p>
+                        <p class='fragment'><strong>Quota Management API</strong></p>
+                        <p>
+                            <em class='fragment'>Get quota</em>
+                            <br>
+                            <em class='fragment'>Request larger quota</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <p>TODO: Recap for explanation of when and why with a word of caution</p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Client-side Images</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problems</h2>
+                        <p class="fragment">Performance</p>
+                        <p class="fragment">Quotas</p>
+                        <p class="fragment">Viewport</p>
+                    </section>
+                    
+                    <section>
+                        <h2>srcset</h2>
+                        <p class="fragment">Define a set of images with physical dimensions</p>
+                        <pre class="fragment"><code>&lt;img srcset="ex-200.jpg 200w, 	
+		ex-400.jpg 400w, 	
+		ex-800.jpg 800w, 	
+		ex-1600.jpg 1600w"
+     src="ex-400.jpg" alt="Example"&gt;
+</code></pre>
+                        <p class="fragment">Browser selects image best suited for viewport and layout</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Chicken and Egg</h2>
+                        <p class="fragment">How does browser determine which image to load?</p>
+                        <p>
+                            <em class="fragment">Viewport Dimensions</em>
+                            <br>
+                            <em class="fragment">Page Layout</em>
+                            <br>
+                            <em class="fragment">Image Dimensions</em>
+                            <br>
+                            <em class="fragment">Other Assets</em>
+                        </p>
+                        <p class="fragment"><strong>Cyclical dependency problem</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>srcset + sizes</h2>
+                        <p class="fragment">Provide a hint for the expected dimensions</p>
+                        <pre class="fragment"><code>&lt;img srcset="ex-200.jpg 200w, 	
+		ex-400.jpg 400w, 	
+		ex-800.jpg 800w, 	
+		ex-1600.jpg 1600w" 
+     <span class="fragment">sizes="<span class="fragment">(max-width: 30em) 100vw,</span>
+        <span class="fragment">(max-width: 50em) 50vw,</span>	
+        <span class="fragment">calc(33vw - 100px)</span>"</span>
+     src="ex-400.jpg" alt="Example"&gt;</code></pre>
+                        <p class="fragment"><strong>Key-value pairs</strong></p>
+                        <p>
+                            <em class="fragment">Find first matching media condition</em>
+                            <br>
+                            <em class="fragment">Use value as the assumed image width</em>
+                            <br>
+                            <span class="fragment"><em>Assumes </em><code>100vw</code><em> if no sizes set</em></span>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Art Direction</h2>
+                        <p class="fragment"><code>img[srcset]</code> for variable-width images</p>
+                        <p class="fragment">Might want to control more...</p>
+                        <p>
+                            <em class="fragment">Proportions</em>
+                            <br>
+                            <em class="fragment">Crop Area</em>
+                            <br>
+                            <em class="fragment">Text Location</em>
+                            <br>
+                            <em class="fragment">Shot Angle</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Picture</h2>
+                        <p class="fragment">Define images by explicit media queries</p>
+                        <pre class="fragment"><code>&lt;picture&gt; 
+    &lt;source media="(min-width: 45em)" srcset="large.jpg"&gt; 
+    &lt;source media="(min-width: 32em)" srcset="med.jpg"&gt; 
+    &lt;img src="small.jpg" alt="Example"&gt; 
+&lt;/picture&gt; </code></pre>
+                        <p>
+                            <span class="fragment"><em>Uses </em><code>srcset</code><em> instead of </em><code>src</code></span>
+                            <br>
+                            <span class="fragment"><code>img</code> does the heavy lifting</span>
+                            <br>
+                            <span class="fragment"><em>Style </em><code>img</code><em> as usual</em></span>
+                            <br>
+                            <em class="fragment">Graceful fallback</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Source Media Types</h2>
+                        <p class="fragment">Like audio and video, picture supports source media types</p>
+                        <pre class="fragment"><code>&lt;picture&gt; 
+    &lt;source type="image/webp" srcset="ex.webp"&gt; 
+    &lt;source type="image/vnd.ms-photo" srcset="ex.jpxr"&gt;
+    &lt;img src="ex.jpg" alt="Example image"&gt;
+&lt;/picture&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Browser Support</h2>
+                        <p class="fragment"><code>img[srcset]</code>
+                            <br><em>Chrome 34, Opera 21, Safari 8, Firefox 32 (if enabled)</em></p>
+                        <p class="fragment"><code>picture</code>
+                            <br><em>Chrome 38, Opera 25, Firefox 33, next Safari version</em></p>
+                        <p class="fragment">
+                            A polyfill for both...
+                            <br>
+                            <a href="https://scottjehl.github.io/picturefill" target="_blank">scottjehl.github.io/picturefill</a>
+                        </p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Server-side Asset Selection</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Server-side Images</h2>
+                        <p class="fragment">Sometimes image markup cannot be influenced</p>
+                        <p>
+                            <em class="fragment">Content management systems</em>
+                            <br>
+                            <em class="fragment">Third-party applications</em>
+                            <br>
+                            <em class="fragment">Acting as network / middleware</em>
+                        </p>
+                        <p class="fragment">Gather device telemetry &amp; compress appropriately</p>
+                        <p>
+                            <em class="fragment">UA Sniffing with Static Metadata</em>
+                            <br>
+                            <em class="fragment">Dimensions Cookie from Javascript</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Client Hints</h2>
+                        <p class='fragment'><strong>Proposed set of HTTP request header fields</strong></p>
+                        <p class='fragment'><em>just as the Accept header allows clients to indicate what formats they prefer, Client Hints allow clients to indicate a list of device and agent specific preferences</em></p>
+                        <p class='fragment'><strong>Motivating use cases</strong></p>
+                        <p>
+                            <em class='fragment'>Device pixel resolution (DPR)</em>
+                            <br>
+                            <em class='fragment'>Resource width (RW)</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Client Hints Example</h2>
+                        <pre class='fragment'><code class='http'>GET /img.jpg HTTP/1.1
+User-Agent: Awesome Browser
+Accept: image/webp, image/jpg
+<span class='fragment'>DPR: 2.0
+RW: 160</span></code></pre>
+                        <pre class='fragment'><code class='http'>HTTP/1.1 200 OK
+Server: Awesome Server
+Content-Type: image/jpg
+Content-Length: 124523
+<span class='fragment'>Content-DPR: 2.0</span>
+<span class='fragment'>Vary: DPR, RW</span>
+
+(data)</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Client Hints Availability</h2>
+                        <p class="fragment"><strong>To succeed, Client Hints needs....</strong></p>
+                        <p>
+                            <em class="fragment">CH transport in browsers</em>
+                            <br>
+                            <em class="fragment">Key implementations</em>
+                            <br>
+                            <em class="fragment">Vary adoption</em>
+                        </p>
+                        <p class='fragment'><strong>Unfortunately, work on Client Hints is struggling</strong></p>
+                        <p>
+                            <em class='fragment'>Browser makers are hesitant about "content negotiation"</em>
+                            <br>
+                            <span class='fragment'><em>CDNs have not yet added support for&nbsp; </em><code>Vary:CH</code>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Adaptive Bitrate Streaming</h2>
+                        <p class="fragment">Adjust video stream quality based on user telemetry</p>
+                        <p>
+                            <em class='fragment'>Network bandwidth</em>
+                            <br>
+                            <em class='fragment'>Device capacity</em>
+                        </p>
+                        <p class='fragment'>Implementation approach</p>
+                        <p>
+                            <em class='fragment'>Encode a stream at multiple bit rates</em>
+                            <br>
+                            <em class='fragment'>Chunk each stream into set of segments</em>
+                            <br>
+                            <em class='fragment'>Client requests stream at lowest bit rate</em>
+                            <br>
+                            <em class='fragment'>If segment download time is less than viewing time, increase rate</em>
+                            <br>
+                            <em class='fragment'>Otherwise, if viewing time is longer, decrease rate</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Apple HLS</h2>
+                        <p>TODO</p>
+                    </section>
+                    
+                    <section>
+                        <h2>MPEG-DASH</h2>
+                        <p>TODO</p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    <h1>Thank You</h1>
+                    <h2>Any Questions?</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/responsive-beyond-layouts">ebollens.github.io/p/responsive-beyond-layouts</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

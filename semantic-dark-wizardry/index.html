@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Semantic Dark Wizardry</title>
+
+        <meta name="description" content="">
+        <meta name="author" content="Eric R. Bollens">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="../css/reveal.min.css">
+        <link rel="stylesheet" href="../css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../css/custom.css">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+                document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="../lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h1 style="font-size:3.4em">Semantic Dark Wizardry</h1>
+                    <h2>with Shadow DOM and Custom Elements</h2>
+                    <h3 style="padding-top:72px">by Eric Bollens</h3>
+                    <div style="font-size:0.8em">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/semantic-dark-wizardy">ebollens.github.io/p/semantic-dark-wizardy</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Shadow DOM &amp; Templates</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problem: Isolation</h2>
+                        <p class="fragment">Suppose we have a widget...</p>
+                        <pre class='fragment'><code class='html'>&lt;div class="badge"&gt;
+  &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+  &lt;div class="name"&gt;Eric&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        <p class='fragment'>What happens if our app has <code>.badge</code> , <code>.title</code> &nbsp; or <code>.name</code>?</p>
+                        <p class='fragment'><strong>The DOM tree of a widget isn't encapsulated from the rest of the DOM tree</strong></p>
+                        <p class='fragment'>When building and using widgets, we want to...</p>
+                        <p>
+                            <em class='fragment'>Encapsulate implementation details</em>
+                            <br>
+                            <em class='fragment'>Isolate from exterior styles and behaviors</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Isolation with a Shadow DOM</h2>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;Eric&lt;/div&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;template id="name-badge-template"&gt; 
+  &lt;style&gt; … &lt;/style&gt;
+  &lt;div class="badge"&gt;
+    &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+    &lt;div class="name"&gt;Eric&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        <pre class='fragment'><code class='javascript'>var shadow = document.querySelector('#name-badge').createShadowRoot(),
+    template = document.querySelector('#name-badge-template'); 
+shadow.appendChild(template.content.cloneNode());</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
+  #shadow-root
+  "Eric"
+&lt;/div&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Template Element</h2>
+                        <p class="fragment">
+                            <strong>Inert until activated</strong>
+                            <br>
+                            <em class="fragment">Markup is hidden and doesn't render until activated</em>
+                        </p>
+                        <p class="fragment">
+                            <strong>No side-effects</strong>
+                            <br>
+                            <em class="fragment">Scripts don't run and media isn't retrieved until activated</em>
+                        </p>
+                        <p class="fragment">
+                            <strong>Not in DOM tree</strong>
+                            <br>
+                            <em class="fragment">Not selectable by usual DOM methods</em>
+                            <br>
+                            <em class='fragment'>May be placed anywhere in head, body or frameset</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Using Template for Delayed Activation</h2>
+                        <pre class='fragment'><code class='html'>&lt;button onclick="useIt()"&gt;Use me&lt;/button&gt;
+&lt;div id="container"&gt;&lt;/div&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;template&gt; 
+  &lt;div&gt;Template used: &lt;span&gt;0&lt;/span&gt;&lt;/div&gt; 
+  &lt;script&gt;alert('Thanks!')&lt;/script&gt; 
+&lt;/template&gt;
+</code></pre>
+                        <pre class='fragment'><code class='javascript'>function useIt() { 
+  var content = document.querySelector('template').content; 
+  var span = content.querySelector('span'); 
+  span.textContent = parseInt(span.textContent) + 1; 
+  document.querySelector('#container').appendChild( 
+    document.importNode(content, true)); 
+}</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Content Projection</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problem: Duplication</h2>
+                        <p class="fragment">Suppose we have a widget...</p>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;Eric&lt;/div&gt;
+&lt;template id="name-badge-template"&gt; 
+  &lt;style&gt; … &lt;/style&gt;
+  &lt;div class="badge"&gt;
+    &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+    &lt;div class="name"&gt;Eric&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        <p class='fragment'>If we want to change name, we have to do it in two places</p>
+                        <p class='fragment'><strong>Need a mechanism for composition</strong></p>
+                        <p>
+                            <em class='fragment'>Extract content from host node</em>
+                            <br>
+                            <em class='fragment'>Leverage content within shadow root</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Composition with Content Element</h2>
+                        <p class='fragment'>The <code>content</code> element projects content from the host node</p>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;Eric&lt;/div&gt;
+&lt;template id="name-badge-template"&gt; 
+  &lt;style&gt; … &lt;/style&gt;
+  &lt;div class="badge"&gt;
+    &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+    &lt;div class="name"&gt;&lt;content&gt;&lt;/content&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        <p>
+                            <em class='fragment'><strong>Content</strong> is in the host node</em>
+                            <br>
+                            <em class='fragment'><strong>Presentation</strong> is in the template</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Projecting Child Nodes</h2>
+                        <p class='fragment'><code>content[select]</code> to project immediate children of host node</p>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
+  &lt;span class="first"&gt;Eric&lt;/span&gt;
+  &lt;span class="last"&gt;Bollens&lt;/span&gt;
+&lt;/div&gt;
+&lt;template id="name-badge-template"&gt; 
+  &lt;style&gt; … &lt;/style&gt;
+  &lt;div class="badge"&gt;
+    &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+    &lt;div class="name"&gt;
+      &lt;content select="first"&gt;&lt;br&gt;
+      &lt;small&gt;&lt;content select="last"&gt;&lt;/small&gt;
+    &lt;/content&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Caveats with Content</h2>
+                        <p class="fragment">Can only select immediate children</p>
+                        <pre class="fragment"><code class="html">&lt;div id="nameTag"&gt;
+  &lt;header&gt;&lt;span class="name"&gt;Eric Bollens&lt;/span&gt;&lt;/header&gt;
+  &lt;span class="email"&gt;ebollens@ucla.edu&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                        <pre class="fragment"><code class="html">&lt;content select="span"&gt;&lt;/content&gt;</code></pre>
+                        <p class="fragment">Can only select a child once</p>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
+  &lt;span class="first"&gt;Eric&lt;/span&gt;
+  &lt;span class="last"&gt;Bollens&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;content select="first"&gt;&lt;br&gt;
+&lt;small&gt;
+  &lt;content select="first"&gt;&lt;/content&gt; &lt;content select="last"&gt;&lt;/content&gt;
+&lt;/small&gt;</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Custom Elements</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problem: Complexity</h2>
+                        <p class='fragment'>A mechanism for building reliably reusable widgets
+                            <br><strong class='fragment'>but the markup it yields is still cumbersome</strong></p>
+                        <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
+  &lt;span class="first"&gt;Eric&lt;/span&gt;
+  &lt;span class="last"&gt;Bollens&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                        <p class="fragment">What if it was...</p>
+                        <pre class='fragment'><code class='html'>&lt;name-badge first="Eric" last="Bollens"&gt;&lt;/name-badge&gt;</code></pre>
+                        <p class="fragment">Today, it can be!</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Custom Elements</h2>
+                        <p class="fragment">Define new HTML elements</p>
+                        <p class="fragment">Extend existing and custom elements</p>
+                        <p class="fragment">Logically bundle functionality within a tag</p>
+                        <p class="fragment">Define APIs for new and existing elements</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Custom Element Basics</h2>
+                        <p class="fragment">Register a custom element</p>
+                        <pre class="fragment"><code class="javascript">var XFoo = document.registerElement('x-foo');</code></pre>
+                        <p class="fragment">Use within the DOM</p>
+                        <pre class="fragment"><code class="javascript">&lt;x-foo&gt;&lt;/x-foo&gt;</code></pre>
+                        <p class="fragment">Instantiate the element</p>
+                        <pre class="fragment"><code class="javascript">document.body.appendChild(new XFoo());</code></pre>
+                        <p class="fragment">Attaching an event</p>
+                        <pre class="fragment"><code class="javascript">var xFoo = document.createElement('x-foo'); 
+<span class="fragment">xFoo.addEventListener('click', function(e) { alert('Fired!'); });</span>
+document.body.appendChild(xFoo);</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>More About Registration</h2>
+                        <pre class="fragment"><code class="javascript">var XFoo = document.registerElement('x-foo');</code></pre>
+                        <pre class="fragment"><code class="javascript">var XFoo = document.registerElement('x-foo', { 
+  prototype: Object.create(HTMLElement.prototype) 
+});</code></pre>
+                        <pre class="fragment"><code class="javascript">var XFooProto = Object.create(HTMLElement.prototype);
+
+<span class="fragment"><span class="fragment">XFooProto.foo = function() { alert('foo() called'); };  </span>
+
+<span class="fragment">Object.defineProperty(XFooProto, "bar", {value: 5});</span>
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Leveraging get/set</h2>
+                        <pre class="fragment"><code class="javascript">var XFooProto = Object.create(HTMLElement.prototype);
+
+XFooProto.foo = function() { alert('foo() called'); };
+
+Object.defineProperty(XFooProto, "bar", {value: 5});
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});</code></pre>
+                        <pre class="fragment"><code class="javascript">var XFoo = document.registerElement('x-foo', { 
+  prototype: Object.create(HTMLElement.prototype, { 
+    <span class="fragment">foo: { 
+      value: function() { alert('foo() called'); } 
+    }</span><span class="fragment">,
+    bar: { 
+      get: function() { return 5; } 
+    }</span>
+  }) 
+});
+</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Custom Element Callbacks</h2>
+                        <p class="fragment"><strong>createdCallback</strong>
+                            <br><em>when instance of element is created</em></p>
+                        <p class="fragment"><strong>attachedCallback</strong>
+                            <br><em>when an instance is inserted into the document</em></p>
+                        <p class="fragment"><strong>detachedCallback</strong>
+                            <br><em>when an instance is removed fmor the document</em></p>
+                        <p class="fragment"><strong>attribuedChangedCallback(attrName, oldVal, newVal)</strong>
+                            <br><em>when an attribute is added, removed or updated</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Adding Markup with Callback</h2>
+                        <pre class="fragment"><code class="javascript">var XFooProto = Object.create(HTMLElement.prototype); 
+ 
+<span class="fragment">XFooProto.createdCallback = function() { 
+  this.innerHTML = "&lt;b&gt;Example!&lt;/b&gt;"; 
+};</span>
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});</code></pre>
+                        <p class="fragment">This doesn't encapsulate the result when rendered<br>
+                            <span class='fragment'>making it harder to achieve reliable reuse</span></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Leveraging the Shadow DOM</h2>
+                        <pre class='fragment'><code class='javascript'>var XFooProto = Object.create(HTMLElement.prototype); 
+
+XFooProto.createdCallback = function() { 
+  <span class="fragment">var shadow = this.createShadowRoot();</span>
+  <span class="fragment">shadow.innerHTML = "&lt;b&gt;Example!&lt;/b&gt;";</span>
+};  
+
+var XFoo = document.registerElement('x-foo-shadowdom', {
+  prototype: XFooProto
+});</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Adding in a Template</h2>
+                        <pre class='fragment'><code class='html'>&lt;template id="name-badge-template"&gt; 
+  &lt;style&gt; … &lt;/style&gt;
+  &lt;div class="badge"&gt;
+    &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
+    &lt;div class="name"&gt;&lt;content&gt;&lt;/content&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                        <pre class="fragment"><code class="javascript">document.registerElement('name-badge', {
+  prototype: Object.create(HTMLElement.prototype, { 
+    createdCallback: { 
+      value: function() { 
+        var shadow = this.createShadowRoot(),
+            template = document.querySelector('#name-badge-template'); 
+        shadow.appendChild(template.content.cloneNode());
+      } 
+    } 
+  })
+});</code></pre>
+                        <pre class="fragment"><code class="html">&lt;name-badge&gt;Eric&lt;name-badge&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Styling Custom Elements</h2>
+                        <p class="fragment">For custom elements</p>
+                        <pre class="fragment"><code class="css">x-foo { 
+  border: 1px solid #090;
+}</code></pre>
+                        <p class="fragment">To target elements within a custom element's shadow DOM</p>
+                        <pre class="fragment"><code class="css">x-foo::shadow p { 
+  color: red;
+}</code></pre>
+                        <p class='fragment'>There's a lot more to this subject...
+                            <br><a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201" target="_blank">html5rocks.com/en/tutorials/webcomponents/shadowdom-201</a></p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Custom Element Inheritance</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problem: Redundancy</h2>
+                        <p class="fragment">Suppose we have a fancy button...</p>
+                        <pre class='fragment'><code class='html'>&lt;mega-button&gt;Important Stuff!&lt;/mega-button&gt;</code></pre>
+                        <p class="fragment">We want it to behave like an enhanced button
+                            <br><strong class='fragment'>but we don't want to have to rewrite everything from scratch</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Type Extension Custom Elements</h2>
+                        <pre class='fragment'><code class='javascript'>var MegaButton = document.registerElement('mega-button', { 
+  prototype: Object.create(HTMLButtonElement.prototype), 
+  extends: 'button' 
+});</code></pre>
+                        <p class='fragment'><em>Attributes, methods and callbacks inherited from</em> &nbsp;<code>button</code></p>
+                        <pre class='fragment'><code class='html'>&lt;button is="mega-button"&gt;</code></pre>
+                        <pre class='fragment'><code class='javascript'>var megaButton = document.createElement('button', 'mega-button');</code></pre>
+                        <pre class='fragment'><code class='css'>[is="mega-button"] { font-size: 2em; }</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Packaging</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Problem: Importing Definitions</h2>
+                        <p class='fragment'><strong>Most types of resources have a method for loading...</strong></p>
+                        <p><em>
+                            <code class='fragment'>&lt;script src&gt;</code>
+                            <br>
+                            <code class='fragment'>&lt;link rel="stylesheet" href&gt;</code>
+                            <br>
+                            <span class='fragment'><code>&lt;img&gt;</code> , <code>&lt;video&gt;</code> &nbsp; and &nbsp;<code>&lt;img&gt;</code></span>
+                            <br>
+                            <span class='fragment'><code>&lt;embed&gt;</code> &nbsp; and &nbsp;<code>&lt;object&gt;</code></span>
+                        </em></p>
+                        <p class='fragment'><strong>But how do we pull HTML templates into the pages on our site?</strong></p>
+                        <p>
+                            <em class="fragment">Single-page apps</em>
+                            <br>
+                            <em class="fragment">AJAX</em>
+                            <br>
+                            <em class="fragment"><code>&lt;iframe&gt;</code></em>
+                            <br>
+                            <em class="fragment">Hacks (overloading <code>&lt;script&gt;</code>, hiding in comments, etc.)</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>HTML Imports</h2>
+                        <p class="fragment">New <code>link[rel="import"]</code></p>
+                        <pre class="fragment"><code class="html">&lt;link rel="import" href="/path/to/imports/stuff.html"&gt;</code></pre>
+                        <p class="fragment"><a href="http://www.w3.org/TR/html-imports/" target="_blank"><em>w3.org/TR/html-imports</em></a></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Includes File</h2>
+                        <p class="fragment">Support for recursion</p>
+                        <pre class="fragment"><code class="html">&lt;link rel="import" href="bootstrap.html"&gt;</code></pre>
+                        <pre class="fragment"><code class="html">&lt;link rel="stylesheet" href="bootstrap.css"&gt; 
+&lt;link rel="stylesheet" href="fonts.css"&gt; 
+&lt;script src="jquery.js"&gt;&lt;/script&gt; 
+&lt;script src="bootstrap.js"&gt;&lt;/script&gt; 
+&lt;script src="bootstrap-tooltip.js"&gt;&lt;/script&gt; 
+&lt;script src="bootstrap-dropdown.js"&gt;&lt;/script&gt; 
+... 
+&lt;template&gt; 
+  ... 
+&lt;/template&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Using Imports</h2>
+                        <p class="fragment"><strong>Each file will be imported only once</strong>
+                            <br><em class="fragment">De-dupes dependency loading when recursively defined in imports</em>
+                        </p>
+                        <p class="fragment"><strong>Standard origin security model</strong>
+                            <br><em class="fragment">Use CORS to allow cross-origin access</em>
+                        </p>
+                        <p class="fragment"><strong>Imports try to load immediately</strong>
+                            <br><em class="fragment">Must define onload/onerror ahead of time</em>
+                        </p>
+                        <p class="fragment"><strong>Imports don't do anything with the content of a file</strong>
+                            <br><em class='fragment'>They only fetch a document and pass it through the parser</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Working with Imported Documents</h2>
+                        <p class='fragment'><em>"fetch a document and pass it through the parser"</em></p>
+                        <p class="fragment">This means all the standard DOM APIs are available:</p>
+                        <pre class="fragment"><code class="html">var content = document.querySelector('link[rel="import"]').import;
+if(content){
+  var el = content.querySelector('.example');
+  document.body.appendChild(el.cloneNode(true));
+}</code></pre>
+                        <p class="fragment">Will be false if:</p>
+                        <p>
+                            <em class="fragment">Browser doesn't support HTML imports</em>
+                            <br>
+                            <em class='fragment'>No <code>link[rel="import"]</code> exists on page</em>
+                            <br>
+                            <em class='fragment'><code>link[rel="import"]</code> is not attached to the DOM</em>
+                            <br>
+                            <em class='fragment'>Resource is cross-origin but not allows by CORS</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Importing Templates</h2>
+                        <pre class='fragment'><code class='html'>&lt;template&gt;   
+  &lt;h1&gt;Hello World!&lt;/h1&gt;     
+  <span class="fragment">&lt;img src="world.png"&gt; &lt;!-- Fetched when &lt;template&gt; activated --&gt;</span>
+  <span class="fragment">&lt;script&gt;alert("Executed when the template activated");&lt;/script&gt;</span>
+&lt;/template&gt;
+</code></pre>
+                        <pre class='fragment'><code class='html'>var link = document.querySelector('link[rel="import"]'),
+    <span class="fragment">template = link.import.querySelector('template'),</span>
+    <span class="fragment">clone = document.importNode(template.content, true)</span>
+
+<span class="fragment">document.querySelector('#container').appendChild(clone);</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Importing Custom Elements</h2>
+                        <p class='fragment'>Custom element defined in the imported file</p>
+                        <pre class='fragment'><code class='javascript'>var proto = Object.create(HTMLElement.prototype); 
+proto.createdCallback = function() { 
+  this.innerHTML = 'Hello, <b>' +
+                   (this.getAttribute('name') || '?')
+                   + '</b>';
+};
+document.registerElement('say-hi', {prototype: proto});</code></pre>
+                        <p class='fragment'>The importer can just use the element directly</p>
+                        <pre class='fragment'><code class='fragment'>&lt;say-hi name="Eric"&gt;&lt;/say-hi&gt;</code></pre>
+                        <p class="fragment">In fact...<br><strong class="fragment">Everything in this session can be used through imports!</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Performance Considerations</h2>
+                        <p class="fragment">Concatenate imports to reduce HTTP requests
+                            <br><em class='fragment'>although this will become less essential with HTTP 2</em></p>
+                        <p class="fragment">Imports leverage browser caching
+                            <br><em class='fragment'>including use in an offline manifest</em></p>
+                        <p class="fragment">Content is inert until you add it</p>
+                        <p class="fragment">Imports don't block parsing the main document
+                            <br><em class='fragment'>so put them at the start of the document</em></p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Browser Support</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Bleeding Edge</h2>
+                        <table style="font-size:24px; margin:auto;" cellspacing="10" class="fragment">
+                            <thead>
+                                <tr>
+                                    <th>Browser</th>
+                                    <th>Template</th>
+                                    <th>Import</th>
+                                    <th>Custom Elements</th>
+                                    <th>Shadow DOM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight:bold">Chromium</td>
+                                    <td style="color:#9f9">26+</td>
+                                    <td style="color:#9f9">36+</td>
+                                    <td style="color:#9f9">33+</td>
+                                    <td style="color:#9f9">35+</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Opera</td>
+                                    <td style="color:#9f9">15+</td>
+                                    <td style="color:#9f9">23+</td>
+                                    <td style="color:#9f9">20+</td>
+                                    <td style="color:#9f9">22+</td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td style="font-weight:bold">Firefox</td>
+                                    <td style="color:#9f9">22+</td>
+                                    <td style="color:#ee9">32+<br><small><strong>(dev only)</strong></small></td>
+                                    <td style="color:#ee9">30+<br><small><strong>(dev only)</strong></small></td>
+                                    <td style="color:#ee9">30+<br><small><strong>(dev only)</strong></small></td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td style="font-weight:bold">Safari</td>
+                                    <td style="color:#9f9">8+</td>
+                                    <td style="color:#caa;"><em>None</em></td>
+                                    <td style="color:#cba;"><em>Mixed</em></td>
+                                    <td style="color:#cba;"><em>Mixed</em></td>
+                                </tr>
+                                <tr class="fragment">
+                                    <td style="font-weight:bold">Internet Explorer</td>
+                                    <td style="color:#aca"><em>Positive</em></td>
+                                    <td style="color:#cba;"><em>Mixed</em></td>
+                                    <td style="color:#cba;"><em>Mixed</em></td>
+                                    <td style="color:#cba;"><em>Mixed</em></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    
+                    <section>
+                        <h2>Runtime Browser Testing</h2>
+                        <pre class="fragment"><code class="javascript">'content' in document.createElement('template')</code></pre>
+                        <pre class="fragment"><code class="javascript">'import' in document.createElement('link')</code></pre>
+                        <pre class="fragment"><code class="javascript">'registerElement' in document</code></pre>
+                        <pre class="fragment"><code class="javascript">'createShadowRoot' in document.createElement('div')</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Graceful Fallbacks</h2>
+                        <p class='fragment'>Make decisions that decrate gracefully</p>
+                        <pre class='fragment'><code class='html'>&lt;div is="date-range-control" start-name="startDate" end-name="endDate"&gt; 
+  <span class="fragment">&lt;label for="start"&gt;Start:&lt;/label&gt; 
+  &lt;input type="date" name="startDate" id="start"&gt;
+  &lt;label for="end"&gt;End:&lt;/label&gt; 
+  &lt;input type="date" name="endDate" id="end"&gt; </span>
+&lt;/div&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Polyfills</h2>
+                        <p class="fragment"><strong>Polymer</strong>
+                            <br><a href="http://www.polymer-project.org" target="_blank">polymer-project.org</a></p>
+                        <p class="fragment"><strong>X-Tag</strong>
+                            <br><a href="http://x-tags.org" target="_blank">x-tags.org</a></p>
+                        <p class="fragment"><strong>Bosonic</strong>
+                            <br><a href="http://bosonic.github.io" target="_blank">bosonic.github.io</a>
+                            <br><em><small>(non-conformant)</small></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Component Libraries</h2>
+                        <p class="fragment"><strong>Polymer Elements</strong>
+                            <br><a href="http://www.polymer-project.org/docs/elements/" target="_blank">polymer-project.org/docs/elements/</a></p>
+                        <p class="fragment"><strong>Component Kitchen</strong>
+                            <br><a href="http://component.kitchen" target="_blank">component.kitchen</a></p>
+                        <p class="fragment"><strong>Custom Elements</strong>
+                            <br><a href="http://customelements.io" target="_blank">customelements.io</a></p>
+                    </section>
+                    
+                </section>
+
+                <section>
+                    <h1>Thank You</h1>
+                    <h2>Any Questions?</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/semantic-dark-wizardy">ebollens.github.io/p/semantic-dark-wizardy</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                        { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                        { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                        { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                        { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+
+    </body>
+</html>

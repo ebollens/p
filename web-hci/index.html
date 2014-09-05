@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Modern Human/Computer Interaction on the Web</title>
+
+        <meta name="description" content="">
+        <meta name="author" content="Eric R. Bollens and Lloyd Nicks">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="../css/reveal.min.css">
+        <link rel="stylesheet" href="../css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="../css/custom.css">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+                document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="../lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+                <section>
+                    <h1 style="font-size:2.8em">Human/Computer Interaction</h1>
+                    <h2>on the Modern Web</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/web-hci">ebollens.github.io/p/web-hci</a></strong>
+                        </p>
+                        <p style="font-size:0.7em;">
+                            Eric Bollens
+                            / <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                            <br>
+                            Lloyd Nicks
+                            / <a href="mailto:lnicks@oit.ucla.edu" target="_blank">lnicks@oit.ucla.edu</a> 
+                            / <a href="https://github.com/lnicks" target="_blank">lnicks [GitHub]</a> 
+                            / <a href="http://twitter.com/lloydnicks" target="_blank">@lloydnicks [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>HCI</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Semantics</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Early Days of HTML</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Rise of CSS</h2>
+                        <p class='fragment'><strong>Separation of content and presentation</strong></p>
+                        a push away from tags like font, center, i and b
+                    </section>
+                    
+                    <section>
+                        <h2>Divitis</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Semantic Web</h2>
+                        <p class='fragment'><em>I have a dream for the Web [in which computers] become capable of analyzing all the data on the Web - the content, links, and transactions between people and computers - a "Semantic Web"</em><br><small>~ Tim Berners-Lee (1999)</small></p>
+                    </section>
+                    
+                    <section>
+                        <h2>HTML 5</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>How Do Semantics Help With HCI?</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Layout Semantics</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;header&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;footer&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;section&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;article&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;aside&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;nav&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;main&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Content Semantics</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;figure&gt; and &lt;figcaption&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;details&gt; and &lt;summary&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;table&gt;</h2>
+                        http://www.whatwg.org/specs/web-apps/current-work/multipage/tables.html#table-descriptions-techniques
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;time&gt;</h2>
+                        http://www.brucelawson.co.uk/2012/best-of-time/
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;progress&gt;</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>&lt;track&gt;</h2>
+                        https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    <h2>Not Enough for Accessibility</h2>
+                    <pre class='fragment'><code class='html'>&lt;nav>&lt;ol>
+  &lt;!-- site nav -->  
+&lt;/ol>&lt;/nav>
+
+&lt;nav>&lt;ol>
+  &lt;li id="a1T">&lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+  &lt;li id="a2T">&lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;/ol>&lt;/nav>
+
+&lt;div>
+  &lt;article id="a1P">
+    &lt;!-- .. -->&lt;/article>
+  &lt;article id="a2P">
+    &lt;!-- .. -->&lt;/article>
+&lt;/div></code></pre>
+                    <p class='fragment'>
+                        No guidance here...
+                    </p>
+                    <p>
+                        <em class='fragment'>which nav is the site nav</em>
+                        <br>
+                        <em class='fragment'>that the nav and articles relate</em>
+                    </p>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>ARIA</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Constituents of ARIA</h2>
+                        <p class='fragment'><strong>Built to map to OS native accessibility APIs</strong></p>
+                        <p class='fragment'>
+                            <strong>Roles</strong>
+                            <br><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em>
+                        </p>
+                        <p class='fragment'>
+                            <strong>Properties</strong>
+                            <br><em class='fragment'>characteristics such as draggable, required, or an associated pop-up</em>
+                        </p>
+                        <p class='fragment'>
+                            <strong>States</strong>
+                            <br><em class='fragment'>current interactive state such as disabled, hidden or live</em>
+                        </p>
+                        <p class='fragment'><strong>Some automatically applied, others manually specified</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Example</h2>
+                        <pre class='fragment'><code class='html'>&lt;nav <span class="fragment">role="navigation"</span>>&lt;ol>
+  &lt;!-- site nav -->  
+&lt;/ol>&lt;/nav>
+
+&lt;nav <span class="fragment">role="tablist"</span>>&lt;ol>
+  &lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
+    &lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+  &lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
+    &lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;/ol>&lt;/nav>
+
+&lt;div <span class="fragment">role="main"</span>>
+  &lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
+    &lt;!-- .. -->&lt;/article>
+  &lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
+    &lt;!-- .. -->&lt;/article>
+&lt;/div></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Landmark Roles</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Structural Roles</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Widget Roles</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Common Mappings</h2>
+                        <p class="fragment"><strong>Directly-implied roles</strong></p>
+                        <p class="fragment">
+                            main &rarr; <strong>main</strong>
+                            <br>
+                            <span class="fragment">nav &rarr; <strong>navigation</strong></span>
+                            <br>
+                            <span class="fragment">section &rarr; <strong>region</strong></span>
+                            <br>
+                            <span class="fragment"><em>and many more ...</em></span>
+                        </p>
+                        <p class="fragment"><strong>Context-implied roles</strong></p>
+                        <p class="fragment">
+                            header &rarr; <strong>banner</strong>
+                            <br>
+                            <span class="fragment">footer &rarr; <strong>contentinfo</strong></span>
+                            <br>
+                            <span class="fragment">aside &rarr; <strong>complementary</strong></span>
+                            <br>
+                            <em class="fragment">when not in sectioning element or main</em></p>
+                    </section>
+                    
+                </section>
+                    
+                <section>
+                    <h2>When HTML Semantics Aren't Enough</h2>
+                    <p class="fragment">There are over <strong>100 elements in HTML 5</strong></p>
+                    <p class="fragment"><strong>But what about when an element doesn't exist?</strong></p>
+                    <p class="fragment"><em>How do we extend the vocabulary?</em>
+                        <br><em class='fragment'>How do we avoid namespace conflicts?</em></p>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Microdata</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Encoding for Machines</h2>
+                        <div style="font-size:0.95em;">
+                        <pre class='fragment'><code class="html">&lt;div&gt;
+  <span class="fragment">&lt;h2&gt;Mobility &amp; Modern Web Conference&lt;/h2&gt;</span>
+  <span class="fragment">&lt;p&gt;University of California, Los Angeles&lt;/p&gt;</span>
+  <span class="fragment">&lt;p&gt;&lt;time datetime="2014-09-17T08:00-07:00"&gt;Sep 17 8:00 AM&lt;/time&gt;&lt;/p&gt;</span>
+  <span class="fragment">&lt;p&gt;&lt;time datetime="2014-09-19T17:00-07:00"&gt;Sep 19 5:00 PM&lt;/time&gt;&lt;/p&gt;</span>
+&lt;/div&gt;</code></pre>
+                        <pre class="fragment"><code class="html">&lt;event&gt;
+  <span class="fragment">&lt;title&gt;Mobility &amp; Modern Web Conference&lt;/title&gt;</span>
+  <span class="fragment">&lt;location&gt;University of California, Los Angeles&lt;/location&gt;</span>
+  <span class="fragment">&lt;start&gt;&lt;time datetime="2014-09-17T08:00-07:00"&gt;Sep 17 8:00 AM&lt;/time&gt;&lt;/start&gt;</span>
+  <span class="fragment">&lt;end&gt;&lt;time datetime="2014-09-19T17:00-07:00"&gt;Sep 19 5:00 PM&lt;/time&gt;&lt;/end&gt;</span>
+&lt;/event&gt;</code></pre>
+                        <p class="fragment">Except that this wouldn't work...</p>
+                        <p>
+                            <em class='fragment'>HTML will never have vocabulary for everything</em>
+                            <br>
+                            <em class='fragment'>Namespace conflicts unless new scoping rules are introduced</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Data Model</h2>
+                        <p class="fragment"><strong>Scope</strong></p>
+                        <pre class="fragment"><code class="html">&lt;div <span class="fragment">itemscope itemtype="http://schema.org/Event"</span>&gt;
+  &lt;!-- .. --&gt;
+&lt;/div&gt;</code></pre>
+                        <p class='fragment'><strong>Name/value pairs</strong></p>
+                        <pre class='fragment'><code class='html'>&lt;h2 itemprop="name"&gt;Mobility &amp; Modern Web Conference&lt;/h2&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-17T08:00-07:00" itemprop="startDate"&gt;
+    Sep 17 8:00 AM&lt;/time&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;meta itemprop="alternateName" content="MMWCON"&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Example</h2>
+                        <div style="font-size:0.95em;">
+                        <pre class='fragment'><code class="html">&lt;div&gt;
+  &lt;h2&gt;Mobility &amp; Modern Web Conference&lt;/h2&gt;
+  &lt;p&gt;University of California, Los Angeles&lt;/p&gt;
+  &lt;p&gt;&lt;time datetime="2014-09-17T08:00-07:00"&gt;Sep 17 8:00 AM&lt;/time&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;time datetime="2014-09-19T17:00-07:00"&gt;Sep 19 5:00 PM&lt;/time&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                        <pre class="fragment"><code class="html">&lt;div itemscope itemtype="http://schema.org/Event"&gt;
+  <span class="fragment">&lt;h2 itemprop="name"&gt;Mobility &amp; Modern Web Conference&lt;/h2&gt;</span>
+  <span class="fragment">&lt;p itemprop="location"&gt;University of California, Los Angeles&lt;/p&gt;</span>
+  <span class="fragment">&lt;p&gt;&lt;time datetime="2014-09-17T08:00-07:00" itemprop="startDate"&gt;
+    Sep 17 8:00 AM&lt;/time&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;time datetime="2014-09-19T17:00-07:00" itemprop="endDate"&gt;
+    Sep 19 5:00 PM&lt;/time&gt;&lt;/p&gt;</span>
+  <span class='fragment'>&lt;meta itemprop="alternateName" content="MMWCON"&gt;</span>
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h2>Nested Scopes</h2>
+                        <div style="font-size:0.97em;">
+                        <pre class='fragment'><code class='html'>&lt;div&gt;
+  &lt;h2&gt;Eric Bollens&lt;/h2&gt;
+  &lt;p&gt;Open Source Architect at UCLA OIT&lt;/p&gt;
+  &lt;p&gt;
+    5308 Math-Sciences&lt;br&gt;
+    Los Angeles, CA 90095-1557&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;div itemscope itemtype="http://schema.org/Person"&gt;
+  <span class="fragment">&lt;h2 itemprop="name"&gt;Eric Bollens&lt;/h2&gt;</span>
+  <span class="fragment">&lt;p&gt;&lt;span itemprop="jobTitle"&gt;Open Source Architect&lt;/span&gt; at 
+    <span class="fragment">&lt;span itemprop="affiliation" 
+      itemscope itemtype="http://schema.org/Organization"&gt;
+        <span class="fragment">&lt;span itemprop="name"&gt;UCLA OIT&lt;span&gt;</span>
+    &lt;/span&gt;</span>
+  &lt;/p&gt;</span>
+  <span class="fragment">&lt;p itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"&gt;
+    <span class="fragment">&lt;span itemprop="street-address"&gt;5308 Math-Sciences&lt;/span&gt;&lt;br&gt;
+    &lt;span itemprop="locality"&gt;Los Angeles&lt;/span&gt;, 
+      &lt;span itemprop="region"&gt;CA&lt;/span&gt;
+      &lt;span itemprop="postal-code"&gt;90095-1557&lt;/span&gt;</span>
+  &lt;/p&gt;</span>
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <h2>Invisible Data</h2>
+                        <p class="fragment">Usually, microdata should be visible
+                            <br><span class="fragment">but <strong>sometimes we want to encode additional data</strong></span></p>
+                        <p class='fragment'>Consider longitude/latitude for relating a map</p>
+                    <pre class='fragment'><code class='html'>&lt;span itemscope itemtype="http://schema.org/Place"&gt;
+  &lt;span itemprop="name"&gt;Empire State Building&lt;/span&gt;
+  <span class="fragment">&lt;span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates"&gt;
+    <span class='fragment'>&lt;meta itemprop="latitude" content="40.75" /&gt;
+    &lt;meta itemprop="longitude" content="73.98" /&gt;</span>
+  &lt;/span&gt;</span>
+&lt;/span&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Consuming Microdata</h2>
+                        <p class="fragment">
+                            <strong>Search Engines</strong>
+                            <br><em class="fragment">Enhanced version of meta author, keyword, etc.</em>
+                            <br><em class="fragment">Present structured data in results</em>
+                            <br><em class="fragment">Establish relations between data structures</em>
+                        </p>
+                        <p class="fragment">
+                            <strong>Web Browsers</strong>
+                            <br><em class="fragment">Javascript DOM API</em>
+                            <br><em class="fragment">Present structured data in UI</em>
+                            <br><em class="fragment">Additional data for assistive technologies</em>
+                        </p>
+                    </section>
+                    
+                </section>
+                    
+                <section>
+                    <h2>Bridging the Gap</h2>
+                    <p class='fragment'>HTML 5 semantics for a wide range of elements</p>
+                    <p class='fragment'>Microdata extending available semantics</p>
+                    <p class='fragment'><strong>But what if we could merge these two?</strong></p>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Custom Elements</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Defining New Semantics</h2>
+                        <p class='fragment'><strong>Web Components</strong></p>
+                        <p>
+                            <em class='fragment'>Create new HTML elements</em>
+                            <br>
+                            <em class='fragment'>Define properties and methods</em>
+                            <br>
+                            <em class='fragment'>Extend existing elements</em>
+                        </p>
+                        <p class='fragment'><em><a href='http://www.html5rocks.com/en/tutorials/webcomponents/customelements/' target='_blank'>html5rocks.com/en/tutorials/webcomponents/customelements</a></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Custom Elements Basics</h2>
+                        <pre class='fragment'><code class='html'>&lt;x-foo&gt;&lt;/x-foo&gt;</code></pre>
+                        <pre class='fragment'><code class='javascript'>var XFooProto = Object.create(HTMLElement.prototype);
+
+<span class="fragment">Object.defineProperty(XFooProto, "foo", {value: 5});</span>
+
+<span class="fragment">XFooProto.bar = function() { alert('bar() called'); };</span>
+
+<span class="fragment">XFooProto.addEventListener('click', function(e) { this.bar(); });</span>
+
+<span class="fragment">XFooProto.createdCallback = function() { 
+  this.innerHTML = "Some Content"
+};</span>
+
+var XFoo = document.registerElement('x-foo', {
+  prototype: XFooProto
+});</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Event Scope</h2>
+                        <pre class='fragment'><code class='html'>&lt;schema-event&gt;
+  &lt;!-- .. --&gt;
+&lt;/schema-event&gt;</code></pre>
+                        <pre class='fragment'><code class='javascript'>var SchemaEventProto = Object.create(HTMLElement.prototype); 
+ 
+<span class="fragment">SchemaEventProto.createdCallback = function() { 
+  <span class="fragment">this.itemScope = true;
+  this.itemType = "http://schema.org/Event";</span>
+};</span>
+
+var SchemaEvent = document.registerElement('schema-event', {
+  prototype: SchemaEventProto
+});</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;schema-event itemscope itemtype="http://schema.org/Event"&gt;
+  &lt;!-- .. --&gt;
+&lt;/schema-event&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Event Title</h2>
+                        <pre class='fragment'><code class='html'>&lt;schema-event&gt;
+  &lt;h2&gt;Mobility and Modern Web Conference&lt;h2&gt;
+  &lt;!-- .. --&gt;
+&lt;/schema-event&gt;</code></pre>
+                        <pre class="fragment"><code class="javascript">SchemaEventProto.createdCallback = function() { 
+  this.itemScope = true;
+  this.itemType = "http://schema.org/Event";
+  <span class="fragment">var eleName = $(this).children('h1,h2,h3,h4,h5,h6').get().reduce(function(prev, cur){
+    return prev.tagName <= cur.tagName ? prev : cur
+  });</spam>
+  <span class="fragment">eleName.itemProp = "name";</span>
+</span>};</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;schema-event itemscope itemtype="http://schema.org/Event"&gt;
+  &lt;h2 itemprop="name"&gt;Mobility and Modern Web Conference&lt;h2&gt;
+  &lt;!-- .. --&gt;
+&lt;/schema-event&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>But Will Google Actually Index This?</h2>
+                        <p class="fragment"><strong>Until recently, no...</strong></p>
+                        <p><em class="fragment">Search engines used to only look at raw text content</em></p>
+                        <p class="fragment"><strong>But today, they do!</strong></p>
+                        <p class="fragment"><em><a href="http://googlewebmastercentral.blogspot.com/2014/05/understanding-web-pages-better.html" target="_blank">googlewebmastercentral.blogspot.com/2014/05/understanding-web-pages-better.html</a></em></p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>IndieUI</h2>
+                    </section>
+                    
+                </section>
+
+                <section>
+                    <h1>Thank You</h1>
+                    <h2>Any Questions?</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://ebollens.github.io/p/web-hci">ebollens.github.io/p/web-hci</a></strong>
+                        </p>
+                        <p style="font-size:0.7em;">
+                            Eric Bollens
+                            / <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                            <br>
+                            Lloyd Nicks
+                            / <a href="mailto:lnicks@oit.ucla.edu" target="_blank">lnicks@oit.ucla.edu</a> 
+                            / <a href="https://github.com/lnicks" target="_blank">lnicks [GitHub]</a> 
+                            / <a href="http://twitter.com/lloydnicks" target="_blank">@lloydnicks [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                        { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                        { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                        { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                        { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                        { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        </script>
+
+    </body>
+</html>

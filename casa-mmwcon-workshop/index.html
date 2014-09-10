@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Deploying an App Store with CASA</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Eric R. Bollens">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                
+                <section>
+                        <h2>Deploying an App Store with</h2>
+                        <h1>CASA</h1>
+                        <h3 style="padding-top:72px">by Eric Bollens</h3>
+                        <div style="font-size:0.8em">
+                            <p>
+                                <strong><a href="http://eb.io/p/casa-mmwcon-workshop">http://eb.io/p/casa-mmwcon-workshop</a></strong>
+                            </p>
+                            <p>
+                                <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                                / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                                / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                            </p>
+                        </div>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>CASA Engine</h3>
+                        <h2>Setting up an App Store</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>CASA Protocol</h2>
+                        <p class='fragment'><strong><a href="http://imsglobal.github.io/casa-protocol" target='_blank'>http://imsglobal.github.io/casa-protocol</a></strong></p>
+                        <p class="fragment"><strong><em>Candidate Draft</em></strong></p>
+                        <p class="fragment"><em>Comments and feedback encouraged
+                                <br><span class="fragment">Additional documentation is coming soon</span></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Reference Implementation</h2>
+                        <p class='fragment'><strong><a href="http://github.com/imsglobal/casa" target='_blank'>http://github.com/imsglobal/casa</a></strong></p>
+                        <p class="fragment"><strong><em>Aligned with Candidate Draft</em></strong></p>
+                        <p class="fragment"><em>Designed to match protocol
+                                <br><span class="fragment">Not exactly easy to set up</span></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>CASA on Rails
+                            <br><small><em><a href="http://github.com/ebollens/casa-on-rails" target='_blank'>http://github.com/ebollens/casa-on-rails</a></em></small></h2>
+                        <p class="fragment"><em>Opinionated, simplified and easy-to-use
+                                <br><span class="fragment">Reduced feature set from the entire protocol</span></em></p>
+                    </section>
+                    
+                    <section>
+                        <h3>But for this workshop, we'll use...</h3>
+                        <h2 class='fragment'>CASA on Rails</h2>
+                        <p class='fragment'><strong><a href="http://github.com/ebollens/casa-on-rails" target='_blank'>http://github.com/ebollens/casa-on-rails</a></strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Setup</h2>
+                        <p class='fragment'><strong>Download</strong></p>
+                        <pre class='fragment'><code class='bash'>git clone https://github.com/ebollens/casa-on-rails.git</code></pre>
+                        <p class='fragment'><strong>Environment Dependencies</strong></p>
+                        <p>
+                            <em class='fragment'>Ruby 2.1+</em>
+                            <br>
+                            <em class='fragment'>Node.js 0.10+</em>
+                            <br>
+                            <em class='fragment'>Java 1.4+</em>
+                        </p>
+                        <p class='fragment'><strong>Package Dependencies</strong></p>
+                        <pre class='fragment'><code>bundle</code></pre>
+                        <pre class='fragment'><code>npm install
+bundle exec blocks build</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Configuration</h2>
+                        <p class='fragment'><code>config/database.yml</code></p>
+                        <pre class='fragment'><code class='ruby'>default: &default
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: root
+  host: 127.0.0.1
+  port: 3306
+  database: casa</code></pre>
+                        <p class='fragment'><code>config/environment/*.rb</code></p>
+                        <pre class='fragment'><code class='ruby'>Rails.application.configure do
+  config.casa = {
+    :engine => {
+      :uuid => 'dd8c99e2-fe5b-4911-a815-73c17b46d3fc'
+    }
+  }
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Elasticsearch</h2>
+                        <p class='fragment'><strong>Open source search server based on Lucene</strong></p>
+                        <p>
+                            <em class='fragment'>Horizontally-scalable for redundancy and performance</em>
+                            <br>
+                            <em class='fragment'>Configurable indices, tokens, weights, etc.</em>
+                            <br>
+                            <em class='fragment'>Search by string and query language</em>
+                        </p>
+                        <p class='fragment'><strong><em><a href='http://elasticsearch.org' target='_blank'>http://elasticsearch.org</a></em></strong></p>
+                        <p class='fragment'><strong>Required for search capabilities in CASA on Rails</strong></p>
+                        <p class='fragment'><code>config/initializers/elasticsearch.rb</code></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Managing the App</h2>
+                        <p class='fragment'>Before first run, migrate database</p>
+                        <pre class='fragment'><code class='bash'>bin/rake db:migrate</code></pre>
+                        <p class='fragment'>Once database and Elasticsearch are running, start Rails</p>
+                        <pre class='fragment'><code class='bash'>bundle exec rackup</code></pre>
+                        <p class='fragment'>To update, pull and migrate the database</p>
+                        <pre class='fragment'><code class='bash'>git pull origin master
+bin/rake db:migrate</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>General Features</h2>
+                        <p class='fragment'><strong>Storefront</strong></p>
+                        <p>
+                            <em class='fragment'>Landing page of apps</em>
+                            <br>
+                            <em class='fragment'>Browse apps by category</em>
+                            <br>
+                            <em class='fragment'>Browse apps by search string</em>
+                        </p>
+                        <p class='fragment'><strong>Administration</strong></p>
+                        <p>
+                            <em class='fragment'>Apps</em>
+                            <br>
+                            <em class='fragment'>Categories</em>
+                            <br>
+                            <em class='fragment'>Inbound Peers</em>
+                        </p>
+                        <p class='fragment'><strong>Integration Points</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Integration Points</h2>
+                        <p class='fragment'><strong>CASA Publisher</strong></p>
+                        <p>
+                            <em class='fragment'>Transit payloads to share with peers</em>
+                            <br>
+                            <em class='fragment'>Local payloads exposed to local outlets</em>
+                        </p>
+                        <p class='fragment'><strong>CASA Receiver</strong></p>
+                        <p>
+                            <em class='fragment'>Scheduled job to query peers for apps</em>
+                        </p>
+                        <p class='fragment'><strong>HTML5 Local Storage</strong></p>
+                        <p>
+                            <em class='fragment'>Dashboard of apps maintained by the Rails app</em>
+                        </p>
+                        <p class='fragment'><strong>IMS LTI ContentItem</strong></p>
+                        <p>
+                            <em class='fragment'>Leveraged by other tool consumers to add apps</em>
+                        </p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>CASA Publisher</h3>
+                        <h2>Publishing from an App Store</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Endpoint</h2>
+                        <p class='fragment'><strong><code>GET /out/payloads</code></strong></p>
+                        <p>
+                            <em class='fragment'>Returns all payloads engine shares with others</em>
+                        </p>
+                        <p class='fragment'><strong><code>GET /out/payloads/[originator_uuid]/[app_uid]</code></strong></p>
+                        <p>
+                            <em class='fragment'>Returns a single payload from those engine shares</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Demo</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Identity</h2>
+                        <p class='fragment'><strong>Compound key</strong></p>
+                        <pre class='fragment'><code class='javascript'>{
+  'identity': { 
+    <strong class='fragment'>'id': 'some_app'</strong><strong class='fragment'>,
+    'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'</strong>
+  },
+  /* .. */
+}</code></pre>
+                        <p class='fragment'><strong>Properties</strong></p>
+                        <p>
+                            <em class='fragment'>Immutable for the lifetime of a payload</em>
+                            <br>
+                            <em class='fragment'>Payloads with same identity refer to same app</em>
+                            <br>
+                            <em class='fragment'>Necessary because URI may change</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Core Attributes</h2>
+                        <pre class='fragment'><code class='javascript'>{
+  'identity': { 
+    'id': 'some_app',
+    'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'
+  },
+  'attributes': {
+    <strong class='fragment'>'uri': 'http://example.com'</strong><strong class='fragment'>,
+    'timestamp': '2014-07-29T21:52:58+00:00'</strong><strong class='fragment'>,
+    'share': true</strong><strong class='fragment'>,
+    'propagate': true</strong><strong class='fragment'>,
+    'use':{ /* .. */ },
+    'require':{ /* .. */ }</strong>
+  }
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Extensible Attributes</h2>
+                        <pre class='fragment'><code class='javascript'>{
+  /* .. */
+  'attributes': {
+    /* .. */
+    'use':{
+      <strong class='fragment'>"1f2625c2-615f-11e3-bf13-d231feb1dc81":"UCLA Directory"</strong>
+    }
+  }
+}</code></pre>
+                        <p>
+                            <em class="fragment">UUID-based to prevent namespace conflicts</em>
+                            <br>
+                            <em class="fragment">Requirement levels regardless of if recognized</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Journal</h2>
+                        <pre class='fragment' style="font-size:19.6px;"><code class='javascript'>{
+  <strong class='fragment'>"attributes": {
+    /* .. */
+    "use":{
+      "1f2625c2-615f-11e3-bf13-d231feb1dc81":"UCLA Directory"
+    }
+  }</strong><strong class='fragment'>,
+  "original":{
+    /* .. */
+    "use": { 
+      "1f2625c2-615f-11e3-bf13-d231feb1dc81":"Directory" 
+    }
+  }</strong><strong class='fragment'>,
+  "journal":[
+    { "use": { "1f2625c2-615f-11e3-bf13-d231feb1dc81":"UCLA Directory" } }
+  ]</strong>
+}</code></pre>
+                        <p>
+                            <em class="fragment">Only local knowledge needed</em>
+                            <br>
+                            <em class="fragment">but access to broader decisions</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Basic Publishing</h2>
+                        <p class='fragment'>All this complexity isn't needed just to publish</p>
+                        <p class="fragment"><strong>As easy as a JSON file</strong></p>
+                        <pre class="fragment"><code class="javascript">[
+  <strong class='fragment'>{
+    'identity': { /* .. */ },
+    'original': { /* .. */ }
+  }</strong><strong class='fragment'>,
+  {
+    'identity': { /* .. */ },
+    'original': { /* .. */ }
+  }</strong>
+]</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>CASA Outlet</h3>
+                        <h2>Integrating with an App Store</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Web Services</h2>
+                        <p class='fragment'><strong><code>GET /local/payloads</code></strong></p>
+                        <p>
+                            <em class='fragment'>Returns all payloads engine shares with others</em>
+                        </p>
+                        <p class='fragment'><strong><code>GET /local/payloads/[originator_uuid]/[app_uid]</code></strong></p>
+                        <p>
+                            <em class='fragment'>Returns a single payload from those engine shares</em>
+                        </p>
+                        <p class='fragment'><strong>Optionally, search-supporting endpoints as well</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Local Payloads</h2>
+                        <pre class='fragment'><code class='javascript'>{
+  <span class="fragment">'identity': { 
+    'id': 'dir',
+    'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'
+  }</span><span class="fragment">,
+  'attributes': {
+    <span class="fragment">'uri': 'http://directory.ucla.edu',
+    'timestamp': '2014-07-29T21:52:58+00:00',
+    'share': true,
+    'propagate': true</span><span class="fragment">,
+    'use':{
+      <strong class='fragment'>"title": "UCLA Directory"
+      /* .. */</strong>
+    }</span><span class="fragment">,
+    'require':{ /* .. */ }</span>
+  }</span>
+}</code></pre>
+                        <p>
+                            <em class="fragment">Do not send <code>original</code> or <code>journal</code></em>
+                            <br>
+                            <em class="fragment">Instead, send a squashed <code>attributes</code> section</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>HTML5 Local Storage</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>But What About Elsewhere?</h2>
+                        <p class='fragment'><strong>What about when we want to "install" them elsewhere?</strong></p>
+                        <p>
+                            <em class='fragment'>Learning management systems</em>
+                            <br>
+                            <em class='fragment'>Student portal</em>
+                            <br>
+                            <em class='fragment'>Other applications</em>
+                        </p>
+                        <p class='fragment'><strong>How do we install apps into these?</strong></p>
+                        <p>
+                            <em class='fragment'>Can't just post back to the app</em>
+                            <br>
+                            <em class='fragment'>Need a way to establish provenance</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>LTI ContentItem</h2>
+                        <p class='fragment'><em>"The content-item message is used to provide a mechanism for users to interact with a Tool Provider (TP) in the process of selecting one or more content items for insertion into the tool consumer."</em></p>
+                        <p class='fragment'><strong>LTI launch</strong></p>
+                        <p>
+                            <span class='fragment'>From any LTI consumer</span>
+                            <br>
+                            <span class='fragment'>To app store as an LTI provider</span>
+                        </p>
+                        <p class='fragment'><strong>ContentItem message</strong></p>
+                        <p>
+                            <span class='fragment'>Posted back to LTI consumer</span>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>LTI ContentItem Envelope</h2>
+                        <pre class='fragment'><code class='html'>&lt;form action="http://consumer.example.com/add-app" method="post"
+ encType="application/x-www-form-urlencoded"&gt;
+  <span class='fragment'>&lt;input type="hidden" name="lti_message_type" 
+                       value="ContentItemSelectionResponse" /&gt;
+  &lt;input type="hidden" name="lti_version" value="LTI-1p0" /&gt;</span>
+  <span class='fragment'><span class='fragment'><span class='fragment'>&lt;input type="hidden" name="content_items" value=".." /&gt;</span>
+  &lt;input type="hidden" name="data" value="Some opaque TC data" /&gt;</span>
+  &lt;input type="hidden" name="oauth_version" value="1.0" /&gt;
+  &lt;input type="hidden" name="oauth_nonce" value="..." /&gt;
+  &lt;input type="hidden" name="oauth_timestamp" value="..." /&gt;
+  &lt;input type="hidden" name="oauth_consumer_key" value="..." /&gt;
+  &lt;input type="hidden" name="oauth_callback" value="about:blank" /&gt;
+  &lt;input type="hidden" name="oauth_signature_method" value="HMAC-SHA1" /&gt;
+  &lt;input type="hidden" name="oauth_signature" value="..." /&gt;</span>
+&lt;/form&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>LTI ContentItem Message</h2>
+                        <pre class='fragment'><code class='javascript'>{
+  <span class='fragment'>"@context" : "http://purl.imsglobal.org/ctx/lti/v1/ContentItemPlacement"</span><span class='fragment'>, 
+  "@graph" : [ 
+    <span class='fragment'>{ 
+      "@type" : "ContentItemPlacement", 
+      "placementOf" : {<span class='fragment'> 
+        "@type" : "FileItem"</span><span class='fragment'>, 
+        "@id" : "http://example.com"</span><span class='fragment'>
+        "title" : "Some Application"</span><span class='fragment'>, 
+        "text" : "Some text describing the app"</span><span class='fragment'>, 
+        "mediaType" : "text/html"</span>
+      },
+      "presentation_document_target" : "window", 
+      "windowTarget" : "_blank"
+    }</span>
+  ]</span>
+}</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>CASA Receiver &amp; Relay</h3>
+                        <h2>Networked App Stores</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Querying for Payloads</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Processing Received Payloads</h2>
+                        <p class='fragment'>Translate</p>
+                        <p class='fragment'>Squash</p>
+                        <p class='fragment'>Filter</p>
+                        <p class='fragment'>Transform</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Who's Sharing?</h2>
+                        <p class='fragment'>Pilots with <strong>UCLA and UC system</strong> and an <strong>IMS instance</strong></p>
+                        <p class='fragment'>
+                            <strong>EduAppCenter</strong> already providing a CASA endpoint
+                        </p>
+                        <pre class='fragment'><code class='bash'>http://www.eduappcenter.com/api/v1/lti_apps/casa</code></pre>
+                        <p class='fragment'><img src='img/inthewild-eduappcenter.png' style='height:300px'></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Relay Data Path</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    <h1>Thank You</h1>
+                    <h2>Any Questions?</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://eb.io/p/casa-mmwcon-workshop">http://eb.io/p/casa-mmwcon-workshop</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                        controls: true,
+                        progress: true,
+                        history: true,
+                        center: true,
+
+                        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                        // Parallax scrolling
+                        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                        // parallaxBackgroundSize: '2100px 900px',
+
+                        // Optional libraries used to extend on reveal.js
+                        dependencies: [
+                                { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                                { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                                { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                                { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                                { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                                { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                        ]
+                });
+
+        </script>
+
+    </body>
+</html>

@@ -65,6 +65,26 @@
                         <h2>HCI</h2>
                     </section>
                     
+                    <section>
+                        <p><em>a discipline concerned with the design, evaluation and implementation of interactive computing systems for human use and with the study of major phenomena surrounding them</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>In This Workshop</h2>
+                        <p class="fragment"><em>We will focus on...</em></p>
+                        <p class="fragment"><strong>How people interact with our sites<span class="fragment">,<br>and how computers interact with our sites</span></strong></p>
+                        <p class="fragment"><em>In particular...</em></p>
+                        <p class="fragment"><strong>The technologies that enable these interactions<span class="fragment">,<br> not the complementary UX or IA practices</span></strong></p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Assistive HTML</h2>
+                    </section>
+                    
                 </section>
                 
                 <section>
@@ -82,11 +102,37 @@
                     
                     <section>
                         <h2>Rise of CSS</h2>
+                        <p class='fragment'>Web content can be viewed in numerous ways...</p>
+                        <p>
+                            <em class='fragment'>Traditional browsers</em>
+                            <br>
+                            <em class='fragment'>Printed page</em>
+                            <br>
+                            <em class='fragment'>Minimal browsers</em>
+                            <br>
+                            <em class='fragment'>Assistive technology</em>
+                        </p>
+                        <p class='fragment'>Style sheets meant to define presentation for a media type</p>
                         <p class='fragment'><strong>Separation of content and presentation</strong></p>
                     </section>
                     
                     <section>
                         <h2>Divitis</h2>
+                        <pre class='fragment'><code class='html'><span class='fragment'>&lt;div class='container'></span>
+    <span class='fragment'>&lt;div class='header'>
+        <span class='fragment'>&lt;!-- .. --></span>
+    &lt;/div></span>
+    <span class='fragment'>&lt;div class='main-container'></span>
+        <span class='fragment'>&lt;div class='nav'>
+            <span class='fragment'>&lt;div class='search'>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+            <span class='fragment'>&lt;div class='menu'>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+        &lt;/div></span>
+        <span class='fragment'>&lt;div class='main'></span>
+            <span class='fragment'>&lt;!-- .. --></span></code></pre>
                     </section>
                     
                     <section>
@@ -95,7 +141,10 @@
                     </section>
                     
                     <section>
-                        <h2>HTML 5</h2>
+                        <h2>HTML 5 Elements</h2>
+                        <p class='fragment'>Page landmarks</p>
+                        <p class='fragment'>Sectioning types</p>
+                        <p class='fragment'>Widget components</p>
                     </section>
                     
                     <section>
@@ -103,27 +152,116 @@
                     </section>
                     
                     <section>
-                        <h2>Layout Semantics</h2>
-                    </section>
-                    
-                    <section>
                         <h2>&lt;header&gt;</h2>
+                        <p class='fragment'><strong>Site masthead/banner ( commonly <code>#header</code> )<span class='fragment'>,<br>and also the head for any section of the page</span></strong></p>
+                        <pre class='fragment'><code class='html'>&lt;body>
+    &lt;!-- .. -->
+    &lt;header>&lt;!-- .. -->&lt;/header>
+    &lt;!-- .. -->
+&lt;/body></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;article>
+    &lt;header>&lt;!-- .. -->&lt;/header>
+    &lt;!-- .. -->
+&lt;/article></code></pre>
+                        <p>
+                            <span class='fragment'>Usually contains an h1-h6 or hgroup tag</span>
+                            <br>
+                            <span class='fragment'>but may be used to wrap a table of contents, logo, search, etc.</span>
+                        </p>
                     </section>
                     
                     <section>
                         <h2>&lt;footer&gt;</h2>
+                        <p class='fragment'><strong>Site footer ( commonly <code>#footer</code> )<span class='fragment'>,<br>and also the footer for any section of the page</span></strong></p>
+                        <pre class='fragment'><code class='html'>&lt;body>
+    &lt;!-- .. -->
+    &lt;footer>&lt;!-- .. -->&lt;/footer>
+    &lt;!-- .. -->
+&lt;/body></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;article>
+    &lt;!-- .. -->
+    &lt;footer>&lt;!-- .. -->&lt;/footer>
+&lt;/article></code></pre>
+                        <p>
+                            <span class='fragment'>Similar content model to <code>header</code></span>
+                            <br>
+                            <span class='fragment'>Usually info like author, related documents and copyright data</span>
+                            <br>
+                            <span class="fragment">May include <code>section</code>s for appendices, indexes, colophons, etc.</span>
+                            <br>
+                            <span class="fragment">Not always at the bottom of a page/section</span>
+                        </p>
                     </section>
                     
                     <section>
-                        <h2>&lt;section&gt;</h2>
+                        <h2>&lt;main&gt;</h2>
+                        <p class="fragment">Until recently...</p>
+                        <p class="fragment"><em>content that is directly related to or expands upon the central topic of a document or central functionality of an application.</em></p>
+                        <p class="fragment">But now...</p>
+                        <p class="fragment"><em>can be used as a container for the dominant contents of another element</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Landmarks with Context</h2>
+                        <pre class="fragment"><code class="html">&lt;body>
+    &lt;div id="header">&lt;!-- .. -->&lt;/div>
+    &lt;div id="container">&lt;!-- .. -->&lt;/div>
+    &lt;div id="footer">&lt;!-- .. -->&lt;/div>
+&lt;/body></code></pre>
+                        <pre class="fragment"><code class="html">&lt;body>
+    <span class='fragment'>&lt;header>&lt;!-- .. -->&lt;/header></span>
+    <span class='fragment'><span class='fragment'>&lt;main>
+        <span class='fragment'>&lt;article>
+            <span class='fragment'>&lt;header>&lt;!-- .. -->&lt;/header></span>
+            <span class='fragment'>&lt;footer>&lt;!-- .. -->&lt;/footer></span>
+            <span class='fragment'>&lt;main>&lt;!-- .. -->&lt;/main></span>
+        &lt;/article></span>
+    &lt;/main></span>
+    &lt;footer>&lt;!-- .. -->&lt;/footer></span>
+&lt;/body></code></pre>
                     </section>
                     
                     <section>
                         <h2>&lt;article&gt;</h2>
+                        <p><em class="fragment">a component of a page that consists of a self-contained composition...</em><em class="fragment">that is intended to be independently distributable</em></p>
+                        <pre class="fragment"><code class="html">&lt;article>
+  &lt;header>
+    &lt;h1>&lt!-- title -->&lt;/h1>
+  &lt;/header>
+  &lt;footer>
+    &lt;p>by &lt!-- author --> on &lt!-- date -->&lt;br>
+        &lt;small>&lt!-- copyright notice -->&lt;/small>&lt;/p>
+  &lt;/footer>
+  &lt!-- .. -->
+&lt;/article></code></pre>
+                        <p class="fragment">
+                            <span>Often includes <code>header</code> and <code>footer</code></span>
+                            <br>
+                            <span class="fragment">Should make sense independent of the page context</span>
+                        </p>
                     </section>
                     
                     <section>
-                        <h2>&lt;aside&gt;</h2>
+                        <h2>&lt;section&gt;</h2>
+                        <p>
+                            <em class='fragment'>a generic document or application section...</em>
+                            <em class='fragment'>not a generic container element...</em>
+                            <em class='fragment'>appropriate only if the element’s contents would be listed explicitly in the document’s outline.</em>
+                        </p>
+                        <p>
+                            <span class='fragment'>Usually shouldn't be used if no natural heading</span>
+                            <br>
+                            <span class='fragment'>Don't use it when you need solely for styles or scripts</span>
+                            <br>
+                            <span class='fragment'>Most generic of the sectioning elements</span>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>When use article, section or div?</h2>
+                        <p class="fragment"><strong>article</strong> if the content would make sense on its own in a feed reader</p>
+                        <p class="fragment"><strong>section</strong> if the content is related</p>
+                        <p class="fragment"><strong>div</strong> otherwise</p>
                     </section>
                     
                     <section>
@@ -131,7 +269,7 @@
                     </section>
                     
                     <section>
-                        <h2>&lt;main&gt;</h2>
+                        <h2>&lt;aside&gt;</h2>
                     </section>
                     
                     <section>
@@ -507,6 +645,203 @@ var SchemaEvent = document.registerElement('schema-event', {
                     
                     <section>
                         <h2>IndieUI</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>How Do You Scroll?</h2>
+                        <p class="fragment">Spin a scroll wheel</p>
+                        <p class="fragment">Drag a scroll bar</p>
+                        <p class="fragment">Press a scroll arrow</p>
+                        <p class="fragment">Slide a finger across the screen</p>
+                        <p class="fragment">Verbally state "scroll" and a direction</p>
+                    </section>
+                    
+                    <section>
+                        <h2>How Do You Undo?</h2>
+                        <p class="fragment"><code>CTRL + Z</code></p>
+                        <p class="fragment"><code>CMD + Z</code></p>
+                        <p class="fragment">Press down and select action</p>
+                        <p class="fragment">Shake or swipe</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Handling for Many Environments</h2>
+                        <pre class="fragment"><code class="javascript"><span class="fragment">document.addEventListener('keydown', function(e){
+    <span class="fragment">if( navigator.userAgent.match(/Macintosh/g) && e.which === 90 && e.metaKey ) {
+        doUndo();
+    }</span><span class="fragment"> else if ( e.which === 90 && e.ctrlKey ){
+        doUndo();
+    }</span>
+});</span>
+
+<span class="fragment">if(navigator.userAgent.match(/(iPad|iPhone|iPod)/g)){
+    <span class="fragment">window.addEventListener('shake', function(e){
+        doUndo();
+    });</span>
+}</span>
+
+<span class="fragment">(function (window, document) {
+
+    function Shake() {
+
+        //feature detect
+        this.hasDeviceMotion = 'ondevicemotion' in window;
+
+        //default velocity threshold for shake to register
+        this.threshold = 15;
+
+        //use date to prevent multiple shakes firing
+        this.lastTime = new Date();
+
+        //accelerometer values
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+
+        //create custom event
+        if (typeof document.CustomEvent === "function") {
+            this.event = new document.CustomEvent('shake', {
+                bubbles: true,
+                cancelable: true
+            });
+        } else if (typeof document.createEvent === "function") {
+            this.event = document.createEvent('Event');
+            this.event.initEvent('shake', true, true);
+        } else { 
+          return false;
+        }
+    }
+
+    //reset timer values
+    Shake.prototype.reset = function () {
+        this.lastTime = new Date();
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+    };
+
+    //start listening for devicemotion
+    Shake.prototype.start = function () {
+        this.reset();
+        if (this.hasDeviceMotion) { window.addEventListener('devicemotion', this, false); }
+    };
+
+    //stop listening for devicemotion
+    Shake.prototype.stop = function () {
+
+        if (this.hasDeviceMotion) { window.removeEventListener('devicemotion', this, false); }
+        this.reset();
+    };
+
+    //calculates if shake did occur
+    Shake.prototype.devicemotion = function (e) {
+
+        var current = e.accelerationIncludingGravity,
+            currentTime,
+            timeDifference,
+            deltaX = 0,
+            deltaY = 0,
+            deltaZ = 0;
+
+        if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+            return;
+        }
+
+        deltaX = Math.abs(this.lastX - current.x);
+        deltaY = Math.abs(this.lastY - current.y);
+        deltaZ = Math.abs(this.lastZ - current.z);
+
+        if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
+            //calculate time in milliseconds since last shake registered
+            currentTime = new Date();
+            timeDifference = currentTime.getTime() - this.lastTime.getTime();
+
+            if (timeDifference > 1000) {
+                window.dispatchEvent(this.event);
+                this.lastTime = new Date();
+            }
+        }
+
+        this.lastX = current.x;
+        this.lastY = current.y;
+        this.lastZ = current.z;
+
+    };
+
+    //event handler
+    Shake.prototype.handleEvent = function (e) {
+
+        if (typeof (this[e.type]) === 'function') {
+            return this[e.type](e);
+        }
+    };
+
+    //create a new instance of shake.js.
+    var myShakeEvent = new Shake();
+    myShakeEvent && myShakeEvent.start();
+
+}(window, document));</span></code></pre>
+                        <p class="fragment"><em>And how about tap highlight undo?</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Goals of IndieUI</h2>
+                        <p class="fragment" style="color:#bbb;">Make it easier for web developers to author <strong style="color:#fff;">consistently usable interfaces that are input-agnostic</strong> and independent of a user's particular platform, hardware, locale, and preferences.</p>
+                        <p class="fragment" style="color:#bbb;">Enable every type of control in these interfaces to be <strong style="color:#fff;">programmatically determinable and controllable by both mainstream and alternate forms of user input</strong>, including assistive technologies.</p>
+                        <p class="fragment" style="color:#bbb;">Provide a clear path for web developers to <strong style="color:#fff;">smoothly transition from currently existing physical events to IndieUI events</strong>, during the period when implementations of IndieUI are incomplete.</p>
+                    </section>
+                    
+                    <section>
+                        <h2>UndoRequest</h2>
+                        <pre class="fragment"><code class='javascript'>element.addEventListener('dismissrequest', function(){
+    doUndo();
+});</code></pre>
+                        <p>
+                            <em class='fragment'>No keypress detection</em>
+                            <br>
+                            <em class='fragment'>No UA sniffing or OS consideration</em>
+                            <br>
+                            <em class='fragment'>No complex hacks to detect interaction</em>
+                            <br>
+                            <em class='fragment'>No undetectable actions</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>UI Request Events</h2>
+                        <p>
+                            <code class='fragment'>undorequest</code>
+                            <br>
+                            <code class='fragment'>redorequest</code>
+                            <br>
+                            <code class='fragment'>expandrequest</code>
+                            <br>
+                            <code class='fragment'>collapserequest</code>
+                            <br>
+                            <code class='fragment'>dismissrequest</code>
+                            <br>
+                            <code class='fragment'>deleterequest</code>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>UI Manipulation &amp; Change Events</h2>
+                        <p>
+                            <code class='fragment'>moverequest</code>
+                            <br>
+                            <code class='fragment'>panrequest</code>
+                            <br>
+                            <code class='fragment'>rotationrequest</code>
+                            <br>
+                            <code class='fragment'>scrollrequest</code>
+                            <br>
+                            <code class='fragment'>zoomrequest</code>
+                            <br>
+                            <code class='fragment'>valuechangerequest</code>
+                        </p>
                     </section>
                     
                 </section>

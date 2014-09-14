@@ -226,11 +226,11 @@
                         <p><em class="fragment">a component of a page that consists of a self-contained composition...</em><em class="fragment">that is intended to be independently distributable</em></p>
                         <pre class="fragment"><code class="html">&lt;article>
   &lt;header>
-    &lt;h1>&lt!-- title -->&lt;/h1>
+    &lt;h1>Web Human Computer Interoperability&lt;/h1>
   &lt;/header>
   &lt;footer>
-    &lt;p>by &lt!-- author --> on &lt!-- date -->&lt;br>
-        &lt;small>&lt!-- copyright notice -->&lt;/small>&lt;/p>
+    &lt;p>by Eric Bollens and Lloyd Nicks
+        &lt;br>&lt;small>Copyright &copy; 2014 UC Regents.&lt;/small>&lt;/p>
   &lt;/footer>
   &lt!-- .. -->
 &lt;/article></code></pre>
@@ -266,41 +266,179 @@
                     
                     <section>
                         <h2>&lt;nav&gt;</h2>
+                        <p class='fragment'><em>section of a page that links to other pages or to parts within the page...</em> <em class='fragment'>only sections that consist of major navigation blocks are appropriate</em></p>
+                        <p><strong>
+                            <span class='fragment'>Site navigation</span>
+                            <br>
+                            <span class='fragment'>Table of contents</span>
+                            <br>
+                            <span class='fragment'>Previous/next buttons or pagination</span>
+                            <br>
+                            <span class='fragment'>Search form</span>
+                            <br>
+                            <span class='fragment'>Breadcrumbs</span>
+                        </strong></p>
+                        <p class='fragment'>Usually contains a list, but sometimes just buttons, forms or links<span class='fragment'><br>UAs may omit on initial rendering, and make it easy to skip to</span></p>
                     </section>
                     
                     <section>
                         <h2>&lt;aside&gt;</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Content Semantics</h2>
+                        <p class='fragment'><em>content that is tangentially related to the content around [it]... often represented as sidebars in printed typography</em></p>
+                        <p><strong>
+                            <span class='fragment'>Pull quotes</span>
+                            <br>
+                            <span class='fragment'>Sidebars</span>
+                            <br>
+                            <span class='fragment'>Glossary</span>
+                            <br>
+                            <span class='fragment'>Blogroll</span>
+                            <br>
+                            <span class='fragment'>Advertisements</span>
+                        </strong></p>
+                        <p class='fragment'>Not for parentheticals, as they're still part of the main flow<br><span class="fragment">Within a sectioned element, tangential to section (like glossary)</span></p>
                     </section>
                     
                     <section>
                         <h2>&lt;figure&gt; and &lt;figcaption&gt;</h2>
+                        <p>
+                            <em class="fragment">unit of content... that is self-contained... </em><em class="fragment">typically referenced as a single unit from the main flow... </em><em class="fragment"> that can be moved away from the main flow</em>
+                        </p>
+                        <p><strong>
+                            <span class="fragment">Diagrams</span>
+                            <br>
+                            <span class="fragment">Illustrations</span>
+                            <br>
+                            <span class="fragment">Photos</span>
+                            <br>
+                            <span class="fragment">Code examples</span>
+                            <br>
+                            <span class="fragment">Audio and video</span>
+                        </strong></p>
+                        <p class="fragment">
+                            If the content is simply related and not essential, use <code>aside</code><br><span class="fragment">If the content is essential but its position isn’t, use <code>figure</code></span></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Examples<br><small>&lt;figure&gt; and &lt;figcaption&gt;</small></h2>
+                        <pre class="fragment"><code class="html">&lt;figure>
+  &lt;img src="/macaque.jpg" alt="Macaque in the trees">
+&lt;/figure></code></pre>
+                        <pre class="fragment"><code class="html">&lt;figure>
+  &lt;img src="/macaque.jpg" alt="Macaque in the trees">
+  &lt;figcaption>A cheeky macaque, Lower Kintaganban River, Borneo. 
+  Original by Richard Clark&lt;/figcaption>
+&lt;/figure></code></pre>
+                        <pre class="fragment"><code class="html">&lt;figure>
+  &lt;img src="/kookaburra.jpg" alt="Kooaburra">
+  &lt;img src="/pelican.jpg" alt="Pelican stood on the beach">
+  &lt;img src="/lorikeet.jpg" alt="Cheeky looking Rainbow Lorikeet">
+  &lt;figcaption>Australian Birds. From left to right, Kookburra, Pelican and 
+  Rainbow Lorikeet. Originals by Richard Clark&lt;/figcaption>
+&lt;/figure></code></pre>
                     </section>
                     
                     <section>
                         <h2>&lt;details&gt; and &lt;summary&gt;</h2>
+                        <p class="fragment">
+                            <em>The &nbsp;<code>details</code>&nbsp; element represents a disclosure widget from which the user can obtain additional information or controls.</em>
+                        </p>
+                        <p>
+                            <span class="fragment">A widget the user can show and hide</span>
+                            <br>
+                            <span class="fragment">Hidden by default, overridden by the <code>open</code> attribute</span>
+                        </p>
+                        <p>
+                            <strong class="fragment">Profiles</strong>
+                            <br>
+                            <strong class="fragment">FAQ Items</strong>
+                            <br>
+                            <strong class="fragment">About the Author</strong>
+                            <br>
+                            <strong class="fragment">Comments</strong>
+                        </p>
+                        <p class="fragment"><em>The &nbsp;<code>summary</code>&nbsp; element represents a summary, caption, or legend for the... element's parent &nbsp;<code>details</code>&nbsp; element</em></p>
+                        <p>
+                            <span class="fragment">When no <code>summary</code>, browser uses some default text</span>
+                        </p>
                     </section>
                     
+                    <section>
+                        <h2>Examples<br><small>&lt;details&gt; and &lt;summary&gt;</small></h2>
+                        <pre class="fragment"><code class="html">&lt;details>
+  &lt;summary>About the author&lt;/summary>
+  &lt;p>Eric Bollens, an open source architect at UCLA, ...&lt;/p>
+&lt;/details></code></pre>
+                        <div class="fragment">
+                            <details>
+                                <summary>About the author</summary>
+                                <p>Eric Bollens, an open source architect at UCLA, ...</p>
+                            </details>
+                        </div>
+                        <pre class="fragment"><code class="html">&lt;ul>
+    &lt;li>&lt;details>
+        &lt;summary>When is article appropriate?&lt;/summary>
+        &lt;p>if the content would make sense extracted on its own&lt;/p>
+    &lt;/details>&lt;/li>
+    &lt;!-- .. -->
+&lt;/ul></code></pre>
+                    </section>
+                    
+                    <!--
                     <section>
                         <h2>&lt;table&gt;</h2>
                         http://www.whatwg.org/specs/web-apps/current-work/multipage/tables.html#table-descriptions-techniques
                     </section>
+                    -->
                     
                     <section>
                         <h2>&lt;time&gt;</h2>
-                        http://www.brucelawson.co.uk/2012/best-of-time/
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-19T16:00Z">Today 9:30 AM at UCLA&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-19T09:00-07:00">Today 9:30 AM at UCLA&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-20">Tomorrow&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-10">Next month&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2015">Next year&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="2015-W1">First week next year&lt;/time></code></pre>
+                        <pre class='fragment'><code class='html'>&lt;time datetime="PT23H 9M 2.343S">23 hours, 9 minutes, 2.345 seconds&lt;/time></code></pre>
+                        <p>
+                            <em class='fragment'>Cannot represent dates before 1 BC</em>
+                            <br>
+                            <em class='fragment'>Cannot indicate date ranges</em>
+                        </p>
                     </section>
                     
                     <section>
                         <h2>&lt;progress&gt;</h2>
+                        <p class='fragment'><em>The &nbsp;<code>progress</code>&nbsp; element represents the completion progress of a task.</em></p>
+                        <p>
+                            <span class='fragment'><code>max</code> defaulting to 1</span>
+                            <br>
+                            <span class='fragment'><code>value</code> between 0 and <code>max</code></span>
+                        </p>
+                        <pre class='fragment'><code class='html'>&lt;progress id='p' max='70'>&lt;span>0&lt;/span>%&lt;/progress></code></pre>
+                        <pre class='fragment'><code class='javascript'>var updateProgress = function(value) {
+  var p = document.getElementById('p');
+  p.value = value;
+  p.getElementsByTagName('span')[0].innerHTML = Math.floor((100 / 70) * value);
+}</code></pre>
                     </section>
                     
                     <section>
                         <h2>&lt;track&gt;</h2>
-                        https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
+                        <p class="fragment"><strong>Captions</strong> are intended for deaf / hard-of-hearing audience<br><span class="fragment"><strong>Subtitles</strong> are usually to assist in understanding the dialogue</span></p>
+                        <p class='fragment'>For HTML audio and video, they're implemented the same way</p>
+                        <pre class='fragment'><code class='html'>&lt;video id="video" controls preload="metadata">
+   &lt;source src="s.mp4" type="video/mp4">
+   &lt;source src="s.webm" type="video/webm">
+   <span class='fragment'>&lt;track label="English" kind="captions" srclang="en" src="s-en.vtt" <span class='fragment'>default</span>></span>
+   <span class='fragment'>&lt;track label="Deutsch" kind="captions" srclang="de" src="s-de.vtt">
+   &lt;track label="Español" kind="captions" srclang="es" src="s-es.vtt"></span>
+&lt;/video></code></pre>
+                        <pre class='fragment'><code class='javascript'>for (var i = 0; i < video.textTracks.length; i++) {
+   video.textTracks[i].mode = 'hidden';
+}</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;button type="button" data-state="captions">CC&lt;/button></code></pre>
+                        <pre class='fragment'><code>AddType text/vtt .vtt.</code></pre>
+                        <!-- https://developer.mozilla.org/en-US/Apps/Build/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video -->
                     </section>
                     
                 </section>

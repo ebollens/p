@@ -78,16 +78,11 @@
                     </section>
                     
                     <section>
-                        <h2>CASA on Rails
-                            <br><small><em><a href="http://github.com/ebollens/casa-on-rails" target='_blank'>http://github.com/ebollens/casa-on-rails</a></em></small></h2>
+                        <h3>But for this workshop, we'll use...</h3>
+                        <h2 class="fragment">CASA on Rails</h2>
+                        <p class='fragment'><strong><a href="http://github.com/ebollens/casa-on-rails" target='_blank'>http://github.com/ebollens/casa-on-rails</a></strong></p>
                         <p class="fragment"><em>Opinionated, simplified and easy-to-use
                                 <br><span class="fragment">Reduced feature set from the entire protocol</span></em></p>
-                    </section>
-                    
-                    <section>
-                        <h3>But for this workshop, we'll use...</h3>
-                        <h2 class='fragment'>CASA on Rails</h2>
-                        <p class='fragment'><strong><a href="http://github.com/ebollens/casa-on-rails" target='_blank'>http://github.com/ebollens/casa-on-rails</a></strong></p>
                     </section>
                     
                     <section>
@@ -152,7 +147,8 @@ end</code></pre>
                         <pre class='fragment'><code class='bash'>bundle exec rackup</code></pre>
                         <p class='fragment'>To update, pull and migrate the database</p>
                         <pre class='fragment'><code class='bash'>git pull origin master
-bin/rake db:migrate</code></pre>
+bin/rake db:migrate
+bundle exec rackup</code></pre>
                     </section>
                     
                     <section>
@@ -225,16 +221,16 @@ bin/rake db:migrate</code></pre>
                     
                     <section>
                         <h2>Identity</h2>
-                        <p class='fragment'><strong>Compound key</strong></p>
                         <pre class='fragment'><code class='javascript'>{
   'identity': { 
-    <strong class='fragment'>'id': 'some_app'</strong><strong class='fragment'>,
+    <strong class='fragment'>'id': 'opt'</strong><strong class='fragment'>,
     'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'</strong>
   },
   /* .. */
 }</code></pre>
-                        <p class='fragment'><strong>Properties</strong></p>
                         <p>
+                            <em class='fragment'>Compound key</em>
+                            <br>
                             <em class='fragment'>Immutable for the lifetime of a payload</em>
                             <br>
                             <em class='fragment'>Payloads with same identity refer to same app</em>
@@ -247,11 +243,11 @@ bin/rake db:migrate</code></pre>
                         <h2>Core Attributes</h2>
                         <pre class='fragment'><code class='javascript'>{
   'identity': { 
-    'id': 'some_app',
+    'id': 'opt',
     'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'
   },
   'attributes': {
-    <strong class='fragment'>'uri': 'http://example.com'</strong><strong class='fragment'>,
+    <strong class='fragment'>'uri': 'http://onlinepoll.ucla.edu'</strong><strong class='fragment'>,
     'timestamp': '2014-07-29T21:52:58+00:00'</strong><strong class='fragment'>,
     'share': true</strong><strong class='fragment'>,
     'propagate': true</strong><strong class='fragment'>,
@@ -264,12 +260,20 @@ bin/rake db:migrate</code></pre>
                     <section>
                         <h2>Extensible Attributes</h2>
                         <pre class='fragment'><code class='javascript'>{
-  /* .. */
+  'identity': { 
+    'id': 'opt',
+    'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'
+  },
   'attributes': {
-    /* .. */
+    'uri': 'http://onlinepoll.ucla.edu',
+    'timestamp': '2014-07-29T21:52:58+00:00',
+    'share': true,
+    'propagate': true,
     'use':{
-      <strong class='fragment'>"1f2625c2-615f-11e3-bf13-d231feb1dc81":"UCLA Directory"</strong>
-    }
+      <strong class='fragment'>"1f2625c2-615f-11e3-bf13-d231feb1dc81": "Online Polling Tool"</strong><strong class='fragment'>,
+      "c80df319-d5da-4f59-8ca3-c89b234c5055": ["Education", "Research"]</strong>
+    },
+    'require':{ /* .. */ }
   }
 }</code></pre>
                         <p>
@@ -321,6 +325,11 @@ bin/rake db:migrate</code></pre>
 ]</code></pre>
                     </section>
                     
+                    <section>
+                        <h2>Demo</h2>
+                        <h3>Building in a Store</h3>
+                    </section>
+                    
                 </section>
                 
                 <section>
@@ -347,25 +356,25 @@ bin/rake db:migrate</code></pre>
                         <h2>Local Payloads</h2>
                         <pre class='fragment'><code class='javascript'>{
   <span class="fragment">'identity': { 
-    'id': 'dir',
+    'id': 'opt',
     'originator_id': '339e0f20-383b-11e4-916c-0800200c9a66'
   }</span><span class="fragment">,
   'attributes': {
-    <span class="fragment">'uri': 'http://directory.ucla.edu',
+    <span class="fragment">'uri': 'http://onlinepoll.ucla.edu',
     'timestamp': '2014-07-29T21:52:58+00:00',
     'share': true,
     'propagate': true</span><span class="fragment">,
     'use':{
-      <strong class='fragment'>"title": "UCLA Directory"
-      /* .. */</strong>
+      <strong class='fragment'>"title": "Online Polling Tool"</strong><strong class='fragment'>,
+      "categories": ["Education", "Research"]</strong>
     }</span><span class="fragment">,
     'require':{ /* .. */ }</span>
   }</span>
 }</code></pre>
                         <p>
-                            <em class="fragment">Do not send <code>original</code> or <code>journal</code></em>
+                            <em class="fragment">Do not send <code>original</code> or <code>journal</code> sections</em>
                             <br>
-                            <em class="fragment">Instead, send a squashed <code>attributes</code> section</em>
+                            <em class="fragment">Send a squashed &amp; translated <code>attributes</code> section</em>
                         </p>
                     </section>
                     
@@ -385,6 +394,8 @@ bin/rake db:migrate</code></pre>
                         </p>
                         <p class='fragment'><strong>How do we install apps into these?</strong></p>
                         <p>
+                            <em class='fragment'>Can't write local storage cross-origin</em>
+                            <br>
                             <em class='fragment'>Can't just post back to the app</em>
                             <br>
                             <em class='fragment'>Need a way to establish provenance</em>
@@ -407,15 +418,69 @@ bin/rake db:migrate</code></pre>
                     </section>
                     
                     <section>
+                        <h2>LTI ContentItemSelectionRequest</h2>
+                        <pre class='fragment'><code class='html'><span class="fragment">&lt;input type="hidden" name="lti_message_type" 
+                     value="ContentItemSelectionRequest" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="lti_version" 
+                     value="LTI-1p0" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="launch_presentation_document_target" 
+                     value="frame" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="accept_media_types" value="*/*" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="accept_presentation_document_targets" 
+                     value="embed,frame,iframe,window,popup,overlay" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="content_item_return_url" 
+                     value="http://www.tc.com/item-return" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="accept_unsigned" value="false" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="accept_multiple" value="true" /&gt;</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>LTI General Launch Parameters</h2>
+                        <pre class='fragment'><code class='html'><span class="fragment">&lt;input type="hidden" name="user_id" value="29123" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="roles" value="Instructor" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="lis_person_name_full" value="John Logie Baird" /&gt;
+&lt;input type="hidden" name="lis_person_name_family" value="Baird" /&gt;
+&lt;input type="hidden" name="lis_person_name_given" value="John" /&gt;
+&lt;input type="hidden" name="lis_person_contact_email_primary" value="jbaird@uni.edu" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="context_id" value="S3294476" /&gt;
+&lt;input type="hidden" name="context_type" value="CourseSection" /&gt;
+&lt;input type="hidden" name="context_title" value="Telecommuncations 101" /&gt;
+&lt;input type="hidden" name="context_label" value="ST101" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="lis_course_section_sourcedid" value="DD-ST101:C1" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="tool_consumer_info_product_family_code" value="ims" /&gt;
+&lt;input type="hidden" name="tool_consumer_info_version" value="1.2" /&gt;
+&lt;input type="hidden" name="tool_consumer_instance_guid" value="imsglobal.org" /&gt;
+&lt;input type="hidden" name="tool_consumer_instance_name" value="Learning Impact Leadership Institute" /&gt;</span>
+<span class="fragment">&lt;input type="hidden" name="data" value="Some opaque TC data" /&gt;</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>LTI Launch Signing</h2>
+                        <pre class='fragment'><code class='html'>&lt;input type="hidden" name="oauth_version" value="1.0" /&gt;
+&lt;input type="hidden" name="oauth_nonce" value="..." /&gt;
+&lt;input type="hidden" name="oauth_timestamp" value="..." /&gt;
+&lt;input type="hidden" name="oauth_consumer_key" value="..." /&gt;
+&lt;input type="hidden" name="oauth_callback" value="about:blank" /&gt;
+&lt;input type="hidden" name="oauth_signature_method" value="HMAC-SHA1" /&gt;
+&lt;input type="hidden" name="oauth_signature" value="..." /&gt;</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Demo</h2>
+                        <h3>Processing an LTI Launch</h3>
+                        <p><strong><a href="https://github.com/ebollens/casa-on-rails/blob/master/app/models/casa/payload.rb" target="_blank">github.com/ebollens/casa-on-rails/blob/master/app/models/lti/launch.rb</a></strong></p>
+                    </section>
+                    
+                    <section>
                         <h2>LTI ContentItem Envelope</h2>
                         <pre class='fragment'><code class='html'>&lt;form action="http://consumer.example.com/add-app" method="post"
  encType="application/x-www-form-urlencoded"&gt;
   <span class='fragment'>&lt;input type="hidden" name="lti_message_type" 
                        value="ContentItemSelectionResponse" /&gt;
   &lt;input type="hidden" name="lti_version" value="LTI-1p0" /&gt;</span>
-  <span class='fragment'><span class='fragment'><span class='fragment'>&lt;input type="hidden" name="content_items" value=".." /&gt;</span>
-  &lt;input type="hidden" name="data" value="Some opaque TC data" /&gt;</span>
-  &lt;input type="hidden" name="oauth_version" value="1.0" /&gt;
+  <span class='fragment'>&lt;input type="hidden" name="content_items" value=".." /&gt;</span>
+  <span class='fragment'>&lt;input type="hidden" name="data" value="Some opaque TC data" /&gt;</span>
+  <span class='fragment'>&lt;input type="hidden" name="oauth_version" value="1.0" /&gt;
   &lt;input type="hidden" name="oauth_nonce" value="..." /&gt;
   &lt;input type="hidden" name="oauth_timestamp" value="..." /&gt;
   &lt;input type="hidden" name="oauth_consumer_key" value="..." /&gt;
@@ -446,6 +511,121 @@ bin/rake db:migrate</code></pre>
 }</code></pre>
                     </section>
                     
+                    <section>
+                        <h2>Demo</h2>
+                        <h3>Generating LTI ContentItem Response</h3>
+                        <p><strong><a href="https://github.com/ebollens/casa-on-rails/blob/master/app/models/casa/payload.rb" target="_blank">github.com/ebollens/casa-on-rails/blob/master/app/models/lti/content_item_tool_provider.rb</a></strong></p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h3>CASA Attributes</h3>
+                        <h2>Extending Metadata</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Definition</h2>
+                        <p class="fragment"><strong>Two required attributes</strong></p>
+                        <p>
+                            <em class="fragment">UUID</em>
+                            <br>
+                            <em class="fragment">Section</em>
+                        </p>
+                        <p class="fragment"><strong>Three operations that can be defined</strong></p>
+                        <p>
+                            <em class="fragment">Filter</em>
+                            <br>
+                            <em class="fragment">Squash</em>
+                            <br>
+                            <em class="fragment">Transform</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Why Define Operations?</h2>
+                        <p class="fragment"><strong>Filter</strong></p>
+                        <p>
+                            <em class="fragment">How to interpret attribute for filtering</em>
+                        </p>
+                        <p class="fragment"><strong>Journaling</strong></p>
+                        <p>
+                            <em class="fragment">Additive or multiplicative</em>
+                            <br>
+                            <em class="fragment">Patching a diff</em>
+                        </p>
+                        <p class="fragment"><strong>Transform</strong></p>
+                        <p>
+                            <em class="fragment">Allowed transformations</em>
+                            <br>
+                            <em class="fragment">How to journal changes</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Example</h2>
+                        <p class="fragment"><em><a href="https://github.com/IMSGlobal/casa-attributes-common/blob/master/lib/casa/attribute/title.rb" target="_blank">github.com/IMSGlobal/casa-attributes-common/blob/master/lib/casa/attribute/title.rb</a></em></p>
+                        <pre class="fragment"><code class="ruby">module CASA
+  module Attribute
+    class Title < Definition
+
+      <span class="fragment">uuid '1f2625c2-615f-11e3-bf13-d231feb1dc81'</span>
+      <span class="fragment">section 'use'</span>
+
+      <span class="fragment">squash Strategy::Squash::String</span>
+      <span class="fragment">filter Strategy::Filter::String</span>
+      <span class="fragment">transform Strategy::Transform::String</span>
+
+    end
+  end
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Another Example</h2>
+                        <p class="fragment"><em><a href="https://github.com/IMSGlobal/casa-attributes-common/blob/master/lib/casa/attribute/organization.rb" target="_blank">github.com/IMSGlobal/casa-attributes-common/blob/master/lib/casa/attribute/organization.rb</a></em></p>
+                        <pre class="fragment"><code class="ruby">module CASA
+  module Attribute
+    class Organization < Definition
+
+      <span class="fragment">uuid '273c148d-de83-499e-b554-4cac9b262ab6'
+      section 'use'</span>
+
+      <span class="fragment">squash Strategy::Squash::Immutable
+      filter Strategy::Filter::AlwaysAccept
+      transform Strategy::Transform::Immutable</span>
+
+    end
+  end
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Attribute Specification</h2>
+                        <p class="fragment"><strong>To this point, attributes have been...</strong></p>
+                        <p>
+                            <em class="fragment">Defined by the reference implementation</em>
+                            <br>
+                            <em class="fragment">Simple and generic</em>
+                        </p>
+                        <p class='fragment'><strong>Moving forward...</strong></p>
+                        <p>
+                            <em class='fragment'>Format will be determined for attribute specs</em>
+                            <br>
+                            <em class='fragment'>Attribute specs will be posted under the protocol</em>
+                        </p>
+                        <p class='fragment'><strong>Of course...</strong></p>
+                        <p>
+                            <em class='fragment'>Extensibility considers affinity groups</em>
+                            <br>
+                            <em class='fragment'>No core approval is needed to add an attribute</em>
+                            <br>
+                            <em class='fragment'>Any attribute recognized by some is valid</em>
+                        </p>
+                    </section>
+                    
                 </section>
                 
                 <section>
@@ -457,14 +637,131 @@ bin/rake db:migrate</code></pre>
                     
                     <section>
                         <h2>Querying for Payloads</h2>
+                        <p class='fragment'><strong>Query a peer</strong></p>
+                        <p class='fragment'>
+                            <code>GET /out/payloads</code><br>
+                            <code class='fragment'>GET /out/payloads/[originator_uuid]/[app_uid]</code>
+                        </p>
+                        <p class='fragment'><strong>Headers</strong></p>
+                        <p>
+                            <code class='fragment'>Accept: application/json</code>
+                            <br>
+                            <code class='fragment'>Accept-Charset: utf-8</code>
+                            <br>
+                            <code class='fragment'>Content-Type: application/json;charset=utf-8</code>
+                        </p>
+                        <p class='fragment'><strong>Access Control</strong></p>
+                        <p>
+                            <em class='fragment'>Send <code>secret</code> property with request if peer requires</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Sending a Request</h2>
+                        <pre class='fragment'><code class='ruby'>Net::HTTP.start(uri.host, uri.port) do |http|
+
+  request = Net::HTTP::Get.new uri
+
+  <span class="fragment">request.add_field('Accept', 'application/json')</span>
+  <span class="fragment">request.add_field('Accept-Charset', 'utf-8')</span>
+  <span class="fragment">request.add_field('Content-Type', 'application/json')</span>
+
+  <span class="fragment">if self.secret
+    <span class="fragment">request.body = {'secret'=>self.secret}.to_json</span>
+  end</span>
+
+  <span class="fragment">response = http.request(request)</span>
+  <span class="fragment">payloads = JSON.parse response.body</span>
+
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Response Codes</h2>
+                        <p class='fragment'><strong>200</strong>&nbsp; will include payload or payloads array</p>
+                        <p class='fragment'><strong>400</strong>&nbsp; if client sent invalid JSON in request body</p>
+                        <p class='fragment'><strong>403</strong>&nbsp; if invalid or not provided secret when provided</p>
+                        <p class='fragment'><strong>406</strong>&nbsp; if <code>Accept</code> or <code>Accept-Charset</code> are invalid</p>
+                        <p class='fragment'><strong>415</strong>&nbsp; if <code>Content-Type</code> is invalid</p>
+                        <p class='fragment'><strong>503</strong>&nbsp; if host is overcapacity</p>
                     </section>
                     
                     <section>
                         <h2>Processing Received Payloads</h2>
-                        <p class='fragment'>Translate</p>
-                        <p class='fragment'>Squash</p>
-                        <p class='fragment'>Filter</p>
-                        <p class='fragment'>Transform</p>
+                        <pre class="fragment"><code class="ruby">payloads.each do |payload|
+
+  <span class="fragment">payload.delete 'attributes' if payload.include? 'attributes'</span>
+
+  <span class="fragment">Casa::Payload.translate_in payload</span>
+
+  <span class="fragment">Casa::Payload.squash_in payload</span>
+
+  <span class="fragment">next unless Casa::Payload.filter_in payload</span>
+
+  <span class="fragment">Casa::Payload.transform_in payload</span>
+
+  <span class="fragment"># save payload into local app...</span>
+  
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Translation</h2>
+                        <pre class="fragment"><code class="ruby">def translate_in p
+  <span class="fragment">p['original'] = t_in_attr_sec p['original']</span>
+  <span class="fragment">p['attributes'] = t_in_attr_sec p['attributes'] if p.include? 'attributes'</span>
+  <span class="fragment">p['journal'].each_index do |idx|
+    <span class="fragment">p['journal'][idx] = t_in_attr_sec p['attributes']</span>
+  end if p.include? 'journal'</span>
+end</code></pre>
+
+<pre class="fragment"><code class="ruby">def t_in_attr_sec section
+  <span class="fragment">['use', 'require'].each do |type|
+    <span class="fragment">if section.include? type
+      <span class="fragment">new_section_type = {}
+      <span class="fragment">section[type].each do |key, value|
+        <span class="fragment">attr = attribute_for_uuid type, key</span>
+        <span class="fragment">new_section_type[attr ? attr.name : key] = value</span>
+      end</span>
+      section[type] = new_section_type</span>
+    end</span>
+  end</span>
+  <span class="fragment">section</span>
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Squashing</h2>
+                        <pre class="fragment"><code class="ruby"><span class="fragment">payload['attributes'] = payload['original']</span>
+
+<span class="fragment">if payload.include? 'journal'
+  <span class="fragment">['use','require'].each do |type|
+    <span class="fragment">payload['journal'].each do |entry|
+      <span class="fragment">entry[type].each do |key, value|
+
+        <span class="fragment">if custom_attribute_squash? key
+          <span class="fragment">attribute_squash(key, type, payload, value) </span>
+        else
+          <span class="fragment">payload['attributes'][type][key] = value</span>
+        end</span>
+
+      end</span>
+    end</span>
+  end</span>
+end</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Filtering</h2>
+                        <p><strong>Drop if...</strong></p>
+                        <p>
+                            <em class="fragment">unrecognized required key</em>
+                            <br>
+                            <em class="fragment">recognized required key does not validate</em>
+                            <br>
+                            <em class="fragment">timestamp is older than value in persistence</em>
+                        </p>
+                        <p class="fragment"><strong>Other user-defined filter rules may also exist</strong></p>
                     </section>
                     
                     <section>
@@ -478,7 +775,7 @@ bin/rake db:migrate</code></pre>
                     </section>
                     
                     <section>
-                        <h2>Relay Data Path</h2>
+                        <h2>Data Paths</h2>
                     </section>
                     
                 </section>

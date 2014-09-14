@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Managing Front-End Libraries with WebBlocks 2 and Bower</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Eric R. Bollens">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                
+                <section>
+                        <h2>Managing Front-End Libraries with</h2>
+                        <h1>WebBlocks 2 &amp; Bower</h1>
+                        <h3 style="padding-top:72px">by Eric Bollens</h3>
+                        <div style="font-size:0.8em">
+                            <p>
+                                <strong><a href="http://eb.io/p/webblocks-mmwcon-workshop">http://eb.io/p/webblocks-mmwcon-workshop</a></strong>
+                            </p>
+                            <p>
+                                <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                                / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                                / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                            </p>
+                        </div>
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>From Chaos to Order</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>A Trend Towards Micro</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Keeping Tabs on It All</h2>
+                        <!--
+                        browse to the site that has the library
+                        download it
+                        check from time to time to see if it's changed
+                        download it if it's been updated
+                        FOR EACH LIBRARY YOU WANT TO USE!
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>Managing the Chaos</h2>
+                        <!--
+                        git modules get part way, but are also broken in many
+                        package managers are a great alternative!
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>Package Managers</h2>
+                        <!--
+                        npm (Node.js)
+                        gem (Ruby)
+                        pip (Python)
+                        composer (PHP)
+                        Apache Ivy (Java)
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>But What About Front-End Assets?</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Bower</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>What is Bower?</h2>
+                        <!--
+                        Dead simple package install, update and remove
+                        Dependency management
+                        package discovery (bower.io)
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>Installation</h2>
+                        <pre class='fragment'><code class='bash'>npm install -g bower</code></pre>
+                        <p class='fragment'><em>Requires Node.js and NPM</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Search</h2>
+                        <pre class='fragment'><code class='bash'>bower search bootstrap</code></pre>
+                        <pre class='fragment'><code class='bash' style='overflow-x:hidden;'>Search results:
+
+    bootstrap git://github.com/twbs/bootstrap.git
+    angular-bootstrap git://github.com/angular-ui/bootstrap-bower.git
+    sass-bootstrap git://github.com/jlong/sass-bootstrap.git
+    bootstrap-datepicker git://github.com/eternicode/bootstrap-datepicker.git
+    bootstrap-sass-official git://github.com/twbs/bootstrap-sass.git
+    bootstrap-sass git://github.com/jlong/sass-twitter-bootstrap
+    bootstrap-select git://github.com/silviomoreto/bootstrap-select.git
+    angular-ui-bootstrap-bower git://github.com/angular-ui/bootstrap-bower
+    angular-ui-bootstrap git://github.com/angular-ui/bootstrap.git
+    bootstrap-timepicker git://github.com/jdewit/bootstrap-timepicker
+    bootstrap-daterangepicker git://github.com/dangrossman/bootstrap-daterangepicker.git
+    bootstrap-css git://github.com/jozefizso/bower-bootstrap-css.git
+    bootstrap-switch git://github.com/nostalgiaz/bootstrap-switch.git
+    bootstrap.css git://github.com/bowerjs/bootstrap.git
+    bootstrap-datetimepicker git://github.com/tarruda/bootstrap-datetimepicker.git
+    select2-bootstrap-css git://github.com/t0m/select2-bootstrap-css.git
+    bootstrap-multiselect git://github.com/davidstutz/bootstrap-multiselect.git
+    bootstrap-modal git://github.com/jschr/bootstrap-modal.git
+    angular-bootstrap-colorpicker git://github.com/buberdds/angular-bootstrap-colorpicker.git
+    eonasdan-bootstrap-datetimepicker git://github.com/Eonasdan/bootstrap-datetimepicker.git
+    seiyria-bootstrap-slider git://github.com/seiyria/bootstrap-slider.git
+    bootstrap-tour git://github.com/sorich87/bootstrap-tour.git
+    bootstrap-notify git://github.com/goodybag/bootstrap-notify
+    angular-bootstrap-datetimepicker git://github.com/dalelotts/angular-bootstrap-datetimepicker
+    bootstrap-file-input git://github.com/grevory/bootstrap-file-input.git
+    bootstrap-tagsinput git://github.com/TimSchlechter/bootstrap-tagsinput.git
+    twbs-bootstrap-sass git://github.com/twbs/bootstrap-sass
+    angular-bootstrap-switch git://github.com/frapontillo/angular-bootstrap-switch.git
+    jquery-ui-bootstrap git://github.com/gustavohenke/jquery-ui-bootstrap
+    bootstrap-javascript git://github.com/alisamar/bootstrap-javascript.git
+    jqueryuibootstrap git://github.com/addyosmani/jquery-ui-bootstrap.git
+    components-bootstrap git://github.com/components/bootstrap.git
+    bootstrap-wysihtml5 git://github.com/jhollingworth/bootstrap-wysihtml5.git
+    bootstrap-less git://github.com/jozefizso/bower-bootstrap-less.git
+    bootstrap-stylus git://github.com/Acquisio/bootstrap-stylus.git
+    smalot-bootstrap-datetimepicker git://github.com/smalot/bootstrap-datetimepicker.git
+    select2-bootstrap3-css git://github.com/fk/select2-bootstrap-css.git
+    ember-addons.bs_for_ember git://github.com/ember-addons/bootstrap-for-ember.git
+    bootstrapValidator git://github.com/nghuuphuoc/bootstrapvalidator.git
+    bootstrap-colorpicker git://github.com/theblacksmith/bootstrap-colorpicker.git
+    ui-bootstrap git://github.com/angular-ui/bootstrap.git
+    bootstrap-additions git://github.com/mgcrea/bootstrap-additions.git
+    bootstrap-hover-dropdown git://github.com/CWSpear/twitter-bootstrap-hover-dropdown.git
+    jasny-bootstrap git://github.com/jasny/bootstrap.git
+    bootstrap-growl git://github.com/ifightcrime/bootstrap-growl.git
+    datatables-bootstrap3 git://github.com/Jowin/Datatables-Bootstrap3.git
+    typeahead.js-bootstrap3.less git://github.com/hyspace/typeahead.js-bootstrap3.less
+    bootstrap3-datetimepicker git://github.com/Eonasdan/bootstrap-datetimepicker.git
+    bootstrap-ui git://github.com/angular-ui/bootstrap
+    bootstrap-assets git://github.com/srigi/html-bootstrap-assets.git
+    bootstrap-css-only git://github.com/fyockm/bootstrap-css-only.git
+    bootstrap-paginator git://github.com/lyonlai/bootstrap-paginator.git
+    bootstrap-social git://github.com/lipis/bootstrap-social.git
+    ui.bootstrap git://github.com/angular-ui/bootstrap
+    bootstrap-calendar git://github.com/Serhioromano/bootstrap-calendar.git
+    bootstrap-markdown git://github.com/toopay/bootstrap-markdown.git
+    bootstrap3-wysihtml5-bower git://github.com/Waxolunist/bootstrap3-wysihtml5-bower.git
+    ladda-bootstrap git://github.com/msurguy/ladda-bootstrap.git
+    bootstrap-slider git://github.com/pammacdotnet/bootstrap-slider
+    compass-twitter-bootstrap git://github.com/vwall/compass-twitter-bootstrap.git
+    bootstrap-tokenfield git://github.com/sliptree/bootstrap-tokenfield.git
+    typeahead.js-bootstrap.css git://github.com/jharding/typeahead.js-bootstrap.css.git
+    bootstrap3-typeahead git://github.com/bassjobsen/Bootstrap-3-Typeahead.git
+    bootstrap-filestyle git://github.com/markusslima/bootstrap-filestyle.git
+    bootstrap-jasny git://github.com/jasny/bootstrap.git
+    angular-ui-bootstrap3 git://github.com/kkruit/angular-ui-bootstrap3-bower.git
+    bootstrapx-clickover git://github.com/lecar-red/bootstrapx-clickover.git
+    twitter git://github.com/twbs/bootstrap
+    bootstrap-lightbox git://github.com/jbutz/bootstrap-lightbox.git
+    bootstrap-wysiwyg git://github.com/mindmup/bootstrap-wysiwyg/
+    bootstrap3-datepicker git://github.com/rkmax/bootstrap-datepicker
+    bootstrap-maxlength git://github.com/mimo84/bootstrap-maxlength.git
+    twitter-bootstrap-sass git://github.com/thomas-mcdonald/bootstrap-sass.git
+    sass-bootstrap-compass git://github.com/alademann/sass-bootstrap.git
+    bootstrap-social-buttons git://github.com/noizwaves/bootstrap-social-buttons.git
+    bootstrap-3-datepicker git://github.com/eternicode/bootstrap-datepicker.git
+    blueimp-bootstrap-image-gallery git://github.com/blueimp/Bootstrap-Image-Gallery.git
+    bootstrap-sass-twbs git://github.com/twbs/bootstrap-sass.git
+    angular-bootstrap-select git://github.com/joaoneto/angular-bootstrap-select.git
+    bootstrap-rtl git://github.com/morteza/bootstrap-rtl.git
+    angular-bootstrap3 git://github.com/paptamas/bower-angular-bootstrap3.git
+    angular-bootstrap-jbruni git://github.com/jbruni/bootstrap-bower-jbruni.git
+    backbone.bootstrap-modal git://github.com/powmedia/backbone.bootstrap-modal.git
+    angular-ui-bootstrap-complete git://github.com/datapad/bower-angular-ui-bootstrap-complete.git
+    knockout-bootstrap git://github.com/billpull/knockout-bootstrap.git
+    bootstrap-progressbar git://github.com/minddust/bootstrap-progressbar.git
+    ember-bootstrap git://github.com/emberjs-addons/ember-bootstrap.git
+    jqBootstrapValidation git://github.com/ReactiveRaven/jqBootstrapValidation.git
+    bootstrap3-less git://github.com/paptamas/bower-bootstrap3-less.git
+    bootstrap-vertical-tabs git://github.com/dbtek/bootstrap-vertical-tabs.git
+    twitter-bootstrap-wizard git://github.com/VinceG/twitter-bootstrap-wizard.git
+    bootstrap-form-helpers git://github.com/vlamanna/BootstrapFormHelpers.git
+    mjolnic-bootstrap-colorpicker git://github.com/mjolnic/bootstrap-colorpicker.git
+    angular-bootstrap-toggle-switch git://github.com/JumpLink/angular-toggle-switch.git
+    sydcanem-bootstrap-contextmenu git://github.com/sydcanem/bootstrap-contextmenu
+    react-bootstrap git://github.com/react-bootstrap/react-bootstrap-bower.git
+    angular-deferred-bootstrap git://github.com/philippd/bower-angular-deferred-bootstrap.git
+    boot git://github.com/twitter/bootstrap
+    bootstrap2.3.2 git://github.com/alonisser/bower-bootstrap-2.3.2-legacy.git
+    bootstrap-contextmenu git://github.com/sydcanem/bootstrap-contextmenu.git
+    iwatech-bootstrap-maxlength git://github.com/IWAtech/bootstrap-maxlength.git
+    iwatech-bootstrap-tokenfield git://github.com/IWAtech/bootstrap-tokenfield.git
+    bootstrap-bower git://github.com/diegotoral/bootstrap-bower.git
+    sass-bootstrap-glyphicons git://github.com/greaterweb/sass-bootstrap-glyphicons.git
+    bootstrap-sortable git://github.com/drvic10k/bootstrap-sortable
+    mjaalnir-bootstrap-colorpicker git://github.com/mjaalnir/bootstrap-colorpicker.git
+    bootstrap-ie7 git://github.com/coliff/bootstrap-ie7.git
+    bootstrap-rating-input git://github.com/javiertoledo/bootstrap-rating-input.git
+    angular-bootstrap-nav-tree git://github.com/nickperkinslondon/angular-bootstrap-nav-tree
+    bower-bootstrap-slider git://github.com/rockabox/bower-bootstrap-slider.git
+    angular-bootstrap-datepicker git://github.com/cletourneau/angular-bootstrap-datepicker.git
+    angular-bootstrap3-datepicker git://github.com/benzen/angular-bootstrap3-datepicker.git
+    bootstrap-glyphicons git://github.com/twbs/bootstrap-glyphicons.git
+    bootstrap-ui-datepicker git://github.com/ikelin/bootstrap-datepicker.git
+    angular-bootstrap-lightbox git://github.com/compact/angular-bootstrap-lightbox.git
+    bootstrap-tabdrop git://github.com/nwhite89/bootstrap-tabdrop.git
+    bootstrap-duallistbox git://github.com/istvan-ujjmeszaros/bootstrap-duallistbox.git
+    xaguilars-bootstrap-colorpicker git://github.com/xaguilars/bootstrap-colorpicker.git
+    angular-bootstrap-show-errors git://github.com/paulyoder/angular-bootstrap-show-errors.git
+    di-bootstrap-daterangepicker git://github.com/DrillingInfo/bootstrap-daterangepicker.git
+    bootstrap-editable git://github.com/vitalets/bootstrap-editable.git
+    nya-bootstrap-select git://github.com/lordfriend/nya-bootstrap-select.git
+    bootstrap-combobox git://github.com/danielfarrell/bootstrap-combobox.git
+    bootstrap-arabic git://github.com/izer0x/bootstrap-3-arabic.git
+    bootstrap-fileinput git://github.com/kartik-v/bootstrap-fileinput
+    angular-ui-bootstrap3-patched git://github.com/digiwise/angular-ui-bootstrap3-patched.git
+    bootstrap-theme-white-plum git://github.com/divshot/bootstrap-theme-white-plum.git
+    bootstrap.growl git://github.com/mouse0270/bootstrap-growl.git
+    angular-bootstrap-slider git://github.com/seiyria/angular-bootstrap-slider.git
+    bootstrap-application-wizard git://github.com/amoffat/bootstrap-application-wizard.git
+    flatstrap3 git://github.com/littlesparkvt/Flatstrap-for-Bootstrap-3.git
+    bootstrap-select-labels git://github.com/digitalreasoning/bootstrap-select.git
+    bootstrap-js-dropdown git://github.com/Munter/bootstrap-js-dropdown.git
+    bootstrap-spinedit git://github.com/BrandyMint/bootstrap-spinedit.git
+    metro-bootstrap git://github.com/TalksLab/metro-bootstrap.git
+    bootstrap3-dialog git://github.com/nakupanda/bootstrap3-dialog.git
+    select2-bootstrap git://github.com/MattKetmo/select2-bootstrap-css.git
+    bower-bootstrap-css git://github.com/ch1c0t/bower-bootstrap-css.git
+    bootstrap-touchspin git://github.com/istvan-ujjmeszaros/bootstrap-touchspin.git
+    angular-boostrap-ui git://github.com/angular-ui/bootstrap.git
+    bootstrap3-wysihtml5 git://github.com/rkmax/bootstrap-wysihtml5
+    todc-bootstrap-main git://github.com/todc/todc-bootstrap.git
+    alertify-bootstrap-3 git://github.com/dbtek/alertify-bootstrap-3.git
+    angular-bootstrap-sunrise git://github.com/Victa/bootstrap-bower-sunrise.git
+    talis-bootstrap git://github.com/talis/bootstrap.git
+    bootstrap-tags git://github.com/maxwells/bootstrap-tags.git
+    jquery-bootstrap-scripting git://github.com/Nikku/jquery-bootstrap-scripting.git
+    bootstrap-theme-cirrus git://github.com/divshot/bootstrap-theme-cirrus.git
+    bootstrap-checkbox git://github.com/vsn4ik/bootstrap-checkbox
+    bootstrap-chosen git://github.com/alxlit/bootstrap-chosen.git
+    boostrap-sass git://github.com/twbs/bootstrap-sass.git
+    ghs-angular-bootstrap git://github.com/erictsai6/angular-bootstrap.git
+    bootstrap-validator git://github.com/1000hz/bootstrap-validator.git
+    bootstrap-popover-extra-placements git://github.com/tarlepp/bootstrap-popover-extra-placements.git
+    bootstrap3-less-js git://github.com/kyleget/bower-bootstrap3-less.git
+    chosen-bootstrap git://github.com/dbtek/chosen-bootstrap.git
+    mnd-bootstrap git://github.com/mynewsdesk/mnd-bootstrap.git
+    bootstrap-theme-cosmo git://github.com/tlvince/bootstrap-theme-cosmo.git
+    bootstrap-select-button git://github.com/bvaughn/bootstrap-select-button.git
+    bootstrapx-clickover-bs3 git://github.com/Wolfr/bootstrapx-clickover.git
+    bootstrap-smartdate-input git://github.com/gr2m/bootstrap-smartdate-input.git
+    bootstrap-sass-src git://github.com/h2non/bootstrap-sass-src.git
+    slickgrid-bootstrap git://github.com/reebalazs/SlickGrid-bootstrap.git
+    bootstrap-colorpalette git://github.com/willzeng/bootstrap-colorpalette.git
+    bootstrap3-timepicker git://github.com/m3wolf/bootstrap3-timepicker.git
+    bootstrap-dist git://github.com/visb42/bootstrap-dist.git
+    bootstrap-3-timepicker git://github.com/bopeng87/bootstrap-3-timepicker.git
+    dt-angular-ui-bootstrap git://github.com/keesey/dt-angular-ui-bootstrap
+    bootstrap-star-rating git://github.com/kartik-v/bootstrap-star-rating
+    bower-bootstrap3-less git://github.com/kyleget/bower-bootstrap3-less.git
+    angular-bootstrap-typeahead git://github.com/martco/ng-bootstrap-typeahead.git
+    boilerplate-bootstrap git://github.com/assemble/boilerplate-bootstrap.git
+    bootstrap-ios7 git://github.com/jbrad/bootstrap-ios7.git
+    bootstrap-treeview git://github.com/jonmiles/bootstrap-treeview.git
+    kb-bootstrap-datepicker git://github.com/kbrs/bootstrap-datepicker.git
+    bootstrapless git://github.com/caitp/bootstrapless.git
+    bootstrap-formhelpers git://github.com/vlamanna/BootstrapFormHelpers.git
+    bootstrap-sass-datepicker git://github.com/abnovak/bootstrap-sass-datepicker.git
+    addyosmani-jquery-ui-bootstrap git://github.com/addyosmani/jquery-ui-bootstrap.git
+    angular-bootstrap-duallistbox git://github.com/frapontillo/angular-bootstrap-duallistbox.git
+    new-bb-modal git://github.com/vpontis/backbone.bootstrap-modal.git
+    angular-bootstrap-flash-message git://github.com/mhitza/angular-bootstrap-flash-message.git
+    angular-bootstrap-checkbox git://github.com/sebastianha/angular-bootstrap-checkbox.git
+    bootstrap-ajax git://github.com/eldarion/bootstrap-ajax
+    angular-bootstrap-affix git://github.com/maxisam/angular-bootstrap-affix.git
+    bootstrap-daterangepicker-reset git://github.com/digitalreasoning/bootstrap-daterangepicker.git
+    angularjs-bootstrap-datetimepicker git://github.com/ron-liu/angularjs-bootstrap-datetimepicker.git
+    bootstrapvalidator git://github.com/nghuuphuoc/bootstrapvalidator.git
+    webapps-bower-bootstrap git://github.com/xl8/webapps-bower-bootstrap.git
+    kbootstrap-select git://github.com/kenshoo/bootstrap-select.git
+    chosen-sass-bootstrap git://github.com/joeylomanto/chosen-sass-bootstrap.git
+    ui-bootstrap-alerts git://github.com/tandibar/ui-bootstrap-alerts.git
+    remarkable-bootstrap-growl git://github.com/mouse0270/bootstrap-growl.git
+    bootstrap-switch-sass git://github.com/iki/bootstrap-switch-sass.git
+    todc-bootstrap git://github.com/todc/todc-bootstrap.git
+    bootstrap-flatly git://github.com/nbsp/bower-flatly.git
+    bootstrap-js-components git://github.com/roryf/bootstrap-js-components.git
+    bootstrap-fugue-icons git://github.com/Serhioromano/bootstrap-fugue.git
+    bootstrap-sass3 git://github.com/blai/bootstrap-sass.git
+    bootstrap-touch-carousel git://github.com/ixisio/bootstrap-touch-carousel.git
+    angular-autoFields-bootstrap git://github.com/JustMaier/angular-autoFields-bootstrap.git
+    angular-bootstrap-scrollspy git://github.com/mgcrea/angular-bootstrap-scrollspy.git
+    bootstrap-select2 git://github.com/scribenet/bootstrap-select2.git
+    bootstrap.icon git://github.com/misak113/BootstrapGlyph32x32.git
+    bootstrap3-switch git://github.com/nabil1337/bootstrap-switch.git
+    bootstrap-datepicker-n9 git://github.com/n9/bootstrap-datepicker.git
+    angular-bootstrap-dialog git://github.com/maxwellium/angular-bootstrap-dialog
+    jquery-ui-boostrap git://github.com/addyosmani/jquery-ui-bootstrap.git
+    bootstrap-confirmation git://github.com/rochappy/Bootstrap-Confirmation.git
+    bootstrap-datepaginator git://github.com/jondmiles/bootstrap-datepaginator.git
+    pwstrength-bootstrap git://github.com/ablanco/jquery.pwstrength.bootstrap.git
+    bootstrap-jquery-tags git://github.com/sunliwen/bootstrap-jquery-tags.git
+    bootstrap-tooltip git://github.com/shoehorn/tooltip.git
+    tablesorter.theme.bootstrap2.css git://github.com/kdubuc/tablesorter.theme.bootstrap2.css.git
+    backbone-bootstrap-modals git://github.com/leafygreen/backbone-bootstrap-modals.git
+    bootstrap-colorselector git://github.com/flaute/bootstrap-colorselector.git
+    angular-eonasdan-bootstrap-datetimepicker git://github.com/andrej-zirko/angular-eonasdan-bootstrap-datetimepicker.git
+    angular-bootstrap-nav git://github.com/rackerlabs/angular-bootstrap-nav.git
+    startbootstrap git://github.com/IronSummitMedia/startbootstrap.git
+    bootstrapaccessibilityplugin git://github.com/paypal/bootstrap-accessibility-plugin.git
+    bootstrap.checkbox git://github.com/montrezorro/bootstrap-checkbox.git
+    angular-bootstrap-form-validation git://github.com/assisrafael/angular-bootstrap-form-validation.git
+    bootstrap-iconpicker git://github.com/victor-valencia/bootstrap-iconpicker.git
+    bootstrap-dialog git://github.com/nakupanda/bootstrap3-dialog.git
+    bootstrap-dialogs git://github.com/myme/bootstrap-dialogs.git
+    bootstrap.notify git://github.com/Nijikokun/bootstrap-notify.git
+    scribe-fuelux git://github.com/scribenet/bootstrap-fuelux.git
+    silverorange-bootstrap-slider git://github.com/silverorange/bootstrap-slider.git
+    bs-datetimepicker git://github.com/Eonasdan/bootstrap-datetimepicker
+    binarta.ui.bootstrap.ex.angular git://github.com/binarta/ui.bootstrap.ex.angular.js.git
+    bs-fancyfile git://github.com/biggora/bootstrap-fancyfile.git
+    nabil1337-bootstrap3-datetimepicker git://github.com/nabil1337/bootstrap-datetimepicker.git
+    bootstrap-scroll-modal git://github.com/aroc/Bootstrap-Scroll-Modal
+    angular-bootstrap-directives git://github.com/vlobchuk/angular-strap.git
+    angoolar-bootstrap git://github.com/OlenDavis/angoolar-bootstrap.git
+    angularjs-bootstrap-tagsinput git://github.com/kiddy2910/angularjs-bootstrap-tagsinput.git
+    worldskills-bootstrap git://github.com/worldskills/bootstrap.git
+    bootstrap-flat-ui git://github.com/maxlibin/bootstrap-flat-ui.git
+    knockout-bootstrap-modal git://github.com/ArchonInfoSys/knockout-bootstrap-modal.git
+    angular-bootstrap-nav-tree-nif git://github.com/nickperkinslondon/angular-bootstrap-nav-tree
+    bootstrap-mixins git://github.com/shoehorn/mixins.git
+    bootstrap-tl git://github.com/tomatolabs/bootstrap.git
+    bootstrap-autohidingnavbar git://github.com/istvan-ujjmeszaros/bootstrap-autohidingnavbar.git
+    bootstrap-editable-table git://github.com/gr2m/bootstrap-editable-table.git
+    soundasleep-bootstrap-datetimepicker-sass git://github.com/soundasleep/bootstrap-datetimepicker-sass.git
+    bootstrap-big-grid git://github.com/BenWhitehead/bootstrap-big-grid.git
+    PixelKit-Bootstrap-UI-Kits git://github.com/Pixelkit/PixelKit-Bootstrap-UI-Kits.git
+    bootstrap-grid-css git://github.com/bcandullo/bootstrap-grid.git
+    bootstrap-datepicker-ZekeLu git://github.com/ZekeLu/bootstrap-datepicker.git
+    bootstrap-variables git://github.com/shoehorn/variables.git
+    todc-bootstrap-full git://github.com/todc/todc-bootstrap.git
+    bootstrap-simple-prompts git://github.com/weisjohn/bootstrap-simple-prompts.git
+    angular-sass-bootstrap-switch git://github.com/Arelav/angular-sass-bootstrap-switch.git
+    bootstrap-sidebar git://github.com/asyraf9/bootstrap-sidebar.git
+    bootstrap-uploader git://github.com/noirbizarre/bootstrap-uploader
+    bootstrap-dropdown-checkbox git://github.com/Acquisio/bootstrap-dropdown-checkbox.git
+    bootstrap-confirmation2 git://github.com/mistic100/Bootstrap-Confirmation.git
+    bootstrap-table git://github.com/wenzhixin/bootstrap-table.git
+    bootstrap-wizard git://github.com/VinceG/twitter-bootstrap-wizard.git
+    bootstrap-theme-supervillain git://github.com/trumbitta/bootstrap-theme-supervillain.git
+    bootstrap-sass-components git://github.com/tgdev/bootstrap-sass-components.git
+    bootstrap-chosen-less-js git://github.com/ChrisSoutham/bootstrap-chosen-less-js.git
+    ui-bootstrap-accordion git://github.com/pheuter/ui-bootstrap-accordion-bower
+    bootstrap-tags-pills git://github.com/Serhioromano/bootstrap-tags.git
+    bootstrap-growl-forked git://github.com/warrenca/bootstrap-growl.git
+    rbootstrap git://github.com/jnaqsh/bootstrap.git
+    angular-bootstrap-victor git://github.com/Victa/bootstrap-bower.git
+    prat-bootstrap git://github.com/bkad/bootstrap.git
+    bootstrap-jstree-theme git://github.com/aaronup/bootstrap-jstree-theme.git
+    jasmine-bootstrap git://github.com/esbie/jasmine-bootstrap.git
+    manta-bootstrap git://github.com/mantacode/bootstrap.git
+    angular-ui-bootstrap-tmonsen86 git://github.com/tmonsen86/bootstrap.git
+    angular-bootstrap-datetimepicker-github git://github.com/dalelotts/angular-bootstrap-datetimepicker.git
+    bootstrap-require git://github.com/diguinhorocks/bootstrap-requirejs.git
+    bootstrap-grid git://github.com/shoehorn/grid.git
+    angular-bootstrap-daterangepicker git://github.com/wangshijun/angular-bootstrap-daterangepicker.git
+    bootstrap-languages git://github.com/bower/bower.git
+    bootstrap-accordion git://github.com/Kyruus/bootstrap-accordion.git
+    bootstrap-navigable-table git://github.com/gr2m/bootstrap-navigable-table.git
+    bootstrap-utilities git://github.com/shoehorn/utilities.git
+    bootstrap-toggle git://github.com/minhur/bootstrap-toggle.git
+    bootstrap3-fontawesome-timepicker git://github.com/locarise/bootstrap3-fontawesome-timepicker.git
+    bootstrap-3-timepickr git://github.com/rendom/bootstrap-3-timepicker.git
+    bootstrap-spinner git://github.com/indigojs/bootstrap-spinner.git
+    bootstrap-dynamicSpan git://github.com/Padam87/bootstrap-dynamicSpan.git
+    boostrap-toggle git://github.com/Nijikokun/bootstrap-toggle
+    bootstrap-flat-css git://github.com/kkemple/bootstrap-flat-css.git
+    bootstrap-alert git://github.com/jarvys/bootstrap-alert.git
+    bootstrap-modal-extras git://github.com/halkon/bootstrap-modal-extras.git
+    bootstrap-nytimes-cms git://github.com/nytimes-cms/bootstrap-nytimes-cms.git
+    angular-async-bootstrap git://github.com/philippd/bower-angular-async-bootstrap.git
+    bootstrap-normalize git://github.com/shoehorn/normalize.git
+    bootstrap-sass-no-js git://github.com/xna2/bootstrap-sass-no-js.git
+    bootstrap-ngResponsive git://github.com/darlanalves/ngResponsive.git
+    bootstrap-window git://github.com/earmbrust/bootstrap-window.git
+    bootstrap-nav-wizard git://github.com/acornejo/bootstrap-nav-wizard.git
+    bower-compass-bootstrap git://github.com/apraditya/compass-twitter-bootstrap.git
+    bootstrap3-grid git://github.com/lynzz/bootstrap3-grid.git
+    bootstrap-ie git://github.com/ddouble/bsie.git
+    bootstrap-more git://github.com/GuillaumeAmat/bootstrap-more.git
+    gridline-bootstrap git://github.com/tmaiaroto/gridline.git
+    BetterXforms git://github.com/KnowitLabs/Bootstrap-3-XForms-Fix.git
+    bootstrap-selector git://github.com/flaute/bootstrap-colorselector.git
+    bootstrap.modalform git://github.com/gr2m/bootstrap.modalform.js.git
+    soundasleep-bootstrap-datetimepicker git://github.com/soundasleep/bootstrap-datetimepicker-sass.git
+    bootstrap-theme-bluerex git://github.com/ngallagher87/bluerex-theme.git
+    fahad19-angular-bootstrap git://github.com/fahad19/angular-bootstrap.git
+    bootstrap-alert-manager git://github.com/kelveden/bootstrap-alert-manager.git
+    alloy-bootstrap git://github.com/liferay/alloy-bootstrap.git
+    bootstrap-html git://github.com/sagikazarmark/bootstrap-html.git
+    bootstrap-admin-template git://github.com/onokumus/Bootstrap-Admin-Template.git
+    bootstrap3-confirm-button git://github.com/stefanocudini/bootstrap-confirm-button.git
+    bs-typeahead git://github.com/biggora/bootstrap-ajax-typeahead.git
+    dojo-bootstrap git://github.com/xsokev/Dojo-Bootstrap.git
+    fishrod-bootstrap-datetimepicker git://github.com/fishrod-interactive/bootstrap-datetimepicker.git
+    bootstrap-sideflap git://github.com/euskadi31/bootstrap-sideflap.git
+    bootstrap-common git://github.com/AndrewDryga/bootstrap-common.git
+    bootstrap-windows git://github.com/stevepeak/bootstrap-windows.git
+    harris-bootstrap-sass git://github.com/harris/bootstrap-sass.git
+    bootstrap-sf1 git://github.com/SalesforceFoundation/bootstrap-sf1.git
+    assemble-bootstrap git://github.com/assemble/assemble-bootstrap.git
+    bootstrap-contenteditable-autocomplete git://github.com/gr2m/bootstrap-contenteditable-autocomplete.git
+    bootstrap-carousel-swipe git://github.com/avinoamr/bootstrap-carousel-swipe.git
+    bootstrap-scaffolding git://github.com/shoehorn/scaffolding.git
+    bootstrap-expandable-input git://github.com/gr2m/bootstrap-expandable-input.git
+    angular-bootstrap-chosen git://github.com/wangshijun/angular-bootstrap-chosen.git
+    angular-bootstrap-media git://github.com/daemon1981/angular-bootstrap-media.git
+    bootstrap.pull-down git://github.com/misak113/bootstrap.pull-down.js.git
+    components-bootstrap-default git://github.com/components/bootstrap-default.git
+    eonasdan-bootstrap-datetimepicker-sass git://github.com/shiawuen/bootstrap-datetimepicker.git
+    bs-slider git://github.com/biggora/bootstrap-slider.git
+    boot-growl git://github.com/mitris/bootstrap-growl.git
+    bootstrap-styl git://github.com/shomeya/bootstrap-stylus.git
+    angular-bootstrap-validation git://github.com/guilhermegeek/angular-bootstrap-validation.git
+    boostrap-sass-datepicker git://github.com/abnovak/bootstrap-sass-datepicker.git
+    bootstrap-tagautocomplete git://github.com/Sandglaz/bootstrap-tagautocomplete.git
+    bootstrap-glovett git://github.com/glenlovett/bootstrap-glovett.git
+    bootstrap-tagsinput-freetypeObjectsFeature git://github.com/ziprandom/bootstrap-tagsinput.git
+    bootstrap-requirejs git://github.com/danielevigi/bootstrap-requirejs.git
+    bootstrap-2.3.2-legacy git://github.com/alonisser/bower-bootstrap-2.3.2-legacy.git
+    bootstrap-modalselect git://github.com/K12Labs/bootstrap-multiselect.git
+    bootstrap-rtl2 git://github.com/nadersoliman/bootstrap.git
+    lil-b git://github.com/ItsJonQ/bootstrap-lil-b.git
+    bootstrap-daterangepicker-released git://github.com/DrillingInfo/bootstrap-daterangepicker.git
+    foundry.bootstrap git://github.com/gburghardt/foundry.bootstrap.git
+    bootstrap-checkbox-x git://github.com/kartik-v/bootstrap-checkbox-x.git
+    bootstrap-quickstart git://github.com/mjaalnir/bootstrap-quickstart.git
+    reactive-bootstrap git://github.com/schalmersdev/reactive-bootstrap.git
+    bc-bootstrap-datetimepicker git://github.com/menden/bc-bootstrap-datetimepicker.git
+    bootstrap-contexmenu git://github.com/sydcanem/bootstrap-contextmenu.git
+    unofficial-todc-bootstrap3 git://github.com/zoloft/todc-bootstrap.git
+    ajmalafif-bootstrapify git://github.com/ajmalafif/bootstrapify.git
+    indigo-bootstrap git://github.com/indigojs/bootstrap.git
+    angular-bootstrap-spy git://github.com/mgcrea/angular-bootstrap-spy.git
+    lazarofl.bootstrapmodal2 git://github.com/lazarofl/bootstrap-modal.git
+    cyborg-bootstrap git://github.com/rplansky/cyborg-bootstrap.git
+    bootstrap-sass-only git://github.com/StevenClontz/bootstrap-sass-only.git
+    rezzza-bootstrap-timepicker git://github.com/rezzza/bootstrap-timepicker.git
+    bootstrap-modal-strict-close git://github.com/cabaret/bootstrap-modal-strict-close.git
+    bootstrap-datepicker-eyecon git://github.com/chihab/bootstrap-datepicker-eyecon.git
+    geo-bootstrap git://github.com/divshot/geo-bootstrap.git
+    ng-application-bootstrap git://github.com/BrownPaperBag/ng-application-bootstrap.git
+    angulardirective-datetimepicker git://github.com/ron-liu/angularjs-bootstrap-datetimepicker.git
+    CBHD-Bootstrap-Select git://github.com/yankeyhotel/cbhd-bootstrap-select.git
+    bootstrap-web-components git://github.com/MikeCostello/bootstrap-web-components.git
+    nps-bootstrap git://github.com/nationalparkservice/bootstrap.git
+    mybootstrap3css git://github.com/sudarshan955/mybootstrap3css
+    sass-bootstrap-theme-purple git://github.com/purple-dbu/sass-bootstrap-theme-purple.git
+    bootstrap-clearlooks git://github.com/airudev/bootstrap-clearlooks.git
+    edit-dialog-angular-bootstrap git://github.com/eibrahim/edit-dialog-angular-bootstrap.git
+    bootstrap-switch-j git://github.com/jrparish/bootstrap-switch.git
+    get-bootstrap-stylus git://github.com/drKnoxy/bootstrap-stylus
+    bootstrap-wireframes git://github.com/ksundmyhr/bootstrap-wireframes.git
+    noesis-bootstrap git://github.com/NoesisEnergy/twbs-Bootstrap.git
+    cdn-bootstrap-timepicker git://github.com/jordanthornquest/cdn-bootstrap-timepicker.git
+    boost-bootstrap git://github.com/cristiangrojas/boost-bootstrap.git
+    parsleyjs-bootstrap3 git://github.com/bichotll/Parsley-js-Twitter-Bootstrap-3-configuration.git
+    brandimint-xediatable-bootstrap git://github.com/BrandyMint/bootstrap-editable.git
+    Bootstrap-Confirmation git://github.com/open-node/Bootstrap-Confirmation.git
+    sp-utils-bootstrapmodal git://github.com/lexich/sp-utils-bootstrapmodal.git
+    bootstrap-confirm-button git://github.com/aduyng/bootstrap-confirm-button.git
+    bootstrap-grid-sass git://github.com/mrobit/bootstrap-grid.git
+    gbirman-iseatz-angular-bootstrap git://github.com/gbirman-iseatz/bootstrap.git
+    bootstrap-map-js git://github.com/Esri/bootstrap-map-js.git
+    lungo-bootstrap git://github.com/soyjavi/lungo-bootstrap.git
+    bootstrap-github-widget git://github.com/gilliek/bootstrap-github-widget.git
+    cdn-bootstrap-datepicker git://github.com/jordanthornquest/bootstrap-datepicker
+    bootstrap-datepicker-vizjerai git://github.com/vizjerai/bootstrap-datepicker.git
+    bootstrap-expanding-input git://github.com/gr2m/bootstrap-expanding-input.git
+    lazarofl-bootstrap-modal-2 git://github.com/lazarofl/bootstrap-modal.git
+    silk-twitter-bootstrap-scss-site git://github.com/silk-web-toolkit/silk-twitter-bootstrap-scss-site.git
+    knockout-sortable-data-table git://github.com/labory/knockout-bootstrap-sortable-data-table.git
+    sass-bootstrap-purple git://github.com/purple-dbu/sass-bootstrap-purple.git
+    bs-select git://github.com/biggora/bootstrap-select.git
+    boostrapfile git://github.com/grevory/bootstrap-file-input.git
+    bootstrap-session-timeout git://github.com/orangehill/bootstrap-session-timeout.git
+    ender-bootstrap git://github.com/rvagg/ender-bootstrap.git
+    nr-bootstrap git://github.com/artbelov/nr-bootstrap.git
+    drmikeh-bootstrap-filestyle git://github.com/drmikeh/bootstrap-filestyle.git
+    bootstrap-switch-build-scss git://github.com/loostro/bootstrap-switch.git
+    tdf-bootstrap-wysihtml5 git://github.com/mariusz-kabala/bootstrap-wysihtml5.git
+    z-bootstrap-daterangepicker git://github.com/jasonharbaugh/bootstrap-daterangepicker.git
+    synapse_bootstrap git://github.com/synapsepd/synapse_bootstrap.git
+    bootstrap-pagy git://github.com/medihack/bootstrap-pagy.git
+    manolin-bootstrap-calendar git://github.com/Manolin/bootstrap-calendar.git
+    synapse_boostrap git://github.com/synapsepd/synapse_bootstrap.git
+    cayeene-theme-bootstrap git://github.com/gmlo89/cayeene-theme-bootstrap.git
+    osiris-bootstrap-select git://github.com/0s1r1s/bootstrap-select.git
+    lazarofl-bootstrap-modal-5 git://github.com/lazarofl/bootstrap-modal.git
+    bootstrap-block-grids git://github.com/bgilhome/bootstrap-block-grids.git
+    bootstrap_calendar git://github.com/xero/bootstrap_calendar.git
+    bootstrap-prompts git://github.com/weisjohn/bootstrap-prompts.git
+    lazarofl-bootstrap-modal-teste git://github.com/lazarofl/bootstrap-modal.git
+    bootstrap-android-icons git://github.com/lukasmartinelli/android-actionbar-icons.git
+    bootstrap-sass-dry git://github.com/alexsomeoddpilot/bootstrap-sass-dry.git
+    bootstrap-datetimerangepicker git://github.com/grese/bootstrap-datetimerangepicker
+    bootstrap-language git://github.com/usrz/bootstrap-languages.git
+    bootstrap-growl-injectable git://github.com/pretzelwagon/bootstrap-growl.git
+    bootstrap-submenu git://github.com/vsn4ik/bootstrap-submenu.git
+    lazarofl.bootstrapmodal git://github.com/lazarofl/bootstrap-modal.git
+    lazarofl-bootstrap-modal git://github.com/lazarofl/bootstrap-modal.git
+    angular-bootstrap-datetimepicker-studygps git://github.com/StudyGPS-Company/angular-bootstrap-datetimepicker-studygps.git
+    jqBootstrapValidation-sunng87 git://github.com/sunng87/jqBootstrapValidation.git
+    jquery-validate-bootstrap git://github.com/scastiel/jquery-validate-bootstrap.git
+    thinkerit.angularx.bootstrap.mocks git://github.com/thinkerit/thinkerit.angularx.bootstrap.mocks.js.git
+    ace-bootstrap git://github.com/Kadvin/ace-bootstrap.git
+    lazarofl-bootstrap-modal-4 git://github.com/lazarofl/bootstrap-modal.git
+    angular-bootstrap-lightbox-no-bar git://github.com/bfontaine/angular-bootstrap-lightbox-no-bar.git
+    grese-bootstrap-datetimerangepicker git://github.com/grese/bootstrap-datetimerangepicker.git
+    bs-wysiwyg-shim git://github.com/loostro/bootstrap-wysiwyg.git
+    bootstrap-datepicker-dasprid git://github.com/DASPRiD/Bootstrap-DatePicker.git
+    bootstrap-popover-x git://github.com/kartik-v/bootstrap-popover-x.git
+    bootstrap-google-plus git://github.com/myguidingstar/bootstrap-google-plus.git
+    bootstrap-calendar-touch git://github.com/walterscarborough/bootstrap-calendar.git
+    bootstrap-carousel-caption-below git://github.com/bassettsj/bootstrap-carousel-caption-below.git
+    BootstrapDialog git://github.com/nakupanda/bootstrap3-dialog.git
+    bootstrap-addons git://github.com/jordandh/bootstrap-addons.git
+    awesome-bootstrap-checkbox git://github.com/flatlogic/awesome-bootstrap-checkbox.git
+    bitclaw-bootstrap3-dialog git://github.com/bitclaw/bootstrap3-dialog.git
+    angular-bootstrap-on-the-edge git://github.com/PitBeast/bootstrap.git
+    angular-bootstrap-razvanz git://github.com/razvanz/angular-bootstrap-razvanz.git
+    bootstrap-theme-ceh git://github.com/NERC-CEH/bootstrap-theme-ceh.git
+    enzo-bootstrap-datepicker git://github.com/zozoh94/enzo-bootstrap-datepicker.git
+    xdf-bootstrap git://github.com/xdfcn/bootstrap.git
+    bootstrap-tabs-x git://github.com/kartik-v/bootstrap-tabs-x
+    bootstrap-tabcollapse git://github.com/flatlogic/bootstrap-tabcollapse.git
+    bootstrap-sass-xl git://github.com/sickboy/bootstrap-sass.git
+    angular-bootstrap-rating git://github.com/MikeSpock/angular-bootstrap-rating.git
+    chrome-bootstrap git://github.com/roykolak/chrome-bootstrap.git
+    uninett-bootstrap-theme git://github.com/andreassolberg/uninett-bootstrap-theme.git
+    pnikolov-bootstrap-daterangepicker git://github.com/pnikolov/bootstrap-daterangepicker.git
+    bootstrap-responsive-tabs git://github.com/gabrieltomescu/bootstrap-responsive-tabs
+    xui-bootstrap git://github.com/spxis/xui-bootstrap.git
+    bootstrap-grid-gap git://github.com/minowu/bootstrap-grid-gap.git
+    pnikolov-bootstrap-colorpicker git://github.com/pnikolov/bootstrap-colorpicker.git
+    uninett-bootstrap-theme-temp git://github.com/uninett-simen/uninett-bootstrap-theme.git
+    bootstrap-timeline git://github.com/minowu/bootstrap-timeline.git
+    angular-switch-bootstrap git://github.com/rustane/angular-switch-bootstrap.git
+    angular-bootstrap-show-validation git://github.com/jouke/angular-bootstrap-show-validation.git
+    xero-bootstrap_calendar git://github.com/xero/bootstrap_calendar.git
+    angular-bootstrap-notifications git://github.com/preececonsulting/angular-notifications.git
+    ng-ladda-bootstrap git://github.com/mrpollo/ng-ladda-bootstrap.git
+    bootstrap-sass-rtl git://github.com/snhasani/bootstrap-sass-rtl.git
+    bootstrap-arrow-buttons git://github.com/shpoont/bootstrap-arrow-buttons.git
+    photress-bootstrap git://github.com/Adracus/photress-bootstrap.git
+    bootstrap-offcanvas git://github.com/iamphill/Bootstrap-Offcanvas.git
+    bootstrap-tab-history git://github.com/mnarayan01/bootstrap-tab-history.git
+    customer_club git://github.com/twbs/bootstrap-sass
+    angular-bootstrap-urigo git://github.com/Urigo/bootstrap-bower.git
+    bootstrap-cover git://github.com/danioso/bootstrap.git
+    angular-bootstrap-navbar git://github.com/coderigo/cr-bootstrap-navbar.git
+    troopjs-contrib-bootstrap git://github.com/troopjs-contrib/troopjs-contrib-bootstrap.git
+    po.bootstrap-timepicker git://github.com/podhmo-bower/bootstrap-timepicker.git
+    bootstrap-listbuilder git://github.com/linn/bootstrap-listbuilder.git
+    enzo-bootstrap-datepicker2 git://github.com/zozoh94/enzo-bootstrap-datepicker.git
+    yii2-bootstrap git://github.com/yiisoft/yii2-bootstrap.git
+    closure-bootstrap git://github.com/nalbion/closure-bootstrap.git
+    bootstrap-kickstart git://github.com/micromata/bootstrap-kickstart.git
+    jcamelis-angular-bootstrap git://github.com/jcamelis/bootstrap.git
+    html5-bootstrap-v3-jst git://github.com/carlosmarte/html5-bootstrap-v3-jst.git
+    jquery-survey-bootstrap git://github.com/scastiel/jquery-survey-bootstrap.git
+    bootstrapper git://github.com/alonisser/bower-bootstrap-2.3.2-legacy.git
+    bootstrap-input-combobox git://github.com/PayteR/bootstrap-input-combobox.git
+    bootstrap-panel git://github.com/jethro91/bootstrap-panel.git
+    bootstrap-actionbar git://github.com/avinoamr/bootstrap-actionbar.git
+    emberjs-boostrap-slider git://github.com/michalvich/emberjs-bootstrap-slider.git
+    mino-bootstrap-grid-gap git://github.com/minowu/bootstrap-grid-gap.git
+    angular-bootstrap-progressmask git://github.com/kennyki/angular-bootstrap-progressmask.git
+    ybBootstrap git://github.com/likeclever1/bootstrap
+    guialmeida.bootstrap3-wysihtml5-1.0.2 git://github.com/GuiAlmeida/bootstrap3-wysihtml5-1.0.2.git
+    jquery-bootstrap-pagination git://github.com/markbates/jquery-bootstrap-pagination.git
+    bootstrap-teachnova git://github.com/Teachnova/bootstrap.git
+    startbootstrap-agency git://github.com/IronSummitMedia/startbootstrap-agency.git
+    bootstrap2-styled-buttons git://github.com/acelaya/bootstrap2-styled-buttons.git
+    yBootstrap git://github.com/likeclever1/bootstrap.git
+    guialmeida.bootstrap-wysihtml5 git://github.com/GuiAlmeida/bootstrap-wysihtml5.git
+    ytuvia-bootstrap-tagsinput git://github.com/ytuvia/bootstrap-tagsinput.git
+    bootstrap-grid-columns-clearing-sass git://github.com/Slaver/Bootstrap-3-Grid-Columns-Clearing.git
+    bootstrapck4-skin git://github.com/Kunstmaan/BootstrapCK4-Skin.git
+    tagsinput git://github.com/TimSchlechter/bootstrap-tagsinput.git
+    bootstrap-deps git://github.com/micha-alt/bootstrap-deps.git
+    emberjs-bootstrap-slider git://github.com/michalvich/emberjs-bootstrap-slider.git
+    UtilityBeltBootstrap git://github.com/abhiaiyer91/UtilityBelt.git
+    ybTestBootstrap git://github.com/likeclever1/bootstrap.git
+    bs-progressbar git://github.com/MillerRen/bootstrap-progressbar.git
+    bslistr git://github.com/visbot/Bootstrap-Listr.git
+    bootstrap-grid-columns-clearing git://github.com/sixfootsixdesigns/Bootstrap-3-Grid-Columns-Clearing.git
+    cgrusden-react-bootstrap git://github.com/cgrusden/react-bootstrap-bower.git
+    ngb-bootstrap-forms git://github.com/erik-uy/ngb-bootstrap-forms.git
+    rezzza/bootstrap-timepicker git://github.com/rezzza/bootstrap-timepicker.git
+    pnikolov-bootstrap-chosen git://github.com/pnikolov/bootstrap-chosen.git
+    bs-wishlist git://github.com/elmahdim/bootstrap-wishlist.git
+    angular-bootstrap-tour git://github.com/benmarch/angular-bootstrap-tour.git
+    bootstrap#2a git://github.com/alonisser/bower-bootstrap-2.3.2-legacy.git
+    bootstrap-calendar-cratejoy git://github.com/cratejoy/bootstrap-calendar.git
+    bootstrap#2.3.2 git://github.com/alonisser/bower-bootstrap-2.3.2-legacy.git
+    new-bbmodal git://github.com/vpontis/backbone.bootstrap-modal.git
+    bootstrap-less-only git://github.com/IberaSoft/bower-bootstrap-less.git</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Install</h2>
+                        <pre class='fragment'><code class='bash'>bower install bootstrap</code></pre>
+                        <pre class='fragment code' style='white-space: nowrap;overflow-x:hidden;'><span class="fargment">bower bootstrap#*           not-cached git://github.com/twbs/bootstrap.git#*
+<br>bower bootstrap#*              resolve git://github.com/twbs/bootstrap.git#*
+<br>bower bootstrap#*             download https://github.com/twbs/bootstrap/archive/v3.2.0.tar.gz
+<br>bower bootstrap#*              extract archive.tar.gz
+<br>bower bootstrap#*             resolved git://github.com/twbs/bootstrap.git#3.2.0</span>
+<span class="fragment"><span class="fragment"><br>bower jquery#>= 1.9.0       not-cached git://github.com/jquery/jquery.git#>= 1.9.0
+<br>bower jquery#>= 1.9.0          resolve git://github.com/jquery/jquery.git#>= 1.9.0
+<br>bower jquery#>= 1.9.0         download https://github.com/jquery/jquery/archive/2.1.1.tar.gz
+<br>bower jquery#>= 1.9.0          extract archive.tar.gz
+<br>bower jquery#>= 1.9.0         resolved git://github.com/jquery/jquery.git#2.1.1</span>
+<br>bower bootstrap#~3.2.0         install bootstrap#3.2.0
+<span class="fragment"><br>bower jquery#>= 1.9.0          install jquery#2.1.1</span></span>
+<br>
+<span class="fragment"><br>bootstrap#3.2.0 bower_components/bootstrap
+<br>└── jquery#2.1.1
+<br>
+<br>jquery#2.1.1 bower_components/jquery</span></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Installation</h2>
+                        <pre class="fragment code">bower_components
+└── bootstrap
+      └── dist
+            └── css
+            └── fonts
+            └── js
+      └── ..
+└── jquery
+      └── dist
+      └── src
+      └── ...</pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Version Management</h2>
+                        <!--
+                        install a version such as bower install jquery#1.10
+                        write a bower.json file
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>Semantic Versioning</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>bower.json</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Build Tools</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Why?</h2>
+                        <!--
+                        appending files reduces HTTP requests
+                        makes sure they load in the right order
+                        optimizes and minifies
+                        -->
+                    </section>
+                    
+                    <section>
+                        <h2>Grunt</h2>
+                        <!-- including maybe a reference to grunt-bower-task? -->
+                    </section>
+                    
+                    <section>
+                        <h2>Compass</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Where Do They Fall Short?</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>A Vision</h2>
+                        <!--
+                        in the same way that bower resolves package-level dependencies,
+                        imagine if we had a notion of file-level dependencies
+                        
+                        give some examples
+                        -->
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>WebBlocks 2</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Lineage</h2>
+                        <p class="fragment"><strong>Framework of frameworks</strong></p>
+                        <p>
+                            <em class="fragment">Extend, don't recreate</em>
+                            <br>
+                            <em class='fragment'>Modular and configurable</em>
+                            <br>
+                            <em class='fragment'>Federation as core feature</em>
+                        </p>
+                        <p class='fragment'><strong>But some mistakes were made</strong></p>
+                        <p>
+                            <em class="fragment">Ended up with our own slew of semantics</em>
+                            <br>
+                            <em class='fragment'>Split identity between build tool and framework</em>
+                            <br>
+                            <em class='fragment'>Confusion around modularity</em>
+                            <br>
+                            <em class='fragment'>Not easy enough to extend with additional packages</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Packages and Files</h2>
+                        <p class='fragment'><strong>Two types of dependencies</strong></p>
+                        <p>
+                            <em class='fragment'>Packages</em>
+                            <br>
+                            <em class='fragment'>Files</em>
+                        </p>
+                        <p class='fragment'><strong>Bower gets us part way there</strong>
+                            <br><strong class='fragment'>but we need to define file-level dependencies</strong></p>
+                        <p>
+                            <em class='fragment'><code>@import</code> isn't sufficient</em>
+                            <br>
+                            <em class='fragment'>Don't want to double-include files</em>
+                            <br>
+                            <em class='fragment'>Even harder with inter-package dependencies</em>
+                            <br>
+                            <em class='fragment'>Need a different choice for Javascript</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Dependency Manifest</h2>
+                        <p class='fragment'><strong>Dependency tree primitives</strong></p>
+                        <p>
+                            <span class='fragment'><code>block</code> ( branch )</span>
+                            <br>
+                            <span class='fragment'><code>file</code> ( leaf )</span>
+                            <br>
+                            <span class='fragment'><code>framework</code> ( root )</span>
+                        </p>
+                        <pre class='fragment'><code class='ruby'>block 'breakpoints'<span class='fragment'>, path: 'breakpoints' do
+  scss_file '_variables.scss'
+end</span>
+
+block 'visibility'<span class='fragment'>, path: 'visibility' do
+  <span class="fragment">dependency framework.route 'breakpoints'</span>
+  scss_file '_hide.scss'
+end</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Using WebBlocks</h2>
+                        <pre class="fragment"><code class='bash'>gem install web_blocks --pre</code></pre>
+                        <pre class="fragment code">Blockfile.rb
+breakpoints
+   └── _variables.scss
+visibility
+   └── _hide.scss</pre>
+                        <pre class="fragment"><code class="bash">blocks build</code></pre>
+                        <p class="fragment"><em>Except not quite...</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Adding Packages To The Mix</h2>
+                        <p class="fragment">WebBlocks uses Bower to manage packages</p>
+                        <pre class="fragment"><code class="javascript">{
+    "name": "my_app",
+    "dependencies": {
+        "WebBlocks-visibility": "WebBlocks/block-visibility"
+    }
+}</code></pre>
+                        <pre class="fragment"><code class="javascript">{
+    "name": "WebBlocks-visibility",
+    "version": "2.0.0",
+    "dependencies": {
+        "WebBlocks-breakpoints": "WebBlocks/block-breakpoints"
+    }
+}</code></pre>
+                        <pre class="fragment"><code class="javascript">{
+    "name": "WebBlocks-breakpoints",
+    "version": "2.0.0"
+}</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Build Steps</h2>
+                        <p class="fragment">Pull package dependencies via Bower</p>
+                        <p class="fragment">Read <code>Blockfile.rb</code> for any package that defines one</p>
+                        <p class="fragment">Generate a dependency graph</p>
+                        <p class="fragment">Prune branches without any included leaves</p>
+                        <p class="fragment">Topologically sort marked files by their dependency graph</p>
+                        <p class="fragment">Compile/concatenate/optimize assets</p>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Using Blocks</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Building a Block Directly</h2>
+                        <p class='fragment'><em><a href='https://github.com/ebollens/efx' target='_blank'>https://github.com/ebollens/efx</a></em></p>
+                        <pre class='fragment'><code class='bash'>git clone https://github.com/ebollens/efx.git
+cd efx
+bundle
+npm install</code></pre>
+                        <pre class='fragment'><code class='bash'>bundle exec blocks build</code></pre>
+                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs</code></pre>
+                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs, efx driver toggle</code></pre>
+                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs, efx driver toggle, jquery</code></pre>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Creating Blocks</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Wrapping as a Block</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>More About the Project</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    <h1>Thank You</h1>
+                    <h2>Any Questions?</h2>
+                    <div style="font-size:0.8em; margin-top: 48px;">
+                        <p>
+                            <strong><a href="http://eb.io/p/webblocks-mmwcon-workshop">http://eb.io/p/webblocks-mmwcon-workshop</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a> 
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a> 
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="../lib/js/head.min.js"></script>
+        <script src="../js/reveal.min.js"></script>
+
+        <script>
+
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                        controls: true,
+                        progress: true,
+                        history: true,
+                        center: true,
+
+                        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                        // Parallax scrolling
+                        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                        // parallaxBackgroundSize: '2100px 900px',
+
+                        // Optional libraries used to extend on reveal.js
+                        dependencies: [
+                                { src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                                { src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                                { src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                                { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                                { src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                                { src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                        ]
+                });
+
+        </script>
+
+    </body>
+</html>

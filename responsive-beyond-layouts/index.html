@@ -38,9 +38,9 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
                 
-				<section>
-					<h1>Responsive</h1>
-					<h2>Beyond Layouts</h2>
+                <section>
+                    <h1>Responsive</h1>
+                    <h2>Beyond Layouts</h2>
                     <h3 style="padding-top:72px">by Eric Bollens</h3>
                     <div style="font-size:0.8em">
                         <p>
@@ -52,12 +52,35 @@
                             / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
                         </p>
                     </div>
-				</section>
-                
+                </section>
+
                 <section>
                     
                     <section>
-                        <h2>Responsive Layouts</h2>
+                        <h2>The Web is Flexible</h2>
+                        <p class='fragment'><em>The control which designers know in the print medium... is simply a function of the limitation of the printed page.</em></p>
+                        <p class='fragment'><em>We should embrace the fact that the web doesn't have the same constraints, and <strong>design for this flexibility</strong>.</em></p>
+                        <p class='fragment'><em style='color:#bbb'>~ John Allsopp, <a href='http://www.alistapart.com/articles/dao/' target='_blank'>A Dao of Web Design</a></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Why Do We Care?</h2>
+                        <p class='fragment'>
+                            First there was the desktop...
+                            <span class='fragment'>then there was mobile...</span>
+                            <span class='fragment'>and now watches, widescreens, and everything inbetween</span>
+                        </p>
+                        <p class='fragment'>Fully-capable browsers have become pervasive</p>
+                        <p class='fragment'>Changing perceptions of how mobile is used</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Responsive Web Design</h2>
+                        <p class='fragment'>Website transforms to fit the user's
+                            <br><strong>needs</strong> and <strong>capabilities</strong></p>
+                        <p class='fragment'>Up to this point,
+                            <br>a focus on the <strong>viewport</strong></p>
+                        <p class='fragment'>But <strong>many other factors</strong> to consider</p>
                     </section>
                     
                 </section>
@@ -65,7 +88,153 @@
                 <section>
                     
                     <section>
-                        <h2>Responsive Sampling</h2>
+                        <h2>Responsive Layouts</h2>
+                    </section>
+                    
+                    <section>
+                        <table>
+                            <tr>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-1.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-2.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-3.png'></td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <section>
+                        <h2>Flexible Grid</h2>
+                        <p class='fragment'><code>target ÷ context = result</code></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <td class='fragment'>
+                                    <pre class="prettyprint"><code>body > header, 
+body > footer, 
+body > #container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    width: 180px;
+}
+
+#container > main {
+    margin-left: 190px;
+    width: 770px;
+}</code></pre>
+                                </td>
+                                <td class="fragment">
+                                    <pre class="prettyprint"><code>body > header, body > footer, 
+body > #container {
+    <span class="fragment">width: 93.75%;  /* 960 ÷ 1024 = .9375 */</span>
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    <span class="fragment">width: 18.75%;  /* 180 ÷ 960 = .1875 */</span>
+}
+
+#container > main {
+    <span class="fragment">margin-left: 19.791667%; 
+                    /* 190 ÷ 960 = .1979166.. */</span>
+    <span class="fragment">width: 80.208333%; 
+                    /* 770 ÷ 960 = .8020833.. */</span>
+}</code></pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <section>
+                        <h2>Breaking the Flexible Grid</h2>
+                        <p class="fragment">Still has limits</p>
+                        <p class="fragment"><em>Small screen
+                            <br><strong>constricts content</strong></em></p>
+                        <p class="fragment"><em>Large screen
+                            <br><strong>isolates content</strong></em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Media Queries</h2>
+                        <table style='width:100%'>
+                            <tr>
+                                <td class='fragment'><pre class="prettyprint"><code>body > header, 
+body > footer, 
+body > #container {
+    width: 93.75%;
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    width: 18.75%;
+}
+
+#container > main {
+    margin-left: 19.791667%;
+    width: 80.208333%;
+}</code></pre></td>
+                                <td class='fragment'><pre class='prettyprint'><code>@media (<span class='fragment'>max-width: 640px</span>){
+    
+    #container > nav {
+        <span class='fragment'>float: none;</span>
+        <span class='fragment'>width: 100%;</span>
+    }
+    
+    #container > main {
+        <span class='fragment'>margin-left: 0;</span>
+        <span class='fragment'>width: 100%;</span>
+    }
+    
+}</code></pre></td>
+                            </tr>
+                        </table>
+                    </section>
+                    
+                    <section>
+                        <h2>Flexible Media</h2>
+                        <p class='fragment'>Images and video have explicit pixel sizes</p>
+                        <table>
+                            <tr>
+                                <td class='fragment'><img src='img/responsive-opera-large-ex.png'></td>
+                                <td class='fragment'><img src='img/responsive-opera-small-overflow-ex.png'></td>
+                            </tr>
+                        </table>
+                        <pre class='fragment'><code class='css'>img { max-width: 100%; }</code></pre>
+                        <pre class='fragment'><code class='css'>img, embed, object, video { max-width: 100%; }</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Viewport Tag</h2>
+                        <p class='fragment'>Mobile browsers assume desktop pages
+                            <br><span class='fragment'>but the viewport tag lets us specify otherwise</span></p>
+                        <div class='fragment'><pre class='prettyprint'><code>&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;</code></pre></div>
+                    </section>
+                    
+                    <section>
+                        <h2>Recap</h2>
+                        <p class='fragment'><strong>Flexible Grid</strong>
+                            <br><em class='fragment'>Proportional design with percentages, not pixels</em></p>
+                        <p class='fragment'><strong>Media Queries</strong>
+                            <br><em class='fragment'>Application of styles at particular dimensions</em></p>
+                        <p class='fragment'><strong>Responsive Media</strong>
+                            <br><em class='fragment'>Images and video that scale to fit their container</em></p>
+                        <p class='fragment'><strong>Viewport Definition</strong>
+                            <br><em class='fragment'>Specify dimensions for the viewport</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>There's more we should consider...</h2>
+                    </section>
+                    
+                </section>
+                
+                <section>
+                    
+                    <section>
+                        <h2>Extending Responsive Layouts</h2>
                     </section>
                     
                     <section>
@@ -101,8 +270,20 @@
                     </section>
                     
                     <section>
-                        <h2>Using ems/rems for Breakpoints</h2>
-                        <p>TODO</p>
+                        <h2>Using ems for Breakpoints</h2>
+                        <pre class='fragment'><code class='css'>@media (min-width: 641px) { /* ... */ }</code></pre>
+                        <p class='fragment'><em>for windows or screens of particular width ranges,
+                            <br>we want to flow our content in a particular way</em></p>
+                        <p class='fragment'>But is this the right approach?</p>
+                        <p class='fragment'><strong>What happens when the baseline is not 14pt/16px?</strong></p>
+                        <pre class='fragment'><code class='css'>@media (min-width: 40.0625em) { /* ... */ }</code></pre>
+                        <p>
+                            <em class='fragment'>Identical behavior for default text size</em>
+                            <br>
+                            <em class='fragment'>Friendly to assisted users who scale text size up</em>
+                            <br>
+                            <em class='fragment'>Support high density devices that report larger pixel sizes</em>
+                        </p>
                     </section>
                     
                     <section>
@@ -145,8 +326,8 @@
 }</code></pre>
                         <p class="fragment">Currently only supported in IE and Opera with vendor prefixing</p>
                         <pre class="fragment"><code class="css">@media screen and (max-width:400px) { 
-    @-ms-viewport{ width:320px; } 
-    @-o-viewport { width: device-width; }
+    @-ms-viewport { width:320px; } 
+    @-o-viewport  { width: device-width; }
 }</code></pre>
                     </section>
                     
@@ -164,7 +345,200 @@
                     </section>
                     
                     <section>
-                        <p>TODO</p>
+                        <h2>How Do You Scroll?</h2>
+                        <p class="fragment">Spin a scroll wheel</p>
+                        <p class="fragment">Drag a scroll bar</p>
+                        <p class="fragment">Press a scroll arrow</p>
+                        <p class="fragment">Slide a finger across the screen</p>
+                        <p class="fragment">Verbally state "scroll" and a direction</p>
+                    </section>
+                    
+                    <section>
+                        <h2>How Do You Undo?</h2>
+                        <p class="fragment"><code>CTRL + Z</code></p>
+                        <p class="fragment"><code>CMD + Z</code></p>
+                        <p class="fragment">Press down and select action</p>
+                        <p class="fragment">Shake or swipe</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Handling for Many Environments</h2>
+                        <pre class="fragment"><code class="javascript"><span class="fragment">document.addEventListener('keydown', function(e){
+    <span class="fragment">if( navigator.userAgent.match(/Macintosh/g) && e.which === 90 && e.metaKey ) {
+        doUndo();
+    }</span><span class="fragment"> else if ( e.which === 90 && e.ctrlKey ){
+        doUndo();
+    }</span>
+});</span>
+
+<span class="fragment">if(navigator.userAgent.match(/(iPad|iPhone|iPod)/g)){
+    <span class="fragment">window.addEventListener('shake', function(e){
+        doUndo();
+    });</span>
+}</span>
+
+<span class="fragment">(function (window, document) {
+
+    function Shake() {
+
+        //feature detect
+        this.hasDeviceMotion = 'ondevicemotion' in window;
+
+        //default velocity threshold for shake to register
+        this.threshold = 15;
+
+        //use date to prevent multiple shakes firing
+        this.lastTime = new Date();
+
+        //accelerometer values
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+
+        //create custom event
+        if (typeof document.CustomEvent === "function") {
+            this.event = new document.CustomEvent('shake', {
+                bubbles: true,
+                cancelable: true
+            });
+        } else if (typeof document.createEvent === "function") {
+            this.event = document.createEvent('Event');
+            this.event.initEvent('shake', true, true);
+        } else { 
+          return false;
+        }
+    }
+
+    //reset timer values
+    Shake.prototype.reset = function () {
+        this.lastTime = new Date();
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+    };
+
+    //start listening for devicemotion
+    Shake.prototype.start = function () {
+        this.reset();
+        if (this.hasDeviceMotion) { window.addEventListener('devicemotion', this, false); }
+    };
+
+    //stop listening for devicemotion
+    Shake.prototype.stop = function () {
+
+        if (this.hasDeviceMotion) { window.removeEventListener('devicemotion', this, false); }
+        this.reset();
+    };
+
+    //calculates if shake did occur
+    Shake.prototype.devicemotion = function (e) {
+
+        var current = e.accelerationIncludingGravity,
+            currentTime,
+            timeDifference,
+            deltaX = 0,
+            deltaY = 0,
+            deltaZ = 0;
+
+        if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+            return;
+        }
+
+        deltaX = Math.abs(this.lastX - current.x);
+        deltaY = Math.abs(this.lastY - current.y);
+        deltaZ = Math.abs(this.lastZ - current.z);
+
+        if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
+            //calculate time in milliseconds since last shake registered
+            currentTime = new Date();
+            timeDifference = currentTime.getTime() - this.lastTime.getTime();
+
+            if (timeDifference > 1000) {
+                window.dispatchEvent(this.event);
+                this.lastTime = new Date();
+            }
+        }
+
+        this.lastX = current.x;
+        this.lastY = current.y;
+        this.lastZ = current.z;
+
+    };
+
+    //event handler
+    Shake.prototype.handleEvent = function (e) {
+
+        if (typeof (this[e.type]) === 'function') {
+            return this[e.type](e);
+        }
+    };
+
+    //create a new instance of shake.js.
+    var myShakeEvent = new Shake();
+    myShakeEvent && myShakeEvent.start();
+
+}(window, document));</span></code></pre>
+                        <p class="fragment"><em>And how about tap highlight undo?</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Goals of IndieUI</h2>
+                        <p class="fragment" style="color:#bbb;">Make it easier for web developers to author <strong style="color:#fff;">consistently usable interfaces that are input-agnostic</strong> and independent of a user's particular platform, hardware, locale, and preferences.</p>
+                        <p class="fragment" style="color:#bbb;">Enable every type of control in these interfaces to be <strong style="color:#fff;">programmatically determinable and controllable by both mainstream and alternate forms of user input</strong>, including assistive technologies.</p>
+                        <p class="fragment" style="color:#bbb;">Provide a clear path for web developers to <strong style="color:#fff;">smoothly transition from currently existing physical events to IndieUI events</strong>, during the period when implementations of IndieUI are incomplete.</p>
+                    </section>
+                    
+                    <section>
+                        <h2>UndoRequest</h2>
+                        <pre class="fragment"><code class='javascript'>element.addEventListener('dismissrequest', function(){
+    doUndo();
+});</code></pre>
+                        <p>
+                            <em class='fragment'>No keypress detection</em>
+                            <br>
+                            <em class='fragment'>No UA sniffing or OS consideration</em>
+                            <br>
+                            <em class='fragment'>No complex hacks to detect interaction</em>
+                            <br>
+                            <em class='fragment'>No undetectable actions</em>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>UI Request Events</h2>
+                        <p>
+                            <code class='fragment'>undorequest</code>
+                            <br>
+                            <code class='fragment'>redorequest</code>
+                            <br>
+                            <code class='fragment'>expandrequest</code>
+                            <br>
+                            <code class='fragment'>collapserequest</code>
+                            <br>
+                            <code class='fragment'>dismissrequest</code>
+                            <br>
+                            <code class='fragment'>deleterequest</code>
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>UI Manipulation &amp; Change Events</h2>
+                        <p>
+                            <code class='fragment'>moverequest</code>
+                            <br>
+                            <code class='fragment'>panrequest</code>
+                            <br>
+                            <code class='fragment'>rotationrequest</code>
+                            <br>
+                            <code class='fragment'>scrollrequest</code>
+                            <br>
+                            <code class='fragment'>zoomrequest</code>
+                            <br>
+                            <code class='fragment'>valuechangerequest</code>
+                        </p>
                     </section>
                     
                 </section>
@@ -214,7 +588,7 @@
                     </section>
                     
                     <section>
-                        <h2>Network Information API (that wasn't)</h2>
+                        <h2>Network Information API<br><small>(that wasn't)</small></h2>
                         <p class='fragment'>Proposal for an API with bandwidth and metered properties</p>
                         <pre class='fragment'><code class="javascript">var i = document.getElementById('ex'), connection = document.connection;
 if (connection.bandwidth > 2 && !connection.metered) {
@@ -459,13 +833,13 @@ Content-Length: 124523
                     
                     <section>
                         <h2>Adaptive Bitrate Streaming</h2>
-                        <p class="fragment">Adjust video stream quality based on user telemetry</p>
+                        <p class="fragment"><strong>Adjust video stream quality based on user telemetry</strong></p>
                         <p>
                             <em class='fragment'>Network bandwidth</em>
                             <br>
                             <em class='fragment'>Device capacity</em>
                         </p>
-                        <p class='fragment'>Implementation approach</p>
+                        <p class='fragment'><strong>Implementation approach</strong></p>
                         <p>
                             <em class='fragment'>Encode a stream at multiple bit rates</em>
                             <br>
@@ -477,16 +851,7 @@ Content-Length: 124523
                             <br>
                             <em class='fragment'>Otherwise, if viewing time is longer, decrease rate</em>
                         </p>
-                    </section>
-                    
-                    <section>
-                        <h2>Apple HLS</h2>
-                        <p>TODO</p>
-                    </section>
-                    
-                    <section>
-                        <h2>MPEG-DASH</h2>
-                        <p>TODO</p>
+                        <p class='fragment'><strong>Apple HLS</strong> and <strong>MPEG-DASH</strong></p>
                     </section>
                     
                 </section>

@@ -770,6 +770,22 @@
                     </section>
                     
                     <section>
+                        <h2>Differentiating</h2>
+                        <p class='fragment'>WebBlocks 1 was...</p>
+                        <p>
+                            <em class='fragment'>Dependency management</em>
+                            <br>
+                            <em class='fragment'>CSS/Javascript libraries</em>
+                        </p>
+                        <p class='fragment'><strong>WebBlocks 2 is only dependency management</strong></p>
+                        <p>
+                            <em class='fragment'>Semantics from WebBlocks 1 will become "blocks"</em>
+                            <br>
+                            <em class="fragment">Any other package can become a "block" with only two short files</em>
+                        </p>
+                    </section>
+                    
+                    <section>
                         <h2>Packages and Files</h2>
                         <p class='fragment'><strong>Two types of dependencies</strong></p>
                         <p>
@@ -818,6 +834,14 @@ breakpoints
    └── _variables.scss
 visibility
    └── _hide.scss</pre>
+                        <pre class='fragment'><code class='ruby'>block 'breakpoints', path: 'breakpoints' do
+  scss_file '_variables.scss'
+end
+
+block 'visibility', path: 'visibility' do
+  dependency framework.route 'breakpoints'
+  scss_file '_hide.scss'
+end</code></pre>
                         <pre class="fragment"><code class="bash">blocks build</code></pre>
                         <p class="fragment"><em>Except not quite...</em></p>
                     </section>
@@ -875,6 +899,93 @@ npm install</code></pre>
                         <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs, efx driver toggle, jquery</code></pre>
                     </section>
                     
+                    <section>
+                        <h2>Using WebBlocks for Our App</h2>
+                        <pre class="fragment"><code class="javascript">{
+  <span class="fragment">"name": "example"</span>
+}</code></pre>
+                        <p class='fragment'><em>Automatically includes block by name from <code>bower.json</code></em></p>
+                        <pre class='fragment'><code class='ruby'>set :build_path, 'public/blocks'
+
+<span class='fragment'>block 'example'<span class='fragment'>, :path => 'src' <span class='fragment'>do |ex|
+
+  <span class='fragment'>scss_file '_variables.scss'</span>
+  <span class='fragment'>scss_file '_layout.scss'</span>
+  <span class='fragment'>js_file 'interaction.js'</span>
+
+end</span></span></span></code></pre>
+                        <p class='fragment'><em>Except no dependency ordering among our files</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Intra-app Dependencies</h2>
+                        <pre class='fragment'><code class='ruby'>block 'example', :path => 'src' do |ex|
+  
+  <span class='fragment'>block 'core' <span class='fragment'>do
+    <span class='fragment'>scss_file '_variables.scss'</span>
+  end</span>
+
+  block 'app'<span class='fragment'>, :path => 'app' do
+    <span class='fragment'>dependency ex.route 'core'</span>
+    <span class='fragment'>scss_file '_layout.scss'</span>
+    <span class='fragment'>js_file 'interaction.js'</span>
+  end</span></span>
+
+end
+
+<span class='fragment'>include 'example', 'app'</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Leveraging Other Blocks</h2>
+                        <pre class="fragment"><code class="javascript" style="width:112%;margin-left:-6%;font-size:0.9em;line-height:1.2;">{
+  <span class="fragment">"name": "example"</span><span class="fragment">,
+  "dependencies": {
+    <span class="fragment">"WebBlocks-grid": "WebBlocks/block-grid"</span><span class="fragment">,
+    "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git#2.1.0"</span>
+  }</span>
+}</code></pre>
+                        <pre class='fragment'><code class='ruby' style="width:112%;margin-left:-6%;font-size:0.9em;line-height:1.2;">block 'example', :path => 'src' do |ex|
+  
+  block 'core' do
+    scss_file '_variables.scss'
+  end
+
+  block 'app', :path => 'app' do
+    dependency ex.route 'core'
+    scss_file '_layout.scss'
+    js_file 'interaction.js'
+  end
+
+  <span class="fragment">dependency framework.route 'jquery'</span>
+
+end
+
+include 'example', 'app'
+<span class="fragment">include 'WebBlocks-grid'</span></code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Hooking Into Another Block</h2>
+                        <pre class="fragment"><code class="javascript">{
+  <span class="fragment">"name": "example"</span><span class="fragment">,
+  "dependencies": {
+    <span class="fragment">"WebBlocks-wrapper-bootstrap": "WebBlocks/wrapper-bootstrap"</span>
+  }</span>
+}</code></pre>
+                        <pre class='fragment'><code class='ruby'>block 'example' do
+
+  <span class="fragment">block 'bootstrap-config' <span class="fragment">do
+    <span class="fragment">scss_file '_bootstrap-variables.scss'</span>
+    <span class="fragment">dependency framework.route 'bootstrap', 'variables'</span>
+    <span class="fragment">reverse_dependency framework.route 'bootstrap', 'base'</span>
+  end</span></span>
+
+end
+
+<span class="fragment">include 'bootstrap'</span></code></pre>
+                    </section>
+                    
                 </section>
                 
                 <section>
@@ -883,12 +994,147 @@ npm install</code></pre>
                         <h2>Creating Blocks</h2>
                     </section>
                     
+                    <section>
+                        <h2>Creating a Stand-alone Block</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Modularizing for Reusability</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Leveraging Blocks in Blocks</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Optional Dependencies</h2>
+                    </section>
+                    
                 </section>
                 
                 <section>
                     
                     <section>
                         <h2>Wrapping as a Block</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Wrapping jQuery</h2>
+                        <pre class="fragment"><code class="javascript">{
+    <span class="fragment">"name": "WebBlocks-wrapper-jquery"</span><span class="fragment">,
+    <span class="fragment">"version": "2.1.0",</span>
+    "dependencies": {
+      "jquery": "2.1.0"
+    }</span>
+}</code></pre>
+                        <pre class="fragment"><code class="ruby">block 'jquery', :path => 'bower_components/jquery/dist' do
+  <span class="fragment">js_file 'jquery.js'</span>
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Wrapping DataTables</h2>
+                        <pre class="fragment"><code class="javascript">{
+  <span class="fragment">"name": "WebBlocks-wrapper-DataTables"</span><span class="fragment">,
+  <span class="fragment">"version": "1.10.2",</span>
+  "dependencies": {
+    "DataTables": "~1.10.2"
+  }</span>
+}</code></pre>
+                        <pre class="fragment"><code class="ruby">block 'DataTables', :path => 'bower_components/DataTables/media' do
+  <span class="fragment">js_file 'js/jquery.DataTables.js'</span>
+  <span class="fragment">scss_file 'css/jquery.dataTables.css'</span>
+  <span class="fragment">loose_dependency framework.route 'jquery'</span>
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Wrapping Bootstrap</h2>
+                        <pre class="fragment"><code class="ruby" style="font-size:0.95em;line-height:1.2;">block 'bootstrap'<span class="fragment">, 
+       :path => 'bower_components/bootstrap-sass-twbs/assets' do |twbs|</span>
+
+  <span class="fragment">block 'variables'</span><span class="fragment"> do
+    scss_file 'stylesheets/bootstrap/_variables.scss'
+  end</span>
+
+  <span class='fragment'>block 'base'<span class="fragment"> do
+    <span class="fragment">dependency twbs.route 'variables'</span>
+    <span class="fragment">scss_file 'stylesheets/bootstrap/_mixins.scss'</span>
+    <span class="fragment">scss_file 'stylesheets/bootstrap/_normalize.scss'</span>
+    <span class="fragment">scss_file 'stylesheets/bootstrap/_print.scss'</span>
+    <span class="fragment">scss_file 'stylesheets/bootstrap/_scaffolding.scss'</span>
+  end</span></span>
+
+  <span class="fragment"># ... and more ... #</span>
+
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Wrapping Bootstrap</h2>
+                        <p class='fragment'><em><code>Blockfile.rb</code>&nbsp; is not just a DSL - it's also true Ruby</em></p>
+                        <pre class="fragment"><code class="ruby">[
+  <span class='fragment'>'buttons'</span><span class='fragment'>,
+  'grid'</span><span class='fragment'>,
+  'tables'</span><span class='fragment'>,
+  'dropdown'</span><span class='fragment'>,
+  'navbar'</span><span class='fragment'>,
+  # etc...</span>
+].each do |name|
+  <span class='fragment'>block name do
+    dependency twbs.route 'base'
+    scss_file "stylesheets/bootstrap/_#{name}.scss"
+  end</span>
+end</code></pre>
+                        <p class='fragment'><em>You can reopen blocks after they're defined as needed</em></p>
+                        <pre class="fragment"><code class="ruby">block 'navbar' do
+  <span class='fragment'>dependency twbs.route 'navs'</span>
+  <span class='fragment'>dependency twbs.route 'forms'</span>
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Wrapping Bootstrap</h2>
+                        <pre class="fragment"><code class="ruby" style='font-size:0.9em; line-height:1.2'>block 'js' do |js|
+
+  dependency bootstrap.route 'component-animations'
+
+  block 'transition' do
+    js_file 'javascripts/bootstrap/transition.js'
+  end
+
+  block 'collapse' do
+    dependency js.route 'transition'
+    js_file 'javascripts/bootstrap/collapse.js'
+  end
+
+  block 'dropdown' do
+    dependency twbs.route 'dropdowns'
+    js_file 'javascripts/bootstrap/dropdown.js'
+  end
+
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Putting It All Together</h2>
+                        <pre class="fragment"><code class="javascript" style="width:112%;margin-left:-6%;">{
+  <span class="fragment">"name": "example"</span><span class="fragment">,
+  "dependencies": {
+    <span class="fragment">"WebBlocks-grid": "WebBlocks/block-grid"</span><span class="fragment">,
+    "WebBlocks-wrapper-DataTables": "WebBlocks/wrapper-DataTables"</span><span class="fragment">,
+    "WebBlocks-wrapper-bootstrap": "WebBlocks/wrapper-bootstrap"</span><span class="fragment">,
+    "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git#2.1.0"</span>
+  }</span>
+}</code></pre>
+                        <pre class='fragment'><code class='ruby' style="width:112%;margin-left:-6%;"><span class="fragment">include 'WebBlocks-grid'</span>
+<span class="fragment">include 'bootstrap', 'forms'</span>
+<span class="fragment">include 'bootstrap', 'js', 'dropdown'</span>
+<span class="fragment">include 'jquery'</span>
+
+<span class="fragment">block 'example' <span class="fragment">do
+  dependency framework.route 'DataTables'
+end</span></span></code></pre>
                     </section>
                     
                 </section>

@@ -805,38 +805,25 @@ var SchemaEvent = document.registerElement('schema-event', {
                     <section>
                         <h2>Handling for Many Environments</h2>
                         <pre class="fragment"><code class="javascript"><span class="fragment">document.addEventListener('keydown', function(e){
-    <span class="fragment">if( navigator.userAgent.match(/Macintosh/g) && e.which === 90 && e.metaKey ) {
-        doUndo();
-    }</span><span class="fragment"> else if ( e.which === 90 && e.ctrlKey ){
-        doUndo();
-    }</span>
-});</span>
-
-<span class="fragment">if(navigator.userAgent.match(/(iPad|iPhone|iPod)/g)){
+  <span class="fragment">if(navigator.userAgent.match(/Macintosh/g) && e.which === 90 && e.metaKey)
+    doUndo();
+  </span><span class="fragment">else if(e.which === 90 && e.ctrlKey)
+    doUndo();</span>
+});</span></code></pre>
+                        <pre class="fragment"><code class="javascript">if(navigator.userAgent.match(/(iPad|iPhone|iPod)/g))
     <span class="fragment">window.addEventListener('shake', function(e){
         doUndo();
-    });</span>
-}</span>
-
-<span class="fragment">(function (window, document) {
+    });</span></code></pre>
+                        <pre class="fragment"><code class="javascript" style="height:200px;">(function (window, document) {
 
     function Shake() {
-
-        //feature detect
         this.hasDeviceMotion = 'ondevicemotion' in window;
-
-        //default velocity threshold for shake to register
         this.threshold = 15;
-
-        //use date to prevent multiple shakes firing
         this.lastTime = new Date();
-
-        //accelerometer values
         this.lastX = null;
         this.lastY = null;
         this.lastZ = null;
 
-        //create custom event
         if (typeof document.CustomEvent === "function") {
             this.event = new document.CustomEvent('shake', {
                 bubbles: true,
@@ -850,7 +837,6 @@ var SchemaEvent = document.registerElement('schema-event', {
         }
     }
 
-    //reset timer values
     Shake.prototype.reset = function () {
         this.lastTime = new Date();
         this.lastX = null;
@@ -858,22 +844,17 @@ var SchemaEvent = document.registerElement('schema-event', {
         this.lastZ = null;
     };
 
-    //start listening for devicemotion
     Shake.prototype.start = function () {
         this.reset();
         if (this.hasDeviceMotion) { window.addEventListener('devicemotion', this, false); }
     };
 
-    //stop listening for devicemotion
     Shake.prototype.stop = function () {
-
         if (this.hasDeviceMotion) { window.removeEventListener('devicemotion', this, false); }
         this.reset();
     };
 
-    //calculates if shake did occur
     Shake.prototype.devicemotion = function (e) {
-
         var current = e.accelerationIncludingGravity,
             currentTime,
             timeDifference,
@@ -906,22 +887,18 @@ var SchemaEvent = document.registerElement('schema-event', {
         this.lastX = current.x;
         this.lastY = current.y;
         this.lastZ = current.z;
-
     };
 
-    //event handler
     Shake.prototype.handleEvent = function (e) {
-
         if (typeof (this[e.type]) === 'function') {
             return this[e.type](e);
         }
     };
 
-    //create a new instance of shake.js.
     var myShakeEvent = new Shake();
     myShakeEvent && myShakeEvent.start();
 
-}(window, document));</span></code></pre>
+}(window, document));</code></pre>
                         <p class="fragment"><em>And how about tap highlight undo?</em></p>
                     </section>
                     

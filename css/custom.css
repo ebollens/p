@@ -12,8 +12,9 @@
 
 pre.code { 
     background: #3F3F3F; 
-    padding: 3px 8px; 
+    padding: 6px 8px; 
     box-sizing: border-box; 
+    color: #DCDCDC;
 }
 
 h1, h2, strong {

@@ -62,36 +62,57 @@
                     
                     <section>
                         <h2>A Trend Towards Micro</h2>
+                        <p class='fragment'></p>
                     </section>
                     
                     <section>
                         <h2>Keeping Tabs on It All</h2>
-                        <!--
-                        browse to the site that has the library
-                        download it
-                        check from time to time to see if it's changed
-                        download it if it's been updated
-                        FOR EACH LIBRARY YOU WANT TO USE!
-                        -->
+                        <p class='fragment'>Getting a library...</p>
+                        <p>
+                            <em class='fragment'>Browse to a site that has the library</em>
+                            <br>
+                            <em class='fragment'>Download the library and add it to the project</em>
+                        </p>
+                        <p class='fragment'>Keeping a library up to date...</p>
+                        <p>
+                            <em class='fragment'>Check the site to see if there are any updates</em>
+                            <br>
+                            <em class='fragment'>If updated, download again and replace the old version</em>
+                        </p>
+                        <p class='fragment'>
+                            When you've got a bunch of libraries<span class='fragment'>,
+                                <br><strong>this adds a lot of overhead</strong></span>
+                        </p>
                     </section>
                     
                     <section>
                         <h2>Managing the Chaos</h2>
-                        <!--
-                        git modules get part way, but are also broken in many
-                        package managers are a great alternative!
-                        -->
+                        <p class='fragment'><strong>Git submodules</strong></p>
+                        <p>
+                            <em class='fragment'>If using Git, they seem like an obvious choice</em>
+                            <br>
+                            <em class='fragment'>Submodules bound to repo only by commit ID</em>
+                            <br>
+                            <em class='fragment'>Submodules don't update with base repo pull</em>
+                            <br>
+                            <em class='fragment'>Merge resolution can trample on submodules</em>
+                        </p>
+                        <p class='fragment'><strong>Package managers are a better choice</strong></p>
                     </section>
                     
                     <section>
                         <h2>Package Managers</h2>
-                        <!--
-                        npm (Node.js)
-                        gem (Ruby)
-                        pip (Python)
-                        composer (PHP)
-                        Apache Ivy (Java)
-                        -->
+                        <p>
+                            <span class='fragment'>npm<br><small>Node.js</small></span>
+                            <br>
+                            <span class='fragment'>gem<br><small>Ruby</small></span>
+                            <br>
+                            <span class='fragment'>pip<br><small>Python</small></span>
+                            <br>
+                            <span class='fragment'>composer<br><small>PHP</small></span>
+                            <br>
+                            <span class='fragment'>Ivy<br><small>Java</small></span>
+                        </p>
                     </section>
                     
                     <section>
@@ -108,11 +129,21 @@
                     
                     <section>
                         <h2>What is Bower?</h2>
-                        <!--
-                        Dead simple package install, update and remove
-                        Dependency management
-                        package discovery (bower.io)
-                        -->
+                        <p class='fragment'><strong>Straightforward package manager</strong></p>
+                        <p>
+                            <em class='fragment'>All the usual operations</em>
+                            <br>
+                            <em class='fragment'>Semantic versioning</em>
+                            <br>
+                            <em class='fragment'>No language requirements</em>
+                        </p>
+                        <p class='fragment'><strong>Dependency resolution</strong></p>
+                        <p class='fragment'><strong>Discovery services</strong></p>
+                        <p>
+                            <em class='fragment'><a href='http://bower.io' target='_blank'>bower.io</a> Directory</em>
+                            <br>
+                            <em class='fragment'>Bound to GitHub by default</em>
+                        </p>
                     </section>
                     
                     <section>
@@ -685,18 +716,34 @@
                     
                     <section>
                         <h2>Version Management</h2>
-                        <!--
-                        install a version such as bower install jquery#1.10
-                        write a bower.json file
-                        -->
+                        <pre class="fragment"><code class="bash">bower install jquery</code></pre>
+                        <pre class="fragment"><code class="bash">bower install jquery#1.10</code></pre>
+                        <pre class="fragment"><code class="javascript">{
+    <span class="fragment">"name": "example"</span><span class="fragment">,
+    "dependencies": {
+        <span class="fragment">"jquery": "1.10"</span><span class="fragment">,
+        "efx": "ebollens/efx"</span><span class="fragment">,
+        "bootstrap": "https://github.com/twbs/bootstrap.git<span class="fragment">#3.1.1</span>"</span>
+    }</span><span class="fragment">,
+    "version": "2.0.0"</span>
+}</code></pre>
                     </section>
                     
                     <section>
                         <h2>Semantic Versioning</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>bower.json</h2>
+                        <table style="margin:auto;">
+                            <tr>
+                                <td style="text-align:center;" class="fragment"><strong>2</strong><br><small>major</small></td>
+                                <td class="fragment"><strong>.</strong></td>
+                                <td style="text-align:center;" class="fragment"><strong>0</strong><br><small>minor</small></td>
+                                <td class="fragment"><strong>.</strong></td>
+                                <td style="text-align:center;" class="fragment"><strong>4</strong><br><small>revision</small></td>
+                            </tr>
+                        </table>
+                        <p class="fragment"><strong>MAJOR</strong> when you make incompatible API changes</p>
+                        <p class="fragment"><strong>MINOR</strong> when you add backwards-compatible functionality</p>
+                        <p class="fragment"><strong>PATCH</strong> when you add backwards-compatible bug fix</p>
+                        <p class="fragment"><strong><a href="http://semver.org/" target="_blank">semver.org</a></strong></p>
                     </section>
                     
                 </section>
@@ -709,34 +756,92 @@
                     
                     <section>
                         <h2>Why?</h2>
-                        <!--
-                        appending files reduces HTTP requests
-                        makes sure they load in the right order
-                        optimizes and minifies
-                        -->
-                    </section>
-                    
-                    <section>
-                        <h2>Grunt</h2>
-                        <!-- including maybe a reference to grunt-bower-task? -->
+                        <p class='fragment'><strong>Each package has its own way of organizing</strong></p>
+                        <pre class="fragment code">bower_components
+└── bootstrap
+      └── dist
+            └── css
+            └── fonts
+            └── js
+      └── ..
+└── jquery
+      └── dist
+      └── src
+      └── ...</pre>
+                        <p class='fragment'><strong>Automate asset preparation</strong></p>
+                        <p>
+                            <em class='fragment'>Appending files reduces HTTP requests</em>
+                            <br>
+                            <em class='fragment'>Ensure they load in the right order</em>
+                            <br>
+                            <em class='fragment'>Optimize and minify</em>
+                        </p>
                     </section>
                     
                     <section>
                         <h2>Compass</h2>
+                        <p class='fragment'>Wrapper for SCSS and static assets</p>
+                        <p>
+                            <em class='fragment'>Compile</em>
+                            <br>
+                            <em class='fragment'>Minify</em>
+                            <br>
+                            <em class='fragment'>Sprite</em>
+                        </p>
+                        <pre class='fragment'><code class='ruby'>preferred_syntax = :sass
+http_path = '/'
+css_dir = 'assets/stylesheets'
+sass_dir = 'assets/sass'
+images_dir = 'assets/images'
+javascripts_dir = 'assets/javascripts'
+relative_assets = true
+line_comments = true
+output_style = :compressed</code></pre>
+                        <p class='fragment'><strong>But rigidity doesn't help for packages</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Grunt</h2>
+                        <p class='fragment'>Task-based command line tool for common operations</p>
+                        <p>
+                            <em class='fragment'>Compile</em>
+                            <br>
+                            <em class='fragment'>Concatenate</em>
+                            <br>
+                            <em class='fragment'>Minify</em>
+                        </p>
+                        <pre class='fragment'><code class='javascript'>concat: {
+  js : {
+    src : [ 'engine.js', 'toggle.js', 'tabs.js', 'accordion.js' ],
+    dest : 'build/jQuery.efx.js'
+  }
+},
+uglify : {
+  js: {
+    files: { 'build/jQuery.efx.min.js' : [ 'build/jQuery.efx.js' ] }
+  }
+}</code></pre>
+                        <p class='fragment'><strong>But not as easy to keep track of for packages</strong></p>
                     </section>
                     
                     <section>
                         <h2>Where Do They Fall Short?</h2>
+                        <p class='fragment'>Explicit </p>
+                        <p class='fragment'></p>
                     </section>
                     
                     <section>
                         <h2>A Vision</h2>
-                        <!--
-                        in the same way that bower resolves package-level dependencies,
-                        imagine if we had a notion of file-level dependencies
-                        
-                        give some examples
-                        -->
+                        <p class='fragment'>Bower resolves package-level dependencies
+                            <br><span class="fragment">based on package-defined metadata</span></p>
+                        <p class='fragment'><strong>What if we could do the same for the build?</strong></p>
+                        <p>
+                            <em class='fragment'>Remove concerns over package file layout</em>
+                            <br>
+                            <em class='fragment'>Determine concatenation order from dependencies</em>
+                            <br>
+                            <em class='fragment'>Make packages responsible for their own metadata</em>
+                        </p>
                     </section>
                     
                 </section>
@@ -828,7 +933,7 @@ end</span></code></pre>
                     
                     <section>
                         <h2>Using WebBlocks</h2>
-                        <pre class="fragment"><code class='bash'>gem install web_blocks --pre</code></pre>
+                        <pre class="fragment"><code class='bash'>gem install web_blocks <span class="fragment">--pre</span></code></pre>
                         <pre class="fragment code">Blockfile.rb
 breakpoints
    └── _variables.scss
@@ -887,20 +992,20 @@ end</code></pre>
                     </section>
                     
                     <section>
-                        <h2>Building a Block Directly</h2>
+                        <h2>Building a Package with WebBlocks</h2>
                         <p class='fragment'><em><a href='https://github.com/ebollens/efx' target='_blank'>https://github.com/ebollens/efx</a></em></p>
                         <pre class='fragment'><code class='bash'>git clone https://github.com/ebollens/efx.git
 cd efx
 bundle
 npm install</code></pre>
-                        <pre class='fragment'><code class='bash'>bundle exec blocks build</code></pre>
-                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs</code></pre>
-                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs, efx driver toggle</code></pre>
-                        <pre class='fragment'><code class='bash'>bundle exec blocks build --include efx driver tabs, efx driver toggle, jquery</code></pre>
+                        <pre class='fragment'><code class='bash'>blocks build</code></pre>
+                        <pre class='fragment'><code class='bash'>blocks build --include efx driver tabs</code></pre>
+                        <pre class='fragment'><code class='bash'>blocks build --include efx driver tabs, efx driver toggle</code></pre>
+                        <pre class='fragment'><code class='bash'>blocks build --include efx driver tabs, efx driver toggle, jquery</code></pre>
                     </section>
                     
                     <section>
-                        <h2>Using WebBlocks for Our App</h2>
+                        <h2>Using WebBlocks in an App</h2>
                         <pre class="fragment"><code class="javascript">{
   <span class="fragment">"name": "example"</span>
 }</code></pre>
@@ -914,7 +1019,7 @@ npm install</code></pre>
   <span class='fragment'>js_file 'interaction.js'</span>
 
 end</span></span></span></code></pre>
-                        <p class='fragment'><em>Except no dependency ordering among our files</em></p>
+                        <p class='fragment'><em>Except which SCSS file is concatenated first?</em></p>
                     </section>
                     
                     <section>
@@ -934,6 +1039,21 @@ end</span></span></span></code></pre>
 end
 
 <span class='fragment'>include 'example', 'app'</span></code></pre>
+                        <p class='fragment'><em>Dependencies guarantee an order</em></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Inspecting Your Dependencies</h2>
+                        <pre class="fragment"><code class="bash">blocks inspect dependency_list</code></pre>
+                        <pre class="fragment code">/src/app/_layout.scss
+  /src/_variables.scss
+/src/_variables.scss
+/src/app/interaction.js
+  /src/_variables.scss</pre>
+                        <pre class="fragment"><code class="bash">blocks inspect dependency_order</code></pre>
+                        <pre class="fragment code">/src/_variables.scss
+/src/app/_layout.scss
+/src/app/interaction.js</pre>
                     </section>
                     
                     <section>
@@ -942,10 +1062,13 @@ end
   <span class="fragment">"name": "example"</span><span class="fragment">,
   "dependencies": {
     <span class="fragment">"WebBlocks-grid": "WebBlocks/block-grid"</span><span class="fragment">,
-    "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git#2.1.0"</span>
+    "WebBlocks-wrapper-jquery": "https://github.com/WebBlocks/wrapper-jquery.git<span class="fragment">#2.1.0</span>"</span>
   }</span>
 }</code></pre>
-                        <pre class='fragment'><code class='ruby' style="width:112%;margin-left:-6%;font-size:0.9em;line-height:1.2;">block 'example', :path => 'src' do |ex|
+                        <pre class='fragment'><code class='ruby' style="width:112%;margin-left:-6%;font-size:0.9em;line-height:1.2;">include 'example', 'app'
+<span class="fragment">include 'WebBlocks-grid'</span>
+
+block 'example', :path => 'src' do |ex|
   
   block 'core' do
     scss_file '_variables.scss'
@@ -959,10 +1082,34 @@ end
 
   <span class="fragment">dependency framework.route 'jquery'</span>
 
-end
-
-include 'example', 'app'
-<span class="fragment">include 'WebBlocks-grid'</span></code></pre>
+end</code></pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Inspecting Other Block Dependencies</h2>
+                        <pre class="fragment"><code class="bash">blocks inspect dependency_list</code></pre>
+                        <pre class="fragment code" style="font-size:16px;">/bower_components/WebBlocks-grid/src/definition.scss
+  /bower_components/WebBlocks-breakpoints/_variables.scss
+  /bower_components/WebBlocks-grid/src/variables.scss
+/bower_components/WebBlocks-grid/src/variables.scss
+/bower_components/WebBlocks-breakpoints/_variables.scss
+/src/app/_layout.scss
+  /src/_variables.scss
+  /bower_components/jquery/dist/jquery.js
+/bower_components/jquery/dist/jquery.js
+/src/_variables.scss
+  /bower_components/jquery/dist/jquery.js
+/src/app/interaction.js
+  /src/_variables.scss
+  /bower_components/jquery/dist/jquery.js</pre>
+                        <pre class="fragment"><code class="bash">blocks inspect dependency_order</code></pre>
+                        <pre class="fragment code" style="font-size:16px;">/bower_components/WebBlocks-breakpoints/_variables.scss
+/bower_components/WebBlocks-grid/src/variables.scss
+/bower_components/WebBlocks-grid/src/definition.scss
+/bower_components/jquery/dist/jquery.js
+/src/_variables.scss
+/src/app/_layout.scss
+/src/app/interaction.js</pre>
                     </section>
                     
                     <section>
@@ -973,6 +1120,37 @@ include 'example', 'app'
     <span class="fragment">"WebBlocks-wrapper-bootstrap": "WebBlocks/wrapper-bootstrap"</span>
   }</span>
 }</code></pre>
+                        <pre class="fragment"><code class="bash">blocks inspect blocks --attributes</code></pre>
+<pre class="fragment code">framework (Framework)
+  :required = true
+  :build_path = "build"
+  bootstrap (Block)
+    :required = false
+    :path = "bower_components/bootstrap-sass-twbs/assets"
+    variables (Block)
+      :required = false
+      stylesheets/bootstrap/_variables.scss (ScssFile)
+        :required = true
+    base (Block)
+      :dependencies = [["bootstrap", "variables"]]
+      :required = false
+      ...
+</pre>
+                    </section>
+                    
+                    <section>
+                        <h2>Hooking Into Another Block</h2>
+<pre class="fragment code">framework (Framework)
+  bootstrap (Block)
+    :required = false
+    :path = "bower_components/bootstrap-sass-twbs/assets"
+    variables (Block)
+      :required = false
+    base (Block)
+      :dependencies = [["bootstrap", "variables"]]
+      :required = false
+      ...
+</pre>
                         <pre class='fragment'><code class='ruby'>block 'example' do
 
   <span class="fragment">block 'bootstrap-config' <span class="fragment">do
@@ -981,9 +1159,8 @@ include 'example', 'app'
     <span class="fragment">reverse_dependency framework.route 'bootstrap', 'base'</span>
   end</span></span>
 
-end
-
-<span class="fragment">include 'bootstrap'</span></code></pre>
+end</code></pre>
+                        <pre class="fragment"><code class="ruby">blocks build --include bootstrap</code></pre>
                     </section>
                     
                 </section>
@@ -1097,21 +1274,21 @@ end</code></pre>
                         <h2>Wrapping Bootstrap</h2>
                         <pre class="fragment"><code class="ruby" style='font-size:0.9em; line-height:1.2'>block 'js' do |js|
 
-  dependency bootstrap.route 'component-animations'
+  <span class="fragment">dependency bootstrap.route 'component-animations'</span>
 
-  block 'transition' do
+  <span class="fragment">block 'transition'</span><span class="fragment"> do
     js_file 'javascripts/bootstrap/transition.js'
-  end
+  end</span>
 
-  block 'collapse' do
-    dependency js.route 'transition'
-    js_file 'javascripts/bootstrap/collapse.js'
-  end
+  <span class="fragment">block 'collapse' do
+    <span class="fragment">dependency js.route 'transition'</span>
+    <span class="fragment">js_file 'javascripts/bootstrap/collapse.js'</span>
+  end</span>
 
-  block 'dropdown' do
-    dependency twbs.route 'dropdowns'
-    js_file 'javascripts/bootstrap/dropdown.js'
-  end
+  <span class="fragment">block 'dropdown' do
+    <span class="fragment">dependency twbs.route 'dropdowns'
+    js_file 'javascripts/bootstrap/dropdown.js'</span>
+  end</span>
 
 end</code></pre>
                     </section>
@@ -1143,6 +1320,57 @@ end</span></span></code></pre>
                     
                     <section>
                         <h2>More About the Project</h2>
+                    </section>
+                    
+                    <section>
+                        <h2>Comparison to WebBlocks 1</h2>
+                        <p class="fragment">Removes confusion between modular types</p>
+                        <p class="fragment">Trend towards microframeworks</p>
+                        <p class="fragment">Breaks out modules into their own packages</p>
+                        <p class="fragment">Simplify adding third-party packages</p>
+                        <p class="fragment">Reduce barriers to entry</p>
+                        <p class="fragment">Explicit control rather than implicit convention</p>
+                        <p class="fragment">Substantial compiler performance improvements</p>
+                    </section>
+                    
+                    <section>
+                        <h2>Performance</h2>
+                        <p class="fragment"><strong>Task-level parallelism</strong></p>
+                        <p class="fragment"><strong>Data-level parallelism</strong></p>
+                        <p class="fragment"><strong>Caching</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Blocks</h2>
+                        <p class="fragment"><strong>WebBlocks 1.x Semantics</strong></p>
+                        <p class="fragment"><strong>Third-Party Packages</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Planned Features</h2>
+                        <p class="fragment"><strong>Syntactic sugar</strong></p>
+                        <p>
+                            <em class="fragment">Macros</em>
+                            <br>
+                            <em class="fragment">Groups</em>
+                        </p>
+                        <p class="fragment"><strong>Asset types</strong></p>
+                        <p>
+                            <em class="fragment">Web Components</em>
+                            <br>
+                            <em class="fragment">Images</em>
+                            <br>
+                            <em class="fragment">Fonts</em>
+                        </p>
+                        <p class="fragment"><strong>Streamlining behaviors</strong></p>
+                    </section>
+                    
+                    <section>
+                        <h2>Collaboration</h2>
+                        <p class="fragment">Website<br><small><a href="https://github.com/WebBlocks/WebBlocks" target="_blank">https://github.com/WebBlocks/WebBlocks</a></small></p>
+                        <p class="fragment">Gem<br><small><a href="http://rubygems.org/gems/web_blocks" target="_blank">http://rubygems.org/gems/web_blocks</a></small></p>
+                        <p class="fragment">Issues<br><small><a href="https://huboard.com/WebBlocks/WebBlocks" target="_blank">https://huboard.com/WebBlocks/WebBlocks</a></small></p>
+                        <p class="fragment">Mailing List<br><small><a href="http://lists.ucla.edu/cgi-bin/mailman/listinfo/webblocks" target="_blank">http://lists.ucla.edu/cgi-bin/mailman/listinfo/webblocks</a></small></p>
                     </section>
                     
                 </section>

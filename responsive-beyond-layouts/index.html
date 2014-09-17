@@ -66,7 +66,7 @@
                     <section>
                         <h2>Why Do We Care?</h2>
                         <p class='fragment'>
-                            First there was the desktop...
+                            First there was desktop...
                             <span class='fragment'>then there was mobile...</span>
                             <span class='fragment'>and now watches, widescreens, and everything inbetween</span>
                         </p>
@@ -247,7 +247,7 @@ body > #container {
                 <section>
                     
                     <section>
-                        <h2>Extending Responsive Layouts</h2>
+                        <h2>Considering More Than Basic Layouts</h2>
                     </section>
                     
                     <section>
@@ -619,11 +619,22 @@ someTaskToMeasure();
                             <em class='fragment'>Web Storage</em><em class='fragment'>, Application Cache</em><em class='fragment'>, FileSystem API</em><em class='fragment'> &amp; Indexed Database</em></em>
                         </p>
                         <p class='fragment'><strong>Quota Management API</strong></p>
-                        <p>
-                            <em class='fragment'>Get quota</em>
-                            <br>
-                            <em class='fragment'>Request larger quota</em>
-                        </p>
+                        <pre class="fragment"><code class="javascript">navigator.storageQuota.queryInfo(<span class="fragment">"temporary"</span>).then(<span class="fragment">function(storageInfo) {
+  initializeCache(storageInfo.usage, storageInfo.quota - storageInfo.usage);
+}</span>);</code></pre>
+                        <pre class="fragment"><code class="javascript">function onOfflineModeEnabled(spaceNeeded, errback){<span class="fragment">
+  navigator.storageQuota.queryInfo(<span class="fragment">"persistent"</span>)<span class="fragment">.then(function(storageInfo){
+      <span class="fragment">var availableSpace = storageInfo.quota - storageInfo.usage;</span>
+      <span class="fragment">if (availableSpace >= spaceNeeded)
+        return storageInfo;</span>
+      <span class="fragment">else
+        return navigator.storageQuota.requestPersistentQuota(
+                spaceNeeded + storageInfo.usage);</span>
+    }
+  )</span><span class="fragment">.then(<span class="fragment">function (storageInfo) {
+    prepareForOfflineMode(storageInfo.quota - storageInfo.usage);
+  }</span><span class="fragment">, errback</span>)</span>
+</span>}</code></pre>
                     </section>
                     
                 </section>

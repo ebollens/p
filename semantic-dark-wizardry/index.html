@@ -77,16 +77,16 @@
                     <section>
                         <h2>Isolation with a Shadow DOM</h2>
                         <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;Eric&lt;/div&gt;</code></pre>
-                        <pre class='fragment'><code class='html'>&lt;template id="name-badge-template"&gt; 
+                        <pre class='fragment'><code class='html'><span class="fragment">&lt;template id="name-badge-template"&gt; </span>
   &lt;style&gt; … &lt;/style&gt;
   &lt;div class="badge"&gt;
     &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
     &lt;div class="name"&gt;Eric&lt;/div&gt;
   &lt;/div&gt;
-&lt;/template&gt;</code></pre>
-                        <pre class='fragment'><code class='javascript'>var shadow = document.querySelector('#name-badge').createShadowRoot(),
-    template = document.querySelector('#name-badge-template'); 
-shadow.appendChild(template.content.cloneNode());</code></pre>
+<span class="fragment">&lt;/template&gt;</span></code></pre>
+                        <pre class='fragment'><code class='javascript'>var shadow = document.querySelector('#name-badge').createShadowRoot()<span class="fragment">,
+    template = document.querySelector('#name-badge-template'); </span>
+<span class="fragment">shadow.appendChild(template.content.cloneNode());</span></code></pre>
                         <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
   #shadow-root
   "Eric"
@@ -116,19 +116,21 @@ shadow.appendChild(template.content.cloneNode());</code></pre>
                     
                     <section>
                         <h2>Using Template for Delayed Activation</h2>
-                        <pre class='fragment'><code class='html'>&lt;button onclick="useIt()"&gt;Use me&lt;/button&gt;
+                        <pre class='fragment'><code class='html'>&lt;button onclick="example()"&gt;Use me&lt;/button&gt;
 &lt;div id="container"&gt;&lt;/div&gt;</code></pre>
                         <pre class='fragment'><code class='html'>&lt;template&gt; 
   &lt;div&gt;Template used: &lt;span&gt;0&lt;/span&gt;&lt;/div&gt; 
-  &lt;script&gt;alert('Thanks!')&lt;/script&gt; 
+  &lt;script&gt;alert('Foobar!')&lt;/script&gt; 
 &lt;/template&gt;
 </code></pre>
-                        <pre class='fragment'><code class='javascript'>function useIt() { 
-  var content = document.querySelector('template').content; 
-  var span = content.querySelector('span'); 
-  span.textContent = parseInt(span.textContent) + 1; 
-  document.querySelector('#container').appendChild( 
-    document.importNode(content, true)); 
+                        <pre class='fragment'><code class='javascript'>function example() { 
+  <span class="fragment">var content = document.querySelector('template').content</span><span class="fragment">,
+      span = content.querySelector('span'); </span>
+
+  <span class="fragment">span.textContent = parseInt(span.textContent) + 1; </span>
+
+  <span class="fragment">document.querySelector('#container')
+          .appendChild(document.importNode(content, true)); </span>
 }</code></pre>
                     </section>
                     
@@ -168,7 +170,9 @@ shadow.appendChild(template.content.cloneNode());</code></pre>
   &lt;style&gt; … &lt;/style&gt;
   &lt;div class="badge"&gt;
     &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
-    &lt;div class="name"&gt;&lt;content&gt;&lt;/content&gt;&lt;/div&gt;
+    &lt;div class="name"&gt;
+        <span class="fragment">&lt;content&gt;&lt;/content&gt;</span>
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;</code></pre>
                         <p>
@@ -184,14 +188,17 @@ shadow.appendChild(template.content.cloneNode());</code></pre>
                         <pre class='fragment'><code class='html'>&lt;div id="name-badge"&gt;
   &lt;span class="first"&gt;Eric&lt;/span&gt;
   &lt;span class="last"&gt;Bollens&lt;/span&gt;
-&lt;/div&gt;
-&lt;template id="name-badge-template"&gt; 
+&lt;/div&gt;</code></pre>
+                        <pre class='fragment'><code class='html'>&lt;template id="name-badge-template"&gt; 
   &lt;style&gt; … &lt;/style&gt;
   &lt;div class="badge"&gt;
     &lt;div class="title"&gt;Hi! My name is&lt;/div&gt;
     &lt;div class="name"&gt;
-      &lt;content select="first"&gt;&lt;br&gt;
-      &lt;small&gt;&lt;content select="last"&gt;&lt;/small&gt;
+      <span class="fragment">&lt;content select="first"&gt;&lt;/content&gt;</span>
+      <span class="fragment">&lt;br&gt;</span>
+      <span class="fragment">&lt;small&gt;</span>
+        <span class="fragment">&lt;content select="last"&gt;&lt;/content&gt;</span>
+      <span class="fragment">&lt;/small&gt;</span>
     &lt;/content&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;</code></pre>
@@ -269,7 +276,7 @@ document.body.appendChild(xFoo);</code></pre>
 
 <span class="fragment"><span class="fragment">XFooProto.foo = function() { alert('foo() called'); };  </span>
 
-<span class="fragment">Object.defineProperty(XFooProto, "bar", {value: 5});</span>
+<span class="fragment">XFooProto.bar = 5;</span>
 
 var XFoo = document.registerElement('x-foo', {
   prototype: XFooProto
@@ -277,25 +284,25 @@ var XFoo = document.registerElement('x-foo', {
                     </section>
                     
                     <section>
-                        <h2>Leveraging get/set</h2>
+                        <h2>Leveraging ES5 get/set</h2>
                         <pre class="fragment"><code class="javascript">var XFooProto = Object.create(HTMLElement.prototype);
 
 XFooProto.foo = function() { alert('foo() called'); };
 
-Object.defineProperty(XFooProto, "bar", {value: 5});
+XFooProto.bar = 5;
 
 var XFoo = document.registerElement('x-foo', {
   prototype: XFooProto
 });</code></pre>
                         <pre class="fragment"><code class="javascript">var XFoo = document.registerElement('x-foo', { 
-  prototype: Object.create(HTMLElement.prototype, { 
+  prototype: <span class="fragment">Object.create(<span class="fragment">HTMLElement.prototype</span><span class="fragment">, { 
     <span class="fragment">foo: { 
       value: function() { alert('foo() called'); } 
     }</span><span class="fragment">,
     bar: { 
       get: function() { return 5; } 
     }</span>
-  }) 
+  }</span>) </span>
 });
 </code></pre>
                     </section>
@@ -323,7 +330,7 @@ var XFoo = document.registerElement('x-foo', {
 var XFoo = document.registerElement('x-foo', {
   prototype: XFooProto
 });</code></pre>
-                        <p class="fragment">This doesn't encapsulate the result when rendered<br>
+                        <p class="fragment"><strong>This doesn't encapsulate the result when rendered</strong><br>
                             <span class='fragment'>making it harder to achieve reliable reuse</span></p>
                     </section>
                     
@@ -352,13 +359,13 @@ var XFoo = document.registerElement('x-foo-shadowdom', {
 &lt;/template&gt;</code></pre>
                         <pre class="fragment"><code class="javascript">document.registerElement('name-badge', {
   prototype: Object.create(HTMLElement.prototype, { 
-    createdCallback: { 
-      value: function() { 
-        var shadow = this.createShadowRoot(),
-            template = document.querySelector('#name-badge-template'); 
-        shadow.appendChild(template.content.cloneNode());
-      } 
-    } 
+    <span class="fragment">createdCallback: { 
+      <span class="fragment">value: function() { 
+          <span class="fragment">var shadow = this.createShadowRoot()</span><span class="fragment">,
+          template = document.querySelector('#name-badge-template'); </span>
+        <span class="fragment">shadow.appendChild(template.content.cloneNode());</span>
+      } </span>
+    } </span>
   })
 });</code></pre>
                         <pre class="fragment"><code class="html">&lt;name-badge&gt;Eric&lt;name-badge&gt;</code></pre>
@@ -397,8 +404,8 @@ var XFoo = document.registerElement('x-foo-shadowdom', {
                     <section>
                         <h2>Type Extension Custom Elements</h2>
                         <pre class='fragment'><code class='javascript'>var MegaButton = document.registerElement('mega-button', { 
-  prototype: Object.create(HTMLButtonElement.prototype), 
-  extends: 'button' 
+  prototype: Object.create(HTMLButtonElement.prototype)<span class="fragment">, 
+  extends: 'button' </span>
 });</code></pre>
                         <p class='fragment'><em>Attributes, methods and callbacks inherited from</em> &nbsp;<code>button</code></p>
                         <pre class='fragment'><code class='html'>&lt;button is="mega-button"&gt;</code></pre>
@@ -529,12 +536,12 @@ document.registerElement('say-hi', {prototype: proto});</code></pre>
                     
                     <section>
                         <h2>Performance Considerations</h2>
-                        <p class="fragment">Concatenate imports to reduce HTTP requests
+                        <p class="fragment"><strong>Concatenate imports to reduce HTTP requests</strong>
                             <br><em class='fragment'>although this will become less essential with HTTP 2</em></p>
-                        <p class="fragment">Imports leverage browser caching
+                        <p class="fragment"><strong>Imports leverage browser caching</strong>
                             <br><em class='fragment'>including use in an offline manifest</em></p>
-                        <p class="fragment">Content is inert until you add it</p>
-                        <p class="fragment">Imports don't block parsing the main document
+                        <p class="fragment"><strong>Content is inert until you add it</strong></p>
+                        <p class="fragment"><strong>Imports don't block parsing the main document</strong>
                             <br><em class='fragment'>so put them at the start of the document</em></p>
                     </section>
                     

@@ -811,54 +811,168 @@ var SchemaEvent = document.registerElement('schema-event', {
                     <section>
                         <h2>Constituents of ARIA</h2>
                         <p class='fragment'><strong>Built to map to OS native accessibility APIs</strong></p>
+                        <ul>
+                            <li class='fragment'>Roles</li>
+                            <li class='fragment'>Properties</li>
+                            <li class='fragment'>States</li>
+                        </ul>
+                    </section>
+                                           
+                    <section>
                         <p class='fragment'>
-                            <strong>Roles</strong>
-                            <br><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em>
+                            <h2>Roles</h2>
+                            <p><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em></p>
+                            <ul class="fragment">
+                                <li>Landmark</li>
+                                <li>Structural</li>
+                                <li>Widget</li>
+                            </ul>
+                            <br><pre class='fragment'><code class='html'>role="navigation"</code></pre>
                         </p>
-                        <p class='fragment'>
-                            <strong>Properties</strong>
-                            <br><em class='fragment'>characteristics such as draggable, required, or an associated pop-up</em>
-                        </p>
-                        <p class='fragment'>
-                            <strong>States</strong>
-                            <br><em class='fragment'>current interactive state such as disabled, hidden or live</em>
-                        </p>
-                        <p class='fragment'><strong>Some automatically applied, others manually specified</strong></p>
+                    </section>
+
+                    <section>
+                        <h2>Landmark Roles</h2>
+                        <p>Landmarks are regions on a page, common elements that have an expected set of behaviors or properties</p>
                     </section>
                     
+                    <section>
+                        <h2>Landmark Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="list"</code></pre>
+                        <p>elements that are editable or submit content</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="main"</code></pre>
+                        <p>main content of a document</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="navigation"</code></pre>
+                        <p>menus / list of links</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Structural Roles</h2>
+                        <p>Roles that provide content relevance</p>
+                    </section>
+
+                    <section>
+                        <h2>Structural Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="img"</code></pre>
+                        <p>container for an image and its related parts such as a caption</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="list"</code></pre>
+                        <p>content ordered in a list, non-interactive</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="separator"</code></pre>
+                        <p>content separator like an image based horizontal rule</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Widget Roles</h2>
+                        <p>Widgets are roles that are more specific to the type of action being taken</p>
+                    </section>
+
+                    <section>
+                        <h2>Widget Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="alert"</code></pre>
+                        <p>time sensitive information, will interrupt user</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="tabpanel", role="tablist"</code></pre>
+                        <p>content within a tab, part of a larger tablist</p>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="progressbar"</code></pre>
+                        <p>tick tock, tick tock</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Properties</h2>
+                        <p>characteristics such as draggable, required, or an associated pop-up</p>
+                    </section>
+
+                    <section>
+                        <h2>Aria Properties Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-controls="elementid"</code></pre>
+                        <p>used with elements such as check boxes or radios, but not exclusively</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-labelledby="labelid"</code></pre>
+                        <p>identifies the label related to the current element</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-haspopup="true"</code></pre>
+                        <p>signifies the current element will create a pop up when activated</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>ARIA States</h2>
+                        <p>current interactive state such as disabled, hidden or live</p>
+                    </section>
+
+                    <section>
+                        <h2>ARIA States Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-selected="true"</code></pre>
+                        <p>used with elements such as check boxes or radios, but not exclusively</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-hidden="true"</code></pre>
+                        <p>indicates contained elements are not visible / usable to any user</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-disabled="true"</code></pre>
+                        <p>used on elements that can be seen, but not used / changed</p>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h2>Example</h2>
+                        <pre class='fragment'><code class="html">&lt;h1>User Login&lt;/h1>
+&lt;form action="/user" method="post" id="user-login">
+    &lt;div class="form-item">
+        &lt;label <span class="fragment">for="user-name"</span> id="user-name-label">User Name&lt;/label> 
+        &lt;input type="text" id="user-name" <span class="fragment">aria-labelledby="user-name-label"</span>/> 
+    &lt;/div>
+    &lt;div class="form-item">
+        &lt;label <span class="fragment">for="edit-pass"</span> id="password-label">Password&lt;/label>
+        &lt;input type="password" <span class="fragment">aria-labelledby="password-label"</span> id="edit-pass">
+    &lt;/div>
+    &lt;input type="submit" value="Log in">
+&lt;/form></code></pre>
+                    </section>
+
                     <section>
                         <h2>Example</h2>
                         <pre class='fragment'><code class='html'>&lt;nav <span class="fragment">role="navigation"</span>>&lt;ol>
-  &lt;!-- site nav -->  
+&lt;!-- site nav -->  
 &lt;/ol>&lt;/nav>
 
 &lt;nav <span class="fragment">role="tablist"</span>>&lt;ol>
-  &lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
-    &lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
-  &lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
-    &lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
+&lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+&lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
+&lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
 &lt;/ol>&lt;/nav>
 
 &lt;div <span class="fragment">role="main"</span>>
-  &lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
-    &lt;!-- .. -->&lt;/article>
-  &lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
-    &lt;!-- .. -->&lt;/article>
+&lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
+&lt;!-- .. -->&lt;/article>
+&lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
+&lt;!-- .. -->&lt;/article>
 &lt;/div></code></pre>
-                    </section>
-                    
-                    <section>
-                        <h2>Landmark Roles</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Structural Roles</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Widget Roles</h2>
-                    </section>
-                    
+                    </section> 
+                
                     <section>
                         <h2>Common Mappings</h2>
                         <p class="fragment"><strong>Directly-implied roles</strong></p>
@@ -880,9 +994,10 @@ var SchemaEvent = document.registerElement('schema-event', {
                             <span class="fragment">aside &rarr; <strong>complementary</strong></span>
                             <br>
                             <em class="fragment">when not in sectioning element or main</em></p>
+                    </section>                
+
+                   
                     </section>
-                    
-                </section>
                 
                 <section>
                     

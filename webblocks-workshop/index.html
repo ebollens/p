@@ -59,7 +59,12 @@
                     
                     <section>
                         <h2>A Trend Towards Micro</h2>
-                        <p class='fragment'></p>
+                        <p class='fragment'>Originally, we wanted to make
+                            <br><strong class='fragment'>one framework to rule them all</strong></p>
+                        <p class='fragment'>But to do everything for everyone<span class='fragment'>,<br>we end up doing nothing for anyone</span></p>
+                        <p class='fragment'>Looking to the Linux model<span class='fragment'>,
+                                <br><strong>do one thing and do it well</strong></span></p>
+                                <p class='fragment'><strong>This means many, many awesome tools!</strong></p>
                     </section>
                     
                     <section>
@@ -823,8 +828,9 @@ uglify : {
                     
                     <section>
                         <h2>Where Do They Fall Short?</h2>
-                        <p class='fragment'>Explicit </p>
-                        <p class='fragment'></p>
+                        <p class='fragment'>Enforced conventions</p>
+                        <p class='fragment'>Explicit definitions</p>
+                        <p class='fragment'>Misplaced responsibility</p>
                     </section>
                     
                     <section>
@@ -867,7 +873,7 @@ uglify : {
                             <br>
                             <em class='fragment'>Confusion around modularity</em>
                             <br>
-                            <em class='fragment'>Not easy enough to extend with additional packages</em>
+                            <em class='fragment'>Not easy enough to add packages</em>
                         </p>
                     </section>
                     
@@ -1169,19 +1175,70 @@ end</code></pre>
                     </section>
                     
                     <section>
-                        <h2>Creating a Stand-alone Block</h2>
+                        <h2>Creating a Base Block</h2>
+                        <pre class='fragment'><code class='css'>$breakpoint-xxsmall:        360px !default;
+$breakpoint-xsmall:         480px !default;
+$breakpoint-small:          640px !default;
+$breakpoint-medium-small:   768px !default;
+$breakpoint-medium:         900px !default;
+$breakpoint-medium-large:   1024px !default;
+$breakpoint-large:          1200px !default;
+$breakpoint-xlarge:         1500px !default;
+$breakpoint-xxlarge:        1800px !default;</code></pre>
+                        <pre class='fragment'><code class='ruby'>block 'WebBlocks-breakpoints'<span class='fragment'> do
+  scss_file '_variables.scss'
+end</span></code></pre>
+                        <pre class='fragment'><code class='javascript'>{
+    "name": "WebBlocks-breakpoints",
+    "version": "1.0.0",
+    "dependencies": {}
+}</code></pre>
                     </section>
                     
                     <section>
-                        <h2>Modularizing for Reusability</h2>
+                        <h2>Leveraging a Block</h2>
+                        <pre class='fragment'><code class='javascript'>{
+    "name": "WebBlocks-visibility",
+    "version": "1.0.0",
+    "dependencies": {
+        <span class='fragment'>"WebBlocks-breakpoints": "WebBlocks/block-breakpoints"</span>
+    }
+}</code></pre>
+                        <pre class='fragment'><code class='ruby'>block 'WebBlocks-visibility'<span class='fragment'>, :path => 'src' </span><span class='fragment'>do
+
+  <span class='fragment'>block 'hide'</span><span class='fragment'> do
+    scss_file '_hide.scss'
+  end</span>
+
+  <span class='fragment'>block 'breakpoint'</span><span class='fragment'>, :path => 'breakpoint'</span><span class='fragment'> do
+    <span class='fragment'>dependency framework.route 'WebBlocks-breakpoints'</span>
+    <span class='fragment'>block 'hide' do
+      scss_file '_hide.scss'
+    end</span>
+  end</span>
+
+end</span></code></pre>
                     </section>
                     
                     <section>
-                        <h2>Leveraging Blocks in Blocks</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Optional Dependencies</h2>
+                        <h2>More Blocks Mechanics</h2>
+                        <pre class='fragment'><code class='ruby'>block 'WebBlocks-grid'<span class='fragment'>, :path => 'src'</span><span class='fragment'> do |grid|
+
+  <span class='fragment'>block 'variables'</span><span class='fragment'> do
+    scss_file 'variables.scss'
+  end</span>
+
+  <span class='fragment'>block 'definition'</span><span class='fragment'>, :required => true</span><span class='fragment'> do
+    <span class='fragment'>dependency framework.route 'WebBlocks-breakpoints'</span>
+    <span class='fragment'>dependency grid.route 'variables'</span>
+    <span class='fragment'>scss_file 'definition.scss'</span>
+  end</span>
+
+end</span></code></pre>
+                        <p class='fragment'>Additionally...
+                            <br><em class='fragment'>Loose dependencies</em>
+                            <br><em class='fragment'>Reverse dependencies</em>
+                        </p>
                     </section>
                     
                 </section>

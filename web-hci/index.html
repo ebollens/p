@@ -145,7 +145,9 @@
                     </section>
                     
                     <section>
-                        <h2>How Do Semantics Help With HCI?</h2>
+                        <h2>Semantics and HCI</h2>
+                        <p class="fragment">Computer Comprehension</p>
+                        <p class="fragment">Assistive Technologies</p>
                     </section>
                     
                     <section>
@@ -256,7 +258,7 @@
                     
                     <section>
                         <h2>When use article, section or div?</h2>
-                        <p class="fragment"><strong>article</strong> if the content would make sense on its own in a feed reader</p>
+                        <p class="fragment"><strong>article</strong> if the content would make sense on its own</p>
                         <p class="fragment"><strong>section</strong> if the content is related</p>
                         <p class="fragment"><strong>div</strong> otherwise</p>
                     </section>
@@ -298,7 +300,7 @@
                     <section>
                         <h2>&lt;figure&gt; and &lt;figcaption&gt;</h2>
                         <p>
-                            <em class="fragment">unit of content... that is self-contained... </em><em class="fragment">typically referenced as a single unit from the main flow... </em><em class="fragment"> that can be moved away from the main flow</em>
+                            <em class="fragment">unit of content... that is self-contained... </em><em class="fragment">typically referenced as a single unit from the main flow... </em><em class="fragment"> can be moved away from the main flow</em>
                         </p>
                         <p><strong>
                             <span class="fragment">Diagrams</span>
@@ -389,12 +391,20 @@
                     
                     <section>
                         <h2>&lt;time&gt;</h2>
+                        <p>
+                            <em class='fragment'>Explicit dates</em>
+                        </p>
                         <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-19T16:00Z">Today 9:30 AM at UCLA&lt;/time></code></pre>
                         <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-19T09:00-07:00">Today 9:30 AM at UCLA&lt;/time></code></pre>
+                        <p>
+                            <em class='fragment'>Fuzzy dates</em>
+                        </p>
                         <pre class='fragment'><code class='html'>&lt;time datetime="2014-09-20">Tomorrow&lt;/time></code></pre>
-                        <pre class='fragment'><code class='html'>&lt;time datetime="2014-10">Next month&lt;/time></code></pre>
                         <pre class='fragment'><code class='html'>&lt;time datetime="2015">Next year&lt;/time></code></pre>
                         <pre class='fragment'><code class='html'>&lt;time datetime="2015-W1">First week next year&lt;/time></code></pre>
+                        <p>
+                            <em class='fragment'>Durations</em>
+                        </p>
                         <pre class='fragment'><code class='html'>&lt;time datetime="PT23H 9M 2.343S">23 hours, 9 minutes, 2.345 seconds&lt;/time></code></pre>
                         <p>
                             <em class='fragment'>Cannot represent dates before 1 BC</em>
@@ -669,9 +679,7 @@ var SchemaEvent = document.registerElement('schema-event', {
                 
                 <section>
                     <h2>Not Enough for Accessibility</h2>
-                    <pre class='fragment'><code class='html'>&lt;nav>&lt;ol>
-  &lt;!-- site nav -->  
-&lt;/ol>&lt;/nav>
+                    <pre class='fragment'><code class='html'>&lt;nav>&lt;ol>&lt;!-- site nav -->&lt;/ol>&lt;/nav>
 
 &lt;nav>&lt;ol>
   &lt;li id="a1T">&lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
@@ -684,14 +692,13 @@ var SchemaEvent = document.registerElement('schema-event', {
   &lt;article id="a2P">
     &lt;!-- .. -->&lt;/article>
 &lt;/div></code></pre>
-                    <p class='fragment'>
-                        No guidance here...
-                    </p>
+                    <p class='fragment'><strong>No guidance here...</strong></p>
                     <p>
                         <em class='fragment'>which nav is the site nav</em>
                         <br>
                         <em class='fragment'>that the nav and articles relate</em>
                     </p>
+                    <p class="fragment"><strong>And this isn't even a bad one!</strong></p>
                 </section>
                 
                 <section>
@@ -705,11 +712,12 @@ var SchemaEvent = document.registerElement('schema-event', {
                         <p class='fragment'><strong>Built to map to OS native accessibility APIs</strong></p>
                         <p class='fragment'>
                             <strong>Roles</strong>
+                            <br><em class='fragment'>semantics when not otherwise representable such as banner, contentinfo and search</em>
                             <br><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em>
                         </p>
                         <p class='fragment'>
                             <strong>Properties</strong>
-                            <br><em class='fragment'>characteristics such as draggable, required, or an associated pop-up</em>
+                            <br><em class='fragment'>characteristics such as draggable, required or associations</em>
                         </p>
                         <p class='fragment'>
                             <strong>States</strong>

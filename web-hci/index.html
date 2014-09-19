@@ -81,6 +81,115 @@
                     <section>
                         <h2>Assistive HTML</h2>
                     </section>
+
+                    <section>
+                        <h2>Goal of Web Accessibility</h2>
+                        <p>Provide universal access to information, allowing equal access &amp; opportunity.</p>
+                        <p class="fragment">Equality extends beyond access to content, experience and usage should provide the same levels of access</p>
+                    </section>
+
+                    <section>
+                        <h2>HTML Elements that enhance accessibility</h2>
+                        <ul>
+                            <li>Alt Text</li>
+                            <li>Labels</li>
+                            <li>Keyboard Navigation</li>
+                            <li>Headers</li>
+                            <li>Captions</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Alt Text</h2>
+                        <p>Alt text should convey information that is equivalent to the meaning or purpose of the image</p>
+                    </section>
+                    <section>
+                        <h2>Alt Text</h2>
+                        <img src="img/green-arrow-right.png" alt="Right Pointing Green Arrow image example">
+                        <div class="fragment">
+                            <p><strong>Bad Alt Text Example</strong></p>
+                            <pre><code class='html'>&lt;img src="img/green-arrow-right.png" alt="Right Green Arrow"&gt;</code></pre>
+                        </div>
+                        <div class="fragment">        
+                            <p><strong>Good Alt Text Example</strong></p>
+                            <pre><code class='html'>&lt;img src="img/green-arrow-right.png" alt="Step 5: Choose your pizza toppings!"&gt;</code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Labels</h2>
+                        <div class="fragment">
+                        <p><strong>Bad Label Example</strong></p>
+                            <pre><code class='html'>&lt;label&gt;Name:&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</code></pre>     
+                        <div class="fragment">
+                            <p><strong>Good Label Example</strong></p>
+                            <pre><code class='html'>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</code></pre> 
+                    </section>
+
+                    <section>
+                        <h2>Keyboard Navigation</h2>
+                        <p class="fragment"><strong>Interactivity must support alternative controls</strong></p>
+                        <p class="fragment">Scripted clicks should also support keyboard activation</p>
+                        <p class="fragment">Be mindful of focus location when using javascript</p>
+                    </section>
+
+                    <section>
+                        <h2>Headers</h2>
+                        <div class="fragment">
+                        <p><strong>Bad Header Usage</strong></p>
+                        <ul>
+                            <li >Using Headers to resize your font</li>
+                            <li >Using too many headers</li>
+                        </ul>
+                        </div>
+                        <div class="fragment example">
+                        <br/>
+                        <p><strong>Good Header usage</strong></p>
+                        <ul>
+                            <li>Headers should be clearly defined as such (h1, h2, h3, etc)</li>
+                            <li>Thinking of the site in an outline format often helps clarify the structure of the site</li>
+                        </ul>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h2>Captions</h2>
+                        <p>WCAG 2.0, 1.2.2 Captions (Prerecorded) - Level A</p>
+                        <p>Captions are provided for all prerecorded audio content in synchronized media, except when the media is a media alternative for text and is clearly labeled as such</p>
+                        <p class="fragment">Youtube provides a free automatic transcription service</p>
+                    </section>
+
+                    <section>
+                        <h2>Interoperability &amp; Interpretation</h2>
+                        <p>Structure is critical, but it doesn't fix everything (<em>javascript</em>)<p>
+                        <p class="fragment">Accessibility elements provide information but can be used wrong (<em>poor alt text</em>)</p>
+                        <p class="fragment">We often rely on the assumption that proper structure will provide clear context (<em>header overuse</em>)</p>                        
+                    </section>
+
+                    <section>
+                        <h2>The Accessibility Technology Layer</h2>
+                        <p class="fragment">Assistive Technology is implemented each having different ways of presenting information<p>
+                        <p class="fragment">Gray areas often take on the form of custom, heuristic solutions, making consistent translation of semantics more difficult</p>
+                        <p class="fragment">Requires developers to have to jump through hoops to manage multiple technologies, not unlike browser wars</p>
+                    </section>
+
+                    <section>
+                        <h2>Barriers to Accessibility</h2>
+                        <p class="fragment">Standards lag behind, development of AT bottlenecked</p>
+                        <p class="fragment">Hard to machine test, many false positives </p>
+                        <p class="fragment">Poor implementation can make situations worse</p>
+                        <p class="fragment">Privacy</p>
+                    </section>
+
+                    <section>
+                        <h2>Tried and True, but old</h2>
+                        <p class="fragment">Several accessible features have been around since the beginning of HTML</p>
+                        <p class="fragment">HTML was not concieved with the nature of today's web in mind</p>
+                        <p class="fragment">HTML5 has evolved to have many more features that add to accessibility...</p>
+                    </section>
                     
                 </section>
                 
@@ -703,54 +812,168 @@ var SchemaEvent = document.registerElement('schema-event', {
                     <section>
                         <h2>Constituents of ARIA</h2>
                         <p class='fragment'><strong>Built to map to OS native accessibility APIs</strong></p>
+                        <ul>
+                            <li class='fragment'>Roles</li>
+                            <li class='fragment'>Properties</li>
+                            <li class='fragment'>States</li>
+                        </ul>
+                    </section>
+                                           
+                    <section>
                         <p class='fragment'>
-                            <strong>Roles</strong>
-                            <br><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em>
+                            <h2>Roles</h2>
+                            <p><em class='fragment'>widgets not otherwise available such as sliders, tabs and dialogs</em></p>
+                            <ul class="fragment">
+                                <li>Landmark</li>
+                                <li>Structural</li>
+                                <li>Widget</li>
+                            </ul>
+                            <br><pre class='fragment'><code class='html'>role="navigation"</code></pre>
                         </p>
-                        <p class='fragment'>
-                            <strong>Properties</strong>
-                            <br><em class='fragment'>characteristics such as draggable, required, or an associated pop-up</em>
-                        </p>
-                        <p class='fragment'>
-                            <strong>States</strong>
-                            <br><em class='fragment'>current interactive state such as disabled, hidden or live</em>
-                        </p>
-                        <p class='fragment'><strong>Some automatically applied, others manually specified</strong></p>
+                    </section>
+
+                    <section>
+                        <h2>Landmark Roles</h2>
+                        <p>Landmarks are regions on a page, common elements that have an expected set of behaviors or properties</p>
                     </section>
                     
+                    <section>
+                        <h2>Landmark Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="list"</code></pre>
+                        <p>elements that are editable or submit content</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="main"</code></pre>
+                        <p>main content of a document</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="navigation"</code></pre>
+                        <p>menus / list of links</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Structural Roles</h2>
+                        <p>Roles that provide content relevance</p>
+                    </section>
+
+                    <section>
+                        <h2>Structural Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="img"</code></pre>
+                        <p>container for an image and its related parts such as a caption</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="list"</code></pre>
+                        <p>content ordered in a list, non-interactive</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="separator"</code></pre>
+                        <p>content separator, like an image based horizontal rule</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Widget Roles</h2>
+                        <p>Widgets are roles that are more specific to the type of action being taken</p>
+                    </section>
+
+                    <section>
+                        <h2>Widget Role Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="alert"</code></pre>
+                        <p>time sensitive information, will interrupt user</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="tabpanel", role="tablist"</code></pre>
+                        <p>content within a tab, part of a larger tablist</p>
+                        <div class='fragment'>
+                        <pre><code class='html'>role="progressbar"</code></pre>
+                        <p>tick tock, tick tock</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Properties</h2>
+                        <p>characteristics such as draggable, required, or an associated pop-up</p>
+                    </section>
+
+                    <section>
+                        <h2>Aria Properties Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-controls="elementid"</code></pre>
+                        <p>used with elements such as check boxes or radios, but not exclusively</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-labelledby="labelid"</code></pre>
+                        <p>identifies the label related to the current element</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-haspopup="true"</code></pre>
+                        <p>signifies the current element will create a pop up when activated</p>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>ARIA States</h2>
+                        <p>current interactive state such as disabled, hidden or live</p>
+                    </section>
+
+                    <section>
+                        <h2>ARIA States Examples</h2>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-selected="true"</code></pre>
+                        <p>used with elements such as check boxes or radios, but not exclusively</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-hidden="true"</code></pre>
+                        <p>indicates contained elements are not visible / usable to any user</p>
+                        </div>
+                        <div class='fragment'>
+                        <pre><code class='html'>aria-disabled="true"</code></pre>
+                        <p>used on elements that can be seen, but not used / changed</p>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h2>Example</h2>
+                        <pre class='fragment'><code class="html">&lt;h1>User Login&lt;/h1>
+&lt;form action="/user" method="post" id="user-login">
+    &lt;div class="form-item">
+        &lt;label <span class="fragment">for="user-name"</span> id="user-name-label">User Name&lt;/label> 
+        &lt;input type="text" id="user-name" <span class="fragment">aria-labelledby="user-name-label"</span>/> 
+    &lt;/div>
+    &lt;div class="form-item">
+        &lt;label <span class="fragment">for="edit-pass"</span> id="password-label">Password&lt;/label>
+        &lt;input type="password" <span class="fragment">aria-labelledby="password-label"</span> id="edit-pass">
+    &lt;/div>
+    &lt;input type="submit" value="Log in">
+&lt;/form></code></pre>
+                    </section>
+
                     <section>
                         <h2>Example</h2>
                         <pre class='fragment'><code class='html'>&lt;nav <span class="fragment">role="navigation"</span>>&lt;ol>
-  &lt;!-- site nav -->  
+&lt;!-- site nav -->  
 &lt;/ol>&lt;/nav>
 
 &lt;nav <span class="fragment">role="tablist"</span>>&lt;ol>
-  &lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
-    &lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
-  &lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
-    &lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
+&lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+&lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
+&lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
 &lt;/ol>&lt;/nav>
 
 &lt;div <span class="fragment">role="main"</span>>
-  &lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
-    &lt;!-- .. -->&lt;/article>
-  &lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
-    &lt;!-- .. -->&lt;/article>
+&lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
+&lt;!-- .. -->&lt;/article>
+&lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
+&lt;!-- .. -->&lt;/article>
 &lt;/div></code></pre>
-                    </section>
-                    
-                    <section>
-                        <h2>Landmark Roles</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Structural Roles</h2>
-                    </section>
-                    
-                    <section>
-                        <h2>Widget Roles</h2>
-                    </section>
-                    
+                    </section> 
+                
                     <section>
                         <h2>Common Mappings</h2>
                         <p class="fragment"><strong>Directly-implied roles</strong></p>
@@ -772,9 +995,10 @@ var SchemaEvent = document.registerElement('schema-event', {
                             <span class="fragment">aside &rarr; <strong>complementary</strong></span>
                             <br>
                             <em class="fragment">when not in sectioning element or main</em></p>
+                    </section>                
+
+                   
                     </section>
-                    
-                </section>
                 
                 <section>
                     

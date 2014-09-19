@@ -81,6 +81,107 @@
                     <section>
                         <h2>Assistive HTML</h2>
                     </section>
+
+                    <section>
+                        <h2>Goal of Web Accessibility</h2>
+                        <p>Provide universal access to information, allowing equal access &amp; opportunity.</p>
+                        <p class="fragment">Equality extends beyond access to content, experience and usage should provide the same levels of access</p>
+                        <p class="fragment"><em>The United Nations considers access to the web as a basic human right</em></p>
+                    </section>
+
+                    <section>
+                        <h2>HTML Elements that enhance accessibility</h2>
+                        <ul>
+                            <li>Alt Text</li>
+                            <li>Labels</li>
+                            <li>Keyboard Navigation</li>
+                            <li>Headers</li>
+                            <li>Captions</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Alt Text</h2>
+                        <p>Alt text should convey information that is equivalent to the meaning or purpose of the image</p>
+                    </section>
+                    <section>
+                        <h2>Alt Text</h2>
+                        <img src="img/green-arrow-right.png" alt="Right Pointing Green Arrow image example">
+                        <div class="fragment">
+                            <p><strong>Bad Alt Text Example</strong></p>
+                            <pre><code class='html'>&lt;img src="img/green-arrow-right.png" alt="Right Green Arrow"&gt;</code></pre>
+                        </div>
+                        <div class="fragment">        
+                            <p><strong>Good Alt Text Example</strong></p>
+                            <pre><code class='html'>&lt;img src="img/green-arrow-right.png" alt="Step 5: Choose your pizza toppings!"&gt;</code></pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Labels</h2>
+                        <div class="fragment">
+                        <p><strong>Bad Label Example</strong></p>
+                            <pre><code class='html'>&lt;label&gt;Name:&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</code></pre>     
+                        <div class="fragment">
+                            <p><strong>Good Label Example</strong></p>
+                            <pre><code class='html'>&lt;label for="name"&gt;Name:&lt;/label&gt;
+&lt;input id="name" type="text"&gt;</code></pre> 
+                    </section>
+
+                    <section>
+                        <h2>Keyboard Navigation</h2>
+                        <p>Interactivity must support alternative controls</p>
+                        <p>Click functionality should support 
+                    </section>
+
+                    <section>
+                        <h2>Headers</h2>
+                        <div class="fragment">
+                        <p><strong>Bad Header Usage</strong></p>
+                        <ul>
+                            <li >Using Headers to resize your font</li>
+                            <li >Using too many headers</li>
+                        </ul>
+                        </div>
+                        <div class="fragment example">
+                        <p><strong>Good Header usage</strong></p>
+                        <ul>
+                            <li>Headers should be clearly defined as such (h1, h2, h3, etc)</li>
+                            <li>Thinking of the site in an outline format often helps clarify the structure of the site</li>
+                        </ul>
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h2>Captions</h2>
+                        <p>WCAG 2.0, 1.2.2 Captions (Prerecorded) - Level A</p>
+                        <p>Captions are provided for all prerecorded audio content in synchronized media, except when the media is a media alternative for text and is clearly labeled as such.</p>
+                        <p class="fragment">Youtube provides a free automatic transcription service</p>
+                    </section>
+
+                    <section>
+                        <h2>Interoperability &amp; Interpretation</h2>
+                        <p>Structure is critical, but it doesn't fix everything<p>
+                        <p class="fragment">Accessibility elements provide information but can be used wrong</p>
+                        <p class="fragment">We often rely on the assumption that proper structure will provide clear context</p>                        
+                    </section>
+
+                    <section>
+                        <h2>The Accessibility Technology Layer</h2>
+                        <p>Assistive Technology is implemented each having different ways of presenting information<p>
+                        <p>Gray areas often take on the form of custom, heuristic solutions, making consistent translation of semantics more difficult</p>
+                        <p>Requires developers to have to jump through hoops to manage multiple technologies, not unlike browser wars</p>
+                    </section>
+
+                    <section>
+                        <h2>Barriers to Accessibility</h2>
+                        <p class="fragment">Standards lag behind, development of AT bottlenecked</p>
+                        <p class="fragment">Hard to machine test, many false positives </p>
+                        <p class="fragment">Poor implementation can make situations worse</p>
+                        <p class="fragment">Privacy</p>
+                    </section>
                     
                 </section>
                 

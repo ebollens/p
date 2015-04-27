@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Responsive Web Design</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Eric R. Bollens">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.min.css">
+		<link rel="stylesheet" href="../css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="../css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+                <section>
+                    <h1 style="font-size:120px;">Modern Web Interfaces</h1>
+                    <h2>Responsive and Accessible</h2>
+                    <h3 style="padding-top:72px">by Eric Bollens</h3>
+                    <div style="font-size:0.8em">
+                        <p>
+                            <strong><a href="http://eb.io/p/responsive-beyond-layouts">eb.io/p/responsive</a></strong>
+                        </p>
+                        <p>
+                            <a href="mailto:eric@eb.io" target="_blank">eric@eb.io</a>
+                            / <a href="https://github.com/ebollens" target="_blank">ebollens [GitHub]</a>
+                            / <a href="http://twitter.com/ericbollens" target="_blank">@ericbollens [Twitter]</a>
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+
+                    <section>
+                        <h2>Responsive Design</h2>
+                    </section>
+
+                    <section>
+                        <h2>The Web is Flexible</h2>
+                        <p class='fragment'><em>The control which designers know in the print medium... is simply a function of the limitation of the printed page.</em></p>
+                        <p class='fragment'><em>We should embrace the fact that the web doesn't have the same constraints, and <strong>design for this flexibility</strong>.</em></p>
+                        <p class='fragment'><em style='color:#bbb'>~ John Allsopp, <a href='http://www.alistapart.com/articles/dao/' target='_blank'>A Dao of Web Design</a></em></p>
+                    </section>
+
+                    <section>
+                        <h2>Why Do We Care?</h2>
+                        <p class='fragment'>
+                            First there was desktop...
+                            <span class='fragment'><br>then there was mobile...</span>
+                            <span class='fragment'><br>and now watches, widescreens, etc.</span>
+                        </p>
+						<p class='fragment'>Each device has different <strong>dimensions</strong> and <strong>capabilities</strong></p>
+                        <p class='fragment'><strong>Fully-capable browsers</strong> have become pervasive</p>
+                        <p class='fragment'>Changing perceptions regarding <strong>how mobile is used</strong></p>
+                    </section>
+
+				</section>
+
+				<section>
+
+                    <section>
+                        <h2>Responsive Layouts</h2>
+                    </section>
+
+                    <section>
+                        <table>
+                            <tr>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-1.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-2.png'></td>
+                                <td class="fragment"><img src='img/responsive-marcotte-ex-3.png'></td>
+                            </tr>
+                        </table>
+                    </section>
+
+                    <section>
+                        <h2>Flexible Grid</h2>
+                        <p class='fragment'><code>target ÷ context = result</code></p>
+                        <table style="width:100%;">
+                            <tr>
+                                <td class='fragment'>
+                                    <pre class="prettyprint"><code>body > header,
+body > footer,
+body > #container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    width: 180px;
+}
+
+#container > main {
+    margin-left: 190px;
+    width: 770px;
+}</code></pre>
+                                </td>
+                                <td class="fragment">
+                                    <pre class="prettyprint"><code>body > header, body > footer,
+body > #container {
+    <span class="fragment">width: 93.75%;  /* 960 ÷ 1024 = .9375 */</span>
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    <span class="fragment">width: 18.75%;  /* 180 ÷ 960 = .1875 */</span>
+}
+
+#container > main {
+    <span class="fragment">margin-left: 19.791667%;
+                    /* 190 ÷ 960 = .1979166.. */</span>
+    <span class="fragment">width: 80.208333%;
+                    /* 770 ÷ 960 = .8020833.. */</span>
+}</code></pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+
+                    <section>
+                        <h2>Breaking the Flexible Grid</h2>
+                        <p class="fragment">Still has limits</p>
+                        <p class="fragment"><em>Small screen
+                            <br><strong>constricts content</strong></em></p>
+                        <p class="fragment"><em>Large screen
+                            <br><strong>isolates content</strong></em></p>
+                    </section>
+
+                    <section>
+                        <h2>Media Queries</h2>
+                        <table style='width:100%'>
+                            <tr>
+                                <td class='fragment'><pre class="prettyprint"><code>body > header,
+body > footer,
+body > #container {
+    width: 93.75%;
+    margin: 0 auto;
+}
+
+#container > nav {
+    float: left;
+    width: 18.75%;
+}
+
+#container > main {
+    margin-left: 19.791667%;
+    width: 80.208333%;
+}</code></pre></td>
+                                <td class='fragment'><pre class='prettyprint'><code>@media (<span class='fragment'>max-width: 640px</span>){
+
+    #container > nav {
+        <span class='fragment'>float: none;</span>
+        <span class='fragment'>width: 100%;</span>
+    }
+
+    #container > main {
+        <span class='fragment'>margin-left: 0;</span>
+        <span class='fragment'>width: 100%;</span>
+    }
+
+}</code></pre></td>
+                            </tr>
+                        </table>
+                    </section>
+
+                    <section>
+                        <h2>Flexible Media</h2>
+                        <p class='fragment'>Images and video have explicit pixel sizes</p>
+                        <table>
+                            <tr>
+                                <td class='fragment'><img src='img/responsive-opera-large-ex.png'></td>
+                                <td class='fragment'><img src='img/responsive-opera-small-overflow-ex.png'></td>
+                            </tr>
+                        </table>
+                        <pre class='fragment'><code class='css'>img { max-width: 100%; }</code></pre>
+                        <pre class='fragment'><code class='css'>img, embed, object, video { max-width: 100%; }</code></pre>
+                    </section>
+
+					<section>
+						<h2>Responsive Images</h2>
+
+									<p class="fragment"><em>Art Direction Use Case</em></p>
+									<pre class="fragment"><code>&lt;picture&gt;
+    &lt;img src="small.jpg" alt="Example"&gt;
+    <span class="fragment">&lt;source media="(min-width: 45em)" srcset="large.jpg"&gt;</span>
+    <span class="fragment">&lt;source media="(min-width: 32em)" srcset="med.jpg"&gt;</span>
+&lt;/picture&gt; </code></pre>
+						<p class="fragment"><em>Variable Sized Use Case</em></p>
+						<pre class="fragment"><code>&lt;img src="ex-400.jpg" alt="Example"
+<span class="fragment">srcset="<span class="fragment">ex-200.jpg 200w,
+        ex-400.jpg 400w,
+        ex-800.jpg 800w,
+        ex-1600.jpg 1600w</span>"</span>
+     <span class="fragment">sizes="<span class="fragment">(max-width: 30em) 100vw,</span>
+            <span class="fragment">(max-width: 50em) 50vw,</span>
+            <span class="fragment">calc(33vw - 100px)</span>"</span>&gt;</code></pre>
+					</section>
+
+                    <section>
+                        <h2>Viewport Tag</h2>
+                        <p class='fragment'>Mobile browsers assume desktop pages
+                            <br><span class='fragment'>but the viewport tag lets us specify otherwise</span></p>
+                        <div class='fragment'><pre class='prettyprint'><code>&lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;</code></pre></div>
+                    </section>
+
+                    <section>
+                        <h2>Putting It Together</h2>
+                        <p class='fragment'><strong>Flexible Grid</strong>
+                            <br><em class='fragment'>Proportional design with percentages, not pixels</em></p>
+                        <p class='fragment'><strong>Media Queries</strong>
+                            <br><em class='fragment'>Application of styles at particular dimensions</em></p>
+                        <p class='fragment'><strong>Responsive Media</strong>
+                            <br><em class='fragment'>Images and video that scale to fit their container</em></p>
+                        <p class='fragment'><strong>Viewport Definition</strong>
+                            <br><em class='fragment'>Specify dimensions for the viewport</em></p>
+                    </section>
+
+				</section>
+
+				<section>
+
+                    <section>
+                        <h2>Responsive Beyond Layouts</h2>
+                    </section>
+
+					<section>
+                        <h2>Back to the definition of responsive</h2>
+                        <p class='fragment'>Website transforms to fit the user's
+                            <br><strong>needs</strong> and <strong>capabilities</strong></p>
+                        <p class='fragment'>Up to this point, a focus on the <strong>viewport</strong></p>
+                        <p class='fragment'>But <strong>many other factors</strong> to consider</p>
+                        <p>
+                            <em class="fragment">Context</em>
+                            <br>
+                            <em class="fragment">Network</em>
+                            <br>
+                            <em class="fragment">Resolution</em>
+                            <br>
+                            <em class="fragment">Battery</em>
+                            <br>
+                            <em class="fragment">Light</em>
+                        </p>
+                    </section>
+
+					<section>
+						<h2>@media</h2>
+						<p class="fragment"><strong>CSS Media Queries Level 3</strong></p>
+						<pre class="fragment prettyprint"><code class="css">@media (max-width: 480px) { /* ... */ }
+<span class="fragment">@media (min-width: 481px) { /* ... */ }</span>
+<span class="fragment">@media (max-resolution: 299dpi) { /* ... */ }</span>
+<span class="fragment">@media (min-resolution: 300dpi) { /* ... */ }</span>
+<span class="fragment">@media (max-height: 800p1px) { /* ... */ }</span>
+<span class="fragment">@media (min-height: 800px) { /* ... */ }</span>
+<span class="fragment">@media (max-aspect-ratio: 1/1) { /* ... */ }</span>
+<span class="fragment">@media (orientation: portrait) { /* ... */ }</span>
+<span class="fragment">@media (min-aspect-ratio: 1/1) { /* ... */ }</span>
+<span class="fragment">@media (orientation: landscape) { /* ... */ }</span></code></pre>
+						<p class="fragment"><strong>CSS Media Queries Level 4</strong></p>
+						<pre class="fragment prettyprint"><code class="css">@media (light-level: normal) { /* ... */ }
+@media (light-level: dim)  { /* ... */ }
+@media (light-level: washed)  { /* ... */ }
+@media (pointer: fine) { /* ... */ }
+@media (hover: hover) { /* ... */ }
+@media (scripting: enabled) { /* ... */ }</code></pre>
+					</section>
+
+					<section>
+						<h2>Javascript APIs</h2>
+						<p class="fragment"><strong>Ambient Light</strong></p>
+                        <pre class="fragment prettyprint"><code class="javascript">window.addEventListener('devicelight', function(e) {
+  /** change environment based on e.value from [0,100] **/
+});
+</code></pre>
+						<p class="fragment"><strong>Battery</strong></p>
+						<pre class="prettyprint fragment"><code class="javascript">navigator.battery || navigator.webkitBattery || navigator.mozBattery</code></pre>
+						<p class='fragment'><strong>Network Performance</strong></p>
+						<pre class="prettyprint fragment"><code class="javascript">window.performance.navigation
+<span class="fragment">window.performance.getEntriesByType("resource")[5]</span></code></pre>
+						<p class='fragment'><strong>Quota Management API</strong></p>
+                        <pre class="fragment"><code class="javascript">navigator.storageQuota.queryInfo(<span class="fragment">"temporary"</span>).then(<span class="fragment">function(storageInfo) {
+  initializeCache(storageInfo.usage, storageInfo.quota - storageInfo.usage);
+}</span>);</code></pre>
+					</section>
+
+                    <section>
+                        <h2>@supports</h2>
+                        <p class="fragment"><strong>CSS Conditional Rules Module Level 3</strong></p>
+                        <pre class="fragment"><code class="css">@supports (display: flex) {
+  div { display: flex; }
+}</code></pre>
+                        <pre class="fragment"><code class="css">@supports (-webkit-box-shadow: 0 0 2px #000) or
+          (   -moz-box-shadow: 0 0 2px #000) or
+          (        box-shadow: 0 0 2px #000) {
+   div { /* .. */ }
+}</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("display", "flex");</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("(transform-origin: 5% 5%)");</code></pre>
+                        <pre class="fragment"><code class="javascript">CSS.supports("(transform-origin: 5% 5%) and (display:flex)");</code></pre>
+                        <p class="fragment"><em>Available in Chrome 28, Firefox 17 and Opera 12.1<br>and polyfill <a href="https://github.com/kjarmicki/fq-polyfill">github.com/kjarmicki/fq-polyfill</a></em></p>
+                    </section>
+
+                </section>
+
+				<section>
+
+					<section>
+						<h2>Responsive Interactions</h2>
+					</section>
+
+                    <section>
+                        <h2>How Do You Scroll?</h2>
+                        <p class="fragment">Spin a scroll wheel</p>
+                        <p class="fragment">Drag a scroll bar</p>
+                        <p class="fragment">Press a scroll arrow</p>
+                        <p class="fragment">Slide a finger across the screen</p>
+                        <p class="fragment">Verbally state "scroll" and a direction</p>
+                    </section>
+
+                    <section>
+                        <h2>How Do You Undo?</h2>
+                        <p class="fragment"><code>CTRL + Z</code></p>
+                        <p class="fragment"><code>CMD + Z</code></p>
+                        <p class="fragment">Press down and select action</p>
+                        <p class="fragment">Shake or swipe</p>
+                    </section>
+
+                    <section>
+                        <h2>Handling for Many Environments</h2>
+                        <pre class="fragment"><code class="javascript"><span class="fragment">document.addEventListener('keydown', function(e){
+  <span class="fragment">if(navigator.userAgent.match(/Macintosh/g) && e.which === 90 && e.metaKey)
+    doUndo();
+  </span><span class="fragment">else if(e.which === 90 && e.ctrlKey)
+    doUndo();</span>
+});</span></code></pre>
+                        <pre class="fragment"><code class="javascript">if(navigator.userAgent.match(/(iPad|iPhone|iPod)/g))
+    <span class="fragment">window.addEventListener('shake', function(e){
+        doUndo();
+    });</span></code></pre>
+                        <pre class="fragment"><code class="javascript" style="height:200px;">(function (window, document) {
+
+    function Shake() {
+        this.hasDeviceMotion = 'ondevicemotion' in window;
+        this.threshold = 15;
+        this.lastTime = new Date();
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+
+        if (typeof document.CustomEvent === "function") {
+            this.event = new document.CustomEvent('shake', {
+                bubbles: true,
+                cancelable: true
+            });
+        } else if (typeof document.createEvent === "function") {
+            this.event = document.createEvent('Event');
+            this.event.initEvent('shake', true, true);
+        } else {
+          return false;
+        }
+    }
+
+    Shake.prototype.reset = function () {
+        this.lastTime = new Date();
+        this.lastX = null;
+        this.lastY = null;
+        this.lastZ = null;
+    };
+
+    Shake.prototype.start = function () {
+        this.reset();
+        if (this.hasDeviceMotion) { window.addEventListener('devicemotion', this, false); }
+    };
+
+    Shake.prototype.stop = function () {
+        if (this.hasDeviceMotion) { window.removeEventListener('devicemotion', this, false); }
+        this.reset();
+    };
+
+    Shake.prototype.devicemotion = function (e) {
+        var current = e.accelerationIncludingGravity,
+            currentTime,
+            timeDifference,
+            deltaX = 0,
+            deltaY = 0,
+            deltaZ = 0;
+
+        if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+            return;
+        }
+
+        deltaX = Math.abs(this.lastX - current.x);
+        deltaY = Math.abs(this.lastY - current.y);
+        deltaZ = Math.abs(this.lastZ - current.z);
+
+        if (((deltaX > this.threshold) && (deltaY > this.threshold)) || ((deltaX > this.threshold) && (deltaZ > this.threshold)) || ((deltaY > this.threshold) && (deltaZ > this.threshold))) {
+            //calculate time in milliseconds since last shake registered
+            currentTime = new Date();
+            timeDifference = currentTime.getTime() - this.lastTime.getTime();
+
+            if (timeDifference > 1000) {
+                window.dispatchEvent(this.event);
+                this.lastTime = new Date();
+            }
+        }
+
+        this.lastX = current.x;
+        this.lastY = current.y;
+        this.lastZ = current.z;
+    };
+
+    Shake.prototype.handleEvent = function (e) {
+        if (typeof (this[e.type]) === 'function') {
+            return this[e.type](e);
+        }
+    };
+
+    var myShakeEvent = new Shake();
+    myShakeEvent && myShakeEvent.start();
+
+}(window, document));</code></pre>
+                        <p class="fragment"><em>And how about tap highlight undo?</em></p>
+                    </section>
+
+                    <section>
+                        <h2>IndieUI</h2>
+                        <p class="fragment" style="color:#bbb;">Make it easier for web developers to author <strong style="color:#fff;">consistently usable interfaces that are input-agnostic</strong> and independent of a user's particular platform, hardware, locale, and preferences.</p>
+                        <p class="fragment" style="color:#bbb;">Enable every type of control in these interfaces to be <strong style="color:#fff;">programmatically determinable and controllable by both mainstream and alternate forms of user input</strong>, including assistive technologies.</p>
+                        <p class="fragment" style="color:#bbb;">Provide a clear path for web developers to <strong style="color:#fff;">smoothly transition from currently existing physical events to IndieUI events</strong>, during the period when implementations of IndieUI are incomplete.</p>
+                    </section>
+
+                    <section>
+                        <h2>UndoRequest</h2>
+                        <pre class="fragment"><code class='javascript'>element.addEventListener('undorequest', function(){
+    doUndo();
+});</code></pre>
+                        <p>
+                            <em class='fragment'>No keypress detection</em>
+                            <br>
+                            <em class='fragment'>No UA sniffing or OS consideration</em>
+                            <br>
+                            <em class='fragment'>No complex hacks to detect interaction</em>
+                            <br>
+                            <em class='fragment'>No undetectable actions</em>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>The Twist</h2>
+                        <p class="fragment">Unfortunately, IndieUI is not really supported yet</p>
+						<p class="fragment"><strong>For now, just be congnizant of the variety...</strong></p>
+						<p>
+							<em class="fragment">Not everyone has hover state</em>
+							<br>
+							<em class="fragment">Not everyone interacts with keypresses</em>
+							<br>
+							<em class="fragment">Mouse events and touch events are different</em>
+						</p>
+                    </section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>Interoperable Vocabulary</h2>
+					</section>
+
+					<section>
+						<h2>Why?</h2>
+						<p class="fragment"><strong>Not everyone interacts with our site the same way</strong></p>
+						<p>
+							<em class="fragment">Assistive Technologies</em>
+							<br>
+							<em class="fragment">Computer Comprehension</em>
+						</p>
+						<p class="fragment"><strong>These are needs to which we should be responsive</strong></p>
+					</section>
+
+					<section>
+						<h2>Content Accessibility</h2>
+						<p class="fragment">For more than a decade, HTML has supported...</p>
+						<p>
+							<em class="fragment">alt attributes</em>
+							<br>
+							<em class="fragment">label tags</em>
+							<br>
+							<em class="fragment">tabindex attribute</em>
+							<br>
+							<em class="fragment">h1-6 tags</em>
+						</p>
+						<p class="fragment">Also good practices like captioning and skip navs</p>
+						<p class="fragment"><strong>However, these are not enough for modern <em>applications</em></strong></p>
+					</section>
+
+					<section>
+						<h2>Comprehensibility</h2>
+						<pre class='fragment'><code class='html'><span class='fragment'>&lt;div class='container'></span>
+    <span class='fragment'>&lt;div class='header'>
+        <span class='fragment'>&lt;!-- .. --></span>
+    &lt;/div></span>
+    <span class='fragment'>&lt;div class='content-container'></span>
+        <span class='fragment'>&lt;div class='left-bar'>
+            <span class='fragment'>&lt;div class='search'>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+            <span class='fragment'>&lt;div class='menu'>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+        &lt;/div></span>
+        <span class='fragment'>&lt;div class='main'></span>
+            <span class='fragment'>&lt;!-- .. --></span></code></pre>
+						<p class="fragment">And this is a "sensical" markup</p>
+						<p class="fragment"><em>What about absolute positioning, interactive components, etc.?</em></p>
+					</section>
+
+					<section>
+						<h2>HTML 5 and ARIA</h2>
+						<table>
+							<tr>
+								<td style="width:450px">
+									<pre class='fragment'><code class='html'>&lt;div class='container'>
+    &lt;div class='header'>
+        &lt;!-- .. -->
+    &lt;/div>
+    &lt;div class='content-container'>
+        &lt;div class='left-bar'>
+            &lt;div class='search'>
+                &lt;!-- .. -->
+            &lt;/div>
+            &lt;div class='menu'>
+                &lt;!-- .. -->
+            &lt;/div>
+        &lt;/div>
+        &lt;div class='main'>
+            &lt;!-- .. --></code></pre>
+								</td>
+									<td style="width:450px">
+										<pre class='fragment'><code class='html'><span class='fragment'>&lt;div class='container'></span>
+    <span class='fragment'>&lt;header <span class='fragment'>role="banner"</span>>
+        <span class='fragment'>&lt;!-- .. --></span>
+    &lt;/header></span>
+    <span class='fragment'>&lt;div class='content-container'></span>
+        <span class='fragment'>&lt;div class='left-bar'>
+            <span class='fragment'>&lt;nav role='search'>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+            <span class='fragment'>&lt;nav>
+                <span class='fragment'>&lt;!-- .. --></span>
+            &lt;/div></span>
+        &lt;/div></span>
+        <span class='fragment'>&lt;main <span class="fragment">role="main"</span>></span>
+            <span class='fragment'>&lt;!-- .. --></span></code></pre>
+									</td>
+							</tr>
+						</table>
+					</section>
+
+					<section>
+						<h2>New HTML 5 Elements</h2>
+						<p class="fragment">
+							<strong>Landmarks</strong>
+							<br>
+							<em class="fragment">header, footer, main, nav</em>
+						</p>
+						<p class="fragment">
+							<strong>Sections</strong>
+							<br>
+							<em class="fragment">header, footer, main, nav, article, aside, section</em>
+						</p>
+						<p class="fragment">
+							<strong>Widgets</strong>
+							<br>
+							<em class="fragment">figure + figcaption, details + summary, time, progress, audio/video + track</em>
+						</p>
+						<p class="fragment"><strong><em>Play by the rules, and you'll be pretty accessible without extra work!</em></strong></p>
+					</section>
+
+					<section>
+	                    <h2>Where HTML 5 Isn't Enough</h2>
+	                    <pre class='fragment'><code class='html'>&lt;nav>&lt;ol>&lt;!-- site nav -->&lt;/ol>&lt;/nav>
+
+&lt;nav>&lt;ol>
+  &lt;li id="a1T">&lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+  &lt;li id="a2T">&lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;/ol>&lt;/nav>
+
+&lt;div>
+  &lt;article id="a1P">
+    &lt;!-- .. -->&lt;/article>
+  &lt;article id="a2P">
+    &lt;!-- .. -->&lt;/article>
+&lt;/div></code></pre>
+	                    <p class='fragment'><strong>This doesn't express...</strong></p>
+	                    <p>
+	                        <em class='fragment'>which nav is the site nav</em>
+	                        <br>
+	                        <em class='fragment'>that the nav and articles relate</em>
+	                    </p>
+	                    <p class="fragment"><strong>And this isn't even a bad one!</strong></p>
+	                </section>
+
+					<section>
+						<h2>ARIA</h2>
+						<p class='fragment'><strong>Built to map to OS native accessibility APIs</strong></p>
+						<p>
+							<em class='fragment'>Roles</em>
+							<br>
+							<em class='fragment'>Properties</em>
+							<br>
+							<em class='fragment'>States</em>
+							<br>
+						</p>
+					</section>
+
+					<section>
+                        <h2>Example</h2>
+                        <pre class='fragment'><code class='html'>&lt;nav <span class="fragment">role="navigation"</span>>&lt;ol>
+  &lt;!-- site nav -->
+&lt;/ol>&lt;/nav>
+
+&lt;nav <span class="fragment">role="tablist"</span>>&lt;ol>
+  &lt;li id="a1T" <span class="fragment">role="tab"</span> <span class="fragment">aria-controls="a1P"</span> <span class="fragment">aria-selected="true"</span>>
+    &lt;a href="#a1P">Reading 1&lt;/a>&lt;/li>
+  &lt;li id="a2T" <span class="fragment">role="tab" aria-controls="a2P"</span>>
+    &lt;a href="#a2P">Reading 2&lt;/a>&lt;/li>
+&lt;/ol>&lt;/nav>
+
+&lt;div <span class="fragment">role="main"</span>>
+  &lt;article id="a1P" <span class="fragment">role="tabpanel"</span> <span class="fragment">aria-labelledby="a1T"</span>>
+    &lt;!-- .. -->&lt;/article>
+  &lt;article id="a2P" <span class="fragment">role="tabpanel" aria-labelledby="a2T"</span> <span class="fragment">aria-hidden="true"</span>>
+    &lt;!-- .. -->&lt;/article>
+&lt;/div></code></pre>
+                    </section>
+
+					<section>
+						<h2>Want to Learn More?</h2>
+						<p class="fragment">Check out our accessibility workshop<br><em>Friday 9 AM - 12 PM</em></p>
+					</section>
+
+				</section>
+
+				<section>
+
+					<section>
+						<h2>Tools of the Trade</h2>
+					</section>
+
+					<section>
+						<h2>Underlying Platform</h2>
+						<p>
+							<em class="fragment">HTML 5</em>
+							<br>
+							<em class="fragment">CSS 3</em>
+							<br>
+							<em class="fragment">Javascript</em>
+						</p>
+						<p class="fragment">
+							<strong><a href="https://www.webplatform.org/" target="_blank">webplatform.org</a></strong>
+						</p>
+					</section>
+
+					<section>
+						<h2>Polyfills</h2>
+						<p class="fragment"><strong>All modern browsers support responsive layouts</strong></p>
+						<p>
+							<em class="fragment">Some of us still have to support aging browsers</em>
+							<br>
+							<em class="fragment">Other responsive techniques are much less supported</em>
+						</p>
+						<p class="fragment"><strong>Polyfills enable features in browsers that don't support them</strong></p>
+						<p>
+							<em class="fragment"><a href="http://modernizr.com" target="_blank">Modernizr (modernizr.com)</a></em>
+							<br>
+							<em class="fragment"><a href="https://github.com/scottjehl/Respond" target="_blank">Respond.js (github.com/scottjehl/Respond)</a></em>
+							<br>
+							<em class="fragment"><a href="http://selectivizr.com" target="_blank">Selectivizr (selectivizr.com)</a></em>
+							<br>
+							<em class="fragment"><a href="http://necolas.github.io/normalize.css" target="_blank">Normalize.css (necolas.github.io/normalize.css)</a></em>
+						</p>
+						<p class="fragment">
+							For more...<br>
+							<a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills" target="_blank">github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills</a>
+						</p>
+					</section>
+
+					<section>
+						<h2>General-purpose Frameworks</h2>
+						<p class="fragment"><strong>Twitter Bootstrap</strong>
+						<br><a href="http://getbootstrap.com/" target="_blank">getbootstrap.com</a></p>
+						<p class="fragment"><strong>Zurb Foundation</strong>
+						<br><a href="http://foundation.zurb.com/" target="_blank">foundation.zurb.com</a></p>
+						<p class="fragment"><strong>UIKit</strong>
+						<br><a href="http://getuikit.com/" target="_blank">http://getuikit.com</a></p>
+						<p class="fragment"><strong>PureCSS</strong><br><a href="http://purecss.io/" target="_blank">purecss.io</a></p>
+						<p class="fragment"><strong>WebBlocks 1</strong><br><a href="http://ucla.github.io/WebBlocks" target="_blank">ucla.github.io/WebBlocks</a></p>
+					</section>
+
+					<section>
+						<h2>Layout-oriented Libraries</h2>
+						<p class="fragment"><strong>Skeleton</strong>
+						<br><a href="http://getskeleton.com/" target="_blank">getskeleton.com</a></p>
+						<p class="fragment"><strong>Responsive Grid System</strong><br><a href="http://responsive.gs/" target="_blank">responsive.gs</a></p>
+						<p class="fragment"><strong>Toast</strong><br><a href="http://daneden.github.io/Toast/" target="_blank">daneden.github.io/Toast</a></p>
+						<p class="fragment"><strong>Grid Syle Sheets *</strong><br><a href="http://gridstylesheets.org/" target="_blank">gridstylesheets.org</a><br><em style="font-size: 20px;line-height:20px;">* Not actually CSS but rather a language based on the Cassowary Constraint Solver</em>
+					</section>
+
+					<section>
+						<h2>My Recommendation?</h2>
+						<p class="fragment"><strong>Use specialized components, not all-in-one frameworks</strong></p>
+						<p class="fragment">
+							CSS Precompilers
+							<br><span class="fragment"><a href="http://sass-lang.com/" target="_blank">sass-lang.com</a> / <a href="http://lesscss.org/" target="_blank">lesscss.org</a></span>
+						</p>
+						<p class="fragment">
+							Component Libraries &amp; Compilers
+							<br>
+							<span class="fragment"><a href="http://bower.io/" target="_blank">bower.io</a></span>
+							<br>
+							<span class="fragment"><a href="http://compass-style.org/">compass-style.org</a> / <a href="http://bourbon.io/">bourbon.io</a></span>
+							<br>
+							<span class="fragment"><a href="http://gruntjs.com/" target="_blank">gruntjs.com</a> / <a href="https://github.com/WebBlocks/WebBlocks" target="_blank">github.com/WebBlocks/WebBlocks</a></span>
+						</p>
+						<p class="fragment"><strong>Keep it simple and focus on your use cases!</strong></p>
+					</section>
+
+					<section>
+						<h2>The Bleeding Edge</h2>
+						<p class="fragment"><strong>HTML.next</strong><br><a href="http://www.w3.org/wiki/HTML/next" target="_blank">w3.org/wiki/HTML/next</a></p>
+						<p class="fragment"><strong>Web Components</strong><br><a href="http://webcomponents.org/" target="_blank">webcomponents.org</a></p>
+						<p class="fragment"><strong>ECMAScript 6</strong><br><a href="">people.mozilla.org/~jorendorff/es6-draft.html</a></p>
+						<p class="fragment"><strong>CSS 4</strong>
+						<br><em>Media Queries Level 4, Selectors Level 4, Variables, etc.</em></p>
+						<p class="fragment"><strong><em>Take these with a grain (or two) of salt!!!</em></strong></p>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Want to learn more?</h2>
+						<p class="fragment">Consider joining us at the
+							<br><strong>Mobility and Mobile Web Conference</strong>
+							<br><a href="http://mmwcon.org">mmwcon.org</a>
+							<br><em>September 16-18 2015 @ UCLA</em></p>
+					</section>
+				</section>
+
+			</div>
+
+			<footer style="position:fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size: 20px; padding-bottom: 20px; z-index:100;">
+				Eric Bollens
+				-
+				<a href="mailto:eric@eb.io">eric@eb.io</a>
+				-
+				<a href="http://eb.io/p/responsive" target="_blank">eb.io/p/responsive</a>
+			</footer>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
